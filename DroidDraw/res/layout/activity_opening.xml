@@ -1,0 +1,58 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".OpeningActivity" >
+
+    <Button
+        android:id="@+id/startGame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:text="@string/start_game" />
+
+    <TextView
+        android:id="@+id/playerTwoText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/startGame"
+        android:layout_alignParentLeft="true"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:text="@string/player_two"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/playerTwoEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/playerTwoText"
+        android:layout_toRightOf="@+id/playerTwoText"
+        android:layout_alignParentRight="true"
+        android:ems="10"
+        android:hint="@string/player_two_edit_hint" />
+
+    <EditText
+        android:id="@+id/playerOneEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/playerOneText"
+        android:layout_toRightOf="@+id/playerOneText"
+        android:layout_alignParentRight="true"
+        android:ems="10"
+        android:hint="@string/player_one_edit_hint" />
+
+    <TextView
+        android:id="@+id/playerOneText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/playerTwoEdit"
+        android:layout_alignParentLeft="true"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:text="@string/player_one"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+</RelativeLayout>
