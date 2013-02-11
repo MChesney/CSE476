@@ -1,0 +1,101 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/colors"
+    tools:context=".OpeningActivity" >
+
+    <ImageView
+        android:id="@+id/androidImage"
+        android:adjustViewBounds="true"       
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:contentDescription="@string/android_description"
+        android:src="@drawable/android_transparent" />
+
+    <TextView
+        android:id="@+id/playerOneText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/androidImage"
+        android:gravity="center"
+        android:background="#000"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:text="@string/player_one"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#fff" />
+    
+    <EditText
+        android:id="@+id/playerOneEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/playerOneText"
+        android:layout_alignLeft="@+id/playerOneText"
+        android:layout_alignParentRight="true"
+        android:gravity="center"
+        android:background="#000"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:ems="10"
+        android:hint="@string/player_one_edit_hint" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/playerTwoText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/playerOneText"
+        android:layout_below="@+id/playerOneEdit"
+        android:layout_alignParentRight="true"
+        android:gravity="center"
+        android:background="#000"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:text="@string/player_two"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#fff" />
+    
+     <EditText
+        android:id="@+id/playerTwoEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/playerTwoText"
+        android:layout_alignLeft="@+id/playerTwoText"
+        android:layout_alignParentRight="true"
+        android:gravity="center"
+        android:background="#000"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:ems="10"
+        android:hint="@string/player_two_edit_hint" />
+
+    <Button
+        android:id="@+id/startGame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/playerTwoEdit"
+        android:layout_below="@+id/playerTwoEdit"
+        android:layout_alignParentRight="true"
+        android:background="#333"
+        android:text="@string/start_game"
+        android:textColor="#fff" />
+
+    <Button
+        android:id="@+id/instructions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/startGame"
+        android:layout_below="@+id/startGame"
+        android:layout_alignParentRight="true"
+        android:background="#333"
+        android:text="@string/instructions" 
+        android:textColor="#fff"/>
+
+</RelativeLayout>

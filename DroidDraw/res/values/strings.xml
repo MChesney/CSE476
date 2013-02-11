@@ -8,8 +8,10 @@
     <string name="title_activity_guess">GuessActivity</string>
     <string name="player_one">Player 1: </string>
     <string name="player_two">"Player 2: "</string>
-    <string name="player_one_edit_hint">Enter Player 1\'s name</string>
-    <string name="player_two_edit_hint">Enter Player 2\'s name</string>
+    <string name="player_one_edit_hint">Player 1\'s name</string>
+    <string name="player_two_edit_hint">Player 2\'s name</string>
     <string name="start_game">Start Game</string>
+    <string name="android_description">Image of Android</string>
+    <string name="instructions">How to Play</string>
 
 </resources>
