@@ -3,6 +3,7 @@ package edu.msu.cse.boggle.droiddraw;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
+import android.view.View;
 
 public class EditActivity extends Activity {
 
@@ -16,6 +17,11 @@ public class EditActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.activity_edit, menu);
+		return true;
+	}
+	
+	public boolean onLineColor(View view){
+	int x = 0;
 		return true;
 	}
 
