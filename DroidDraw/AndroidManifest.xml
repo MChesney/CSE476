@@ -30,6 +30,14 @@
             android:name="edu.msu.cse.boggle.droiddraw.GuessActivity"
             android:label="@string/title_activity_guess" >
         </activity>
+        <activity
+            android:name="edu.msu.cse.boggle.droiddraw.MainActivity"
+            android:label="@string/title_activity_main" >
+        </activity>
+        <activity
+            android:name="edu.msu.cse.boggle.droiddraw.ColorSelectActivity"
+            android:label="@string/title_activity_color_select" >
+        </activity>
     </application>
 
 </manifest>
