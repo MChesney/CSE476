@@ -36,6 +36,8 @@
         android:layout_alignTop="@+id/playerTwoText"
         android:layout_toRightOf="@+id/playerTwoText"
         android:background="#000"
+        android:textColor="#fff" 
+	    android:textCursorDrawable="@null"
         android:ems="10"
         android:hint="@string/player_two_edit_hint" />
 
@@ -48,9 +50,11 @@
         android:layout_alignTop="@+id/playerOneText"
         android:layout_toRightOf="@+id/playerOneText"
         android:background="#000"
+        android:textColor="#fff" 
+	    android:textCursorDrawable="@null"
         android:ems="10"
         android:hint="@string/player_one_edit_hint" >
-
+        
         <requestFocus />
     </EditText>
 
@@ -60,8 +64,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_toBottomOf="@+id/playerTwoEdit" >
+        android:layout_alignParentRight="true" >
 
         <Button
             android:id="@+id/startGame"
@@ -70,7 +73,8 @@
             android:layout_weight="1"
             android:background="#222"
             android:text="@string/start_game"
-            android:textColor="#fff" />
+            android:textColor="#fff" 
+            android:onClick="onStartGame"/>
 
         <Button
             android:id="@+id/instructions"
@@ -79,7 +83,8 @@
             android:layout_weight="1"
             android:background="#222"
             android:text="@string/instructions"
-            android:textColor="#fff" />
+            android:textColor="#fff" 
+            android:onClick="onInstructions" />
 
     </LinearLayout>
 
