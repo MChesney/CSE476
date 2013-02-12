@@ -68,7 +68,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#333"
+            android:background="#222"
             android:text="@string/start_game"
             android:textColor="#fff" />
 
@@ -77,7 +77,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#333"
+            android:background="#222"
             android:text="@string/instructions"
             android:textColor="#fff" />
 
