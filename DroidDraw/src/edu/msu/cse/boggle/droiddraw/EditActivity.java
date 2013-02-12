@@ -35,6 +35,7 @@ public class EditActivity extends Activity {
 		// This is a color response
 		int color = data.getIntExtra(ColorSelectActivity.COLOR, Color.BLACK);
 		
+		//TODO Set the color somewhere
 		
 		}
 	}
