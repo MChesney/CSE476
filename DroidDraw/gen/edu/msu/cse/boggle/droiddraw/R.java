@@ -47,6 +47,7 @@ public final class R {
         public static final int player_one_edit_hint=0x7f040007;
         public static final int player_two=0x7f040006;
         public static final int player_two_edit_hint=0x7f040008;
+        public static final int rules_of_game=0x7f04000c;
         public static final int start_game=0x7f040009;
         public static final int title_activity_edit=0x7f040003;
         public static final int title_activity_guess=0x7f040004;

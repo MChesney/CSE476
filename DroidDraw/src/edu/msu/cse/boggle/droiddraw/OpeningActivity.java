@@ -43,8 +43,8 @@ public class OpeningActivity extends Activity {
         AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
         
         // Parameterize the builder
-        //builder.setTitle(R.string.hurrah);
-        //builder.setMessage(R.string.completed_puzzle);
+        builder.setTitle(R.string.instructions);
+        builder.setMessage(R.string.rules_of_game);
         builder.setPositiveButton(android.R.string.ok, null);
 		//builder.setNegativeButton(R.string.shuffle, listener);
         

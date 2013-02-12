@@ -13,5 +13,7 @@
     <string name="start_game">Start Game</string>
     <string name="android_description">Image of Android</string>
     <string name="instructions">How to Play</string>
+    <string name="rules_of_game">Player 1 will begin by secretly drawing a picture from a randomly selected category.\n Player 2 will then attempt to guess Player 1\'s drawing, using the hint if necessary.</string>
+    
 
 </resources>
