@@ -21,7 +21,7 @@ public class EditActivity extends Activity {
 	}
 	
 	public boolean onLineColor(View view){
-	
+	int x = 0;
 		return true;
 	}
 
