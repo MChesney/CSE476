@@ -3,6 +3,7 @@ package edu.msu.cse.boggle.droiddraw;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
@@ -34,7 +35,8 @@ public class OpeningActivity extends Activity {
 		} else if (playerTwoName.length() == 0) {
 			two.requestFocus();
 		} else {
-
+			Intent intent = new Intent(this,  EditActivity.class);
+			startActivity(intent);
 		}
 		
 	}

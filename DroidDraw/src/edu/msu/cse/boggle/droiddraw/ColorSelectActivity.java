@@ -2,10 +2,13 @@ package edu.msu.cse.boggle.droiddraw;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
+import android.view.View;
 
 public class ColorSelectActivity extends Activity {
 
+	public static final String COLOR = "COLOR";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -18,5 +21,13 @@ public class ColorSelectActivity extends Activity {
 		getMenuInflater().inflate(R.menu.activity_color_select, menu);
 		return true;
 	}
+
+	public void selectColor(int color) {
+		Intent result = new Intent();
+		result.putExtra(COLOR,color);
+		setResult(Activity.RESULT_OK, result);
+		finish();
+        
+    }
 
 }
