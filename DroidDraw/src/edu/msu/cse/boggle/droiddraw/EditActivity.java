@@ -2,11 +2,13 @@ package edu.msu.cse.boggle.droiddraw;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 
 public class EditActivity extends Activity {
 
+	private static final int GOT_COLOR = 1;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -21,8 +23,10 @@ public class EditActivity extends Activity {
 	}
 	
 	public boolean onLineColor(View view){
-	int x = 0;
+		Intent intent = new Intent(this, EditActivity.class);
+		startActivityForResult(intent, GOT_COLOR);
 		return true;
 	}
+	
 
 }
