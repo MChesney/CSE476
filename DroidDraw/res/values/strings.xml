@@ -16,5 +16,7 @@
     <string name="rules_of_game">Player 1 will begin by secretly drawing a picture from a randomly selected category.\n Player 2 will then attempt to guess Player 1\'s drawing, using the hint if necessary.</string>
     <string name="title_activity_color_select">Color Select</string>
     <string name="color_set">Line Color</string>
+    <string name="linewidth">Line Width</string>
+    <string name="done">Done</string>
 
 </resources>

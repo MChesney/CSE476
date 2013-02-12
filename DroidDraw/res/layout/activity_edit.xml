@@ -1,27 +1,44 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     tools:context=".EditActivity" >
 
-    <edu.msu.cse.boggle.droiddraw.DrawView
-        android:id="@+id/drawView1"
+    <Button
+        android:id="@+id/donebutton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="6" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="onDoneButton"
+        android:text="@string/done" />
 
     <Button
         android:id="@+id/colorselect"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_above="@id/donebutton"
+        android:layout_alignParentLeft="true"
+        android:onClick="onLineColor"
         android:text="@string/color_set" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/linewidth"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/colorselect"
+        android:layout_centerHorizontal="true"
+        android:text="@string/linewidth" />
+
+    <edu.msu.cse.boggle.droiddraw.DrawView
+        android:id="@+id/drawView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Button" />
+        android:layout_above="@id/linewidth"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" />
 
+
+
+</RelativeLayout>

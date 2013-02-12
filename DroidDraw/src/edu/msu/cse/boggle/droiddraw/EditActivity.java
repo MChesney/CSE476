@@ -22,7 +22,11 @@ public class EditActivity extends Activity {
 		getMenuInflater().inflate(R.menu.activity_edit, menu);
 		return true;
 	}
-	
+	public boolean onDoneButton(View view){
+		Intent intent = new Intent(this, GuessActivity.class);
+		startActivity(intent);
+		return true;
+	}
 	public boolean onLineColor(View view){
 		Intent intent = new Intent(this,  ColorSelectActivity.class);
 		startActivityForResult(intent, GOT_COLOR);
