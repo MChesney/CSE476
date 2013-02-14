@@ -19,5 +19,9 @@
     <string name="linewidth">Line Width</string>
     <string name="done">Done</string>
     <string name="title_activity_closing">Closing Activity</string>
+    <string name="Drawpicture">Draw Picture</string>
+    <string name="guess">Guess:</string>
+    <string name="hint">Hint will appear here</string>
+    <string name="category">Category</string>
 
 </resources>
