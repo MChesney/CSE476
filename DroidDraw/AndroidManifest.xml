@@ -34,6 +34,10 @@
             android:name="edu.msu.cse.boggle.droiddraw.ColorSelectActivity"
             android:label="@string/title_activity_color_select" >
         </activity>
+        <activity
+            android:name="edu.msu.cse.boggle.droiddraw.ClosingActivity"
+            android:label="@string/title_activity_closing" >
+        </activity>
     </application>
 
 </manifest>

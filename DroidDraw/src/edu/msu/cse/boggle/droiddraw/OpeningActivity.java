@@ -9,6 +9,13 @@ import android.view.View;
 import android.widget.EditText;
 
 public class OpeningActivity extends Activity {
+	
+	/**
+	 * The name of the keys to save the names
+	 * TODO
+	 */
+	private final static String PLAYERONE = "player1";
+	private final static String PLAYERTWO = "player2";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +43,9 @@ public class OpeningActivity extends Activity {
 			two.requestFocus();
 		} else {
 			Intent intent = new Intent(this,  EditActivity.class);
+			Bundle bundle = new Bundle();
+			bundle.putString(Player.PLAYERONENAME, playerOneName);
+			bundle.putString(Player.PLAYERTWONAME, playerTwoName);
 			startActivity(intent);
 		}
 		
