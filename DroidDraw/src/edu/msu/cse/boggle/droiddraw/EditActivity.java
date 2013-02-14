@@ -17,14 +17,9 @@ public class EditActivity extends Activity {
 	private DrawView drawView;
 	
 	/*
-	 * Player 1
+	 * The players
 	 */
-	Player player1;
-	
-	/*
-	 * Player 2
-	 */
-	Player player2;
+	//private Players players = new Players();
 	
 	@Override
 	protected void onCreate(Bundle bundle) {

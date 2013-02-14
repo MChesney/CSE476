@@ -11,8 +11,12 @@ import android.view.View;
 
 public class Drawing {
 	
-	public static final float INITIAL_THICKNESS = (float) 1.0;
+	public static final float INITIAL_THICKNESS = (float) 5.0;
 	
+	/*
+	 * The class for a single line segment
+	 * Connected by two points, with color and thickness (stroke width)
+	 */
     private class Segment {
         /**
          * Color of segment
@@ -25,15 +29,15 @@ public class Drawing {
         private float thickness = INITIAL_THICKNESS; 
         
         /*
-         * Point 1 of segment
+         * Last point of segment
          */
         private Point lastPoint = null;
         
         /*
-         * Point 1 of segment
+         * Current point of segment
          */
         private Point currPoint = null;
-
+        
 		public Point getLastPoint() {
 			return lastPoint;
 		}
@@ -50,6 +54,9 @@ public class Drawing {
 			return thickness;
 		}
 		
+		/*
+		 * Constructor for segment
+		 */
 		public Segment(Point lastPoint, Point currPoint, int color, float thickness) {
 			this.lastPoint = new Point(lastPoint);
 			this.currPoint = new Point(currPoint);
@@ -70,17 +77,26 @@ public class Drawing {
     	 */
     	public float y = 0;
     	
+    	/*
+    	 * Constructor for Point with two integers
+    	 */
     	public Point(float x, float y) {
     		this.x = x;
     		this.y = y;
     	}
     	
+    	/*
+    	 * Constructor for Point with Point (essentially copy constructor)
+    	 */
     	public Point(Point point) {
     		this.x = point.x;
     		this.y = point.y;
     	}
     }
     
+    /*
+     * Array of segments that make up the drawing
+     */
     private ArrayList<Segment> segments = new ArrayList<Segment>();
     
     /**
@@ -106,12 +122,12 @@ public class Drawing {
     /*
      * The current thickness
      */
-    private float currThickness = (float) 5.0;
+    private float currThickness = INITIAL_THICKNESS;
 
 	/*
      * The drawing view in this activity's view
      */
-    private DrawView drawView;
+    //private DrawView drawView;
     
     public int getCurrColor() {
 		return currColor;
@@ -130,14 +146,21 @@ public class Drawing {
 		this.currThickness = currThickness;
 		currPaint.setStrokeWidth(currThickness);
 	}
-
+	
+	/*
+	 * Constructor for Drawing
+	 * Initializes paint color and thickness
+	 */
 	public Drawing(Context context, DrawView drawView) {
-		this.drawView = drawView;
+		//this.drawView = drawView;
 		currPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 		currPaint.setColor(currColor);
 		currPaint.setStrokeWidth(currThickness);
 	}
 	
+	/*
+	 * Draw the drawing by iterating through the array of segments
+	 */
 	public void draw(Canvas canvas) {
 		float lastX, lastY, currX, currY;
 		Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -182,6 +205,9 @@ public class Drawing {
 		return false;
 	}
 	
+	/*
+	 * Every time the finger moves, add a segment to the array of segments
+	 */
 	public void move(float x, float y) {
 		Segment segment = new Segment(new Point(lastX, lastY), new Point(x, y), currColor, currThickness);
 		segments.add(segment);
