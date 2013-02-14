@@ -1,0 +1,33 @@
+Project 1 Submission
+
+Group Name: Boggle
+
+When you have completed the project, complete the following form and include it with your project. Include this file as a text file in the folder with your project when you turn it in. 
+
+Names of all classes responsible for storing the drawing:
+Drawing - Main class with all the functions for actually drawing and manipulating the drawing
+Segment - A single line segment with two points, a color, and a line thickness
+Point - A single x,y point
+
+
+Member 1: Mairin Chesney
+
+Responsibility:
+Opening activity
+Drawing View
+
+
+
+Member 2: Benjamin Szymczak
+
+Responsibility:
+Editing activity
+Icons
+
+
+
+Member 3: Sana Siddique
+
+Responsibility:
+Guessing activity
+Scorekeeping

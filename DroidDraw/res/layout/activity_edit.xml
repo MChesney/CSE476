@@ -37,6 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/linewidth"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true" />
 
 
