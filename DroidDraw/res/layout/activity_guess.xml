@@ -5,23 +5,22 @@
     tools:context=".GuessActivity" >
 
     <edu.msu.cse.boggle.droiddraw.DrawView
-        android:id="@+id/drawView1"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_above="@string/category"
+        android:id="@+id/drawViewGuess"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textView3"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:background="@android:color/background_dark" />
+        android:background="@android:color/background_light" />
 
     <Chronometer
         android:id="@+id/time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="false"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_alignTop="@id/drawView1"
+        android:layout_alignTop="@id/drawViewGuess"
         android:text="Chronometer" />
 
     <Button

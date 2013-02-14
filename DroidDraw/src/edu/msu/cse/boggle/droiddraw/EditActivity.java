@@ -26,7 +26,7 @@ public class EditActivity extends Activity {
 		super.onCreate(bundle);
 		setContentView(R.layout.activity_edit);
 		
-		drawView = (DrawView) this.findViewById(R.id.drawView1);
+		drawView = (DrawView) this.findViewById(R.id.drawViewEdit);
 		
 		/*if (bundle != null) {
 			drawView.loadInstanceState(bundle);
@@ -66,8 +66,6 @@ public class EditActivity extends Activity {
 			// This is a color response
 			int color = data.getIntExtra(ColorSelectActivity.COLOR, Color.BLACK);
 			drawView.setColor(color);
-		
-		//TODO Set the color somewhere
 		
 		}
 	}

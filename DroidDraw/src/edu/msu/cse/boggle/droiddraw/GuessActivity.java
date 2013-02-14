@@ -8,11 +8,22 @@ import android.view.View;
 //import android.widget.EditText;
 
 public class GuessActivity extends Activity {
+	
+	/*
+	 * The drawing view in this activity's view
+	 */
+	private DrawView drawView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_guess);
+		
+		drawView = (DrawView) this.findViewById(R.id.drawViewGuess);
+		
+		/*if (bundle != null) {
+			drawView.loadInstanceState(bundle);
+		}*/
 	}
 
 	@Override
@@ -22,13 +33,13 @@ public class GuessActivity extends Activity {
 		return true;
 		//testing
 	}
+	
 	public void onDrawPicture(View view){
 		Intent intent = new Intent(this, EditActivity.class);
 		startActivity(intent);
-		//works
-	
-		
+		//works	
 	}
+	
 	public void onExit(View view){
 		Intent intent = new Intent(this, ClosingActivity.class);
 		startActivity(intent);

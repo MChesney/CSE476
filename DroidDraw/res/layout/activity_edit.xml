@@ -32,7 +32,7 @@
         android:text="@string/linewidth" />
 
     <edu.msu.cse.boggle.droiddraw.DrawView
-        android:id="@+id/drawView1"
+        android:id="@+id/drawViewEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@id/linewidth"
