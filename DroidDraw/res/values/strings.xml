@@ -24,5 +24,7 @@
     <string name="hint">Hint will appear here</string>
     <string name="category">Category</string>
     <string name="exit">Exit</string>
+    <string name="clue">"Clue: "</string>
+    <string name="answer">"Answer: "</string>
 
 </resources>
