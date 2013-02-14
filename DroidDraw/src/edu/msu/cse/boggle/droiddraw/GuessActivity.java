@@ -25,6 +25,7 @@ public class GuessActivity extends Activity {
 	public void onDrawPicture(View view){
 		Intent intent = new Intent(this, EditActivity.class);
 		startActivity(intent);
+		//works
 	
 		
 	}
