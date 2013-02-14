@@ -29,4 +29,11 @@ public class GuessActivity extends Activity {
 	
 		
 	}
+	public void onExit(View view){
+		Intent intent = new Intent(this, ClosingActivity.class);
+		startActivity(intent);
+		//works
+	
+		
+	}
 }

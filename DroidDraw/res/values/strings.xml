@@ -23,5 +23,6 @@
     <string name="guess">Guess:</string>
     <string name="hint">Hint will appear here</string>
     <string name="category">Category</string>
+    <string name="exit">Exit</string>
 
 </resources>
