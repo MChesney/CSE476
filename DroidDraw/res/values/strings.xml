@@ -33,5 +33,7 @@
     <string name="new_game">New Game</string>
     <string name="clue">"Clue: "</string>
     <string name="answer">"Answer: "</string>
+    <string name="p1">Player1 Score</string>
+    <string name="p2">Player2 Score</string>
 
 </resources>

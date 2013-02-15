@@ -58,11 +58,10 @@
         android:gravity="center"
         android:paddingRight="5dp" >
 
-        <TextView
-            android:id="@+id/textView1"
+        <Button
+            android:id="@+id/guess"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
+            android:layout_height="wrap_content"
             android:text="@string/guess" />
 
         <EditText
@@ -87,17 +86,42 @@
         android:paddingRight="10dp"
         android:paddingTop="10dp"
         android:text="@string/answer" />
+    
+    <TextView
+        android:id="@+id/player1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/p1" />
+
+    <TextView
+        android:id="@+id/player2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/time"
+        android:text="@string/p2" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/drawagain"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:onClick="onExit"
+        android:text="@string/exit" />
 
     <Button
         android:id="@+id/drawagain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/button1"
         android:layout_alignLeft="@+id/textView2"
-        android:layout_alignParentBottom="false"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/Answer"
         android:onClick="onDrawPicture"
-        android:padding="20dp"
+        android:padding="10dp"
         android:text="@string/Drawpicture" />
 
 </RelativeLayout>

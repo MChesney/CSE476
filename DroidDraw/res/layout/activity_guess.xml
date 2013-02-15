@@ -53,11 +53,10 @@
         android:layout_alignParentLeft="true"
         android:gravity="center" >
 
-        <TextView
-            android:id="@+id/textView1"
+        <Button
+            android:id="@+id/guess"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
+            android:layout_height="wrap_content"
             android:text="@string/guess" />
 
         <EditText
@@ -70,6 +69,7 @@
 
             <requestFocus />
         </EditText>
+
     </LinearLayout>
 
     <TextView
@@ -101,5 +101,21 @@
         android:gravity="center"
         android:text="@string/category"
         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/player1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/p1" />
+
+    <TextView
+        android:id="@+id/player2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/time"
+        android:text="@string/p2" />
 
 </RelativeLayout>
