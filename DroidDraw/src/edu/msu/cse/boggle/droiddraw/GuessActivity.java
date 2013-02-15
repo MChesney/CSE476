@@ -44,7 +44,9 @@ public class GuessActivity extends Activity {
 		Intent intent = new Intent(this, ClosingActivity.class);
 		startActivity(intent);
 		
+	}
 	
-		
+	@Override
+	public void onBackPressed() {
 	}
 }

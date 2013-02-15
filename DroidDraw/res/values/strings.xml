@@ -24,5 +24,12 @@
     <string name="hint">Hint will appear here</string>
     <string name="category">Category</string>
     <string name="exit">Exit</string>
+    <string name="winner">"Winner: "</string>
+    <string name="loser">" Loser: "</string>
+    <string name="placeholder">XX</string>
+    <string name="winner_image_description">Winner!</string>
+    <string name="loser_image_description">Loser!</string>
+    <string name="score">"Score: "</string>
+    <string name="new_game">New Game</string>
 
 </resources>
