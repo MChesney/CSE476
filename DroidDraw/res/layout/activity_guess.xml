@@ -20,8 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_alignTop="@id/drawViewGuess"
-        android:text="Chronometer" />
+        android:layout_alignTop="@id/drawViewGuess" />
 
     <Button
         android:id="@+id/button1"
@@ -44,7 +43,7 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:paddingTop="10dp"
-        android:text="This is where the answer is displayed" />
+        android:text="@string/answer" />
 
     <LinearLayout
         android:id="@+id/linearLayout1"
@@ -58,7 +57,6 @@
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="0"
             android:gravity="center"
             android:text="@string/guess" />
 

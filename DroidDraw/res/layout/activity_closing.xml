@@ -71,24 +71,27 @@
         </LinearLayout>
 
     </RelativeLayout>
-
+    
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_gravity="center"
         android:layout_weight="1" >
-
-        <LinearLayout
+        
+        <ImageView
+            android:id="@+id/loserImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/linearLayout2" >
+            android:layout_gravity="center"
+            android:contentDescription="@string/loser_image_description"
+            android:src="@drawable/ic_launcher" />
 
-            <ImageView
-                android:id="@+id/loserImage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/loser_image_description"
-                android:src="@drawable/ic_launcher" />
+        <LinearLayout
+            android:id="@+id/linearLayoutLoserText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:orientation="vertical"
+            android:layout_toRightOf="@+id/loserImage">
 
             <TextView
                 android:id="@+id/loserText"
@@ -98,24 +101,25 @@
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
-                android:id="@+id/loserName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/placeholder"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
-        </LinearLayout>
-        
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/linearLayout2" 
-            android:layout_alignRight="@+id/linearLayout2">
-            
-            <TextView
                 android:id="@+id/loserScoreText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/score"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/linearLayoutLoserText"
+            android:orientation="vertical">
+            
+            <TextView
+                android:id="@+id/loserName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/placeholder"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
@@ -124,7 +128,6 @@
                 android:layout_height="wrap_content"
                 android:text="@string/placeholder"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
-            
         </LinearLayout>
 
     </RelativeLayout>
@@ -139,15 +142,12 @@
             android:id="@+id/newGameButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
             android:text="@string/new_game" />
 
         <Button
             android:id="@+id/exitButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/newGameButton"
             android:text="@string/exit" />
 

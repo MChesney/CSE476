@@ -33,8 +33,7 @@
         android:layout_alignParentLeft="false"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_alignTop="@id/drawViewGuess"
-        android:text="Chronometer" />
+        android:layout_alignTop="@id/drawViewGuess" />
 
     <TextView
         android:id="@+id/textView2"
@@ -63,7 +62,6 @@
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="0"
             android:gravity="center"
             android:text="@string/guess" />
 
@@ -88,7 +86,7 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:paddingTop="10dp"
-        android:text="answer is displayed" />
+        android:text="@string/answer" />
 
     <Button
         android:id="@+id/drawagain"

@@ -12,14 +12,14 @@ public class GuessActivity extends Activity {
 	/*
 	 * The drawing view in this activity's view
 	 */
-	private DrawView drawView;
+	//private DrawView drawView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_guess);
 		
-		drawView = (DrawView) this.findViewById(R.id.drawViewGuess);
+		//drawView = (DrawView) this.findViewById(R.id.drawViewGuess);
 		
 		/*if (bundle != null) {
 			drawView.loadInstanceState(bundle);
