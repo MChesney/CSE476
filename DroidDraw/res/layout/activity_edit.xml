@@ -104,4 +104,23 @@
         android:onClick="onLineColor"
         android:text="@string/color_set" />
 
+    <TextView
+        android:id="@+id/player2score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/drawViewEdit"
+        android:layout_centerHorizontal="true"
+        android:text="@string/p2score"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/score1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/player2score"
+        android:layout_alignBottom="@+id/player2score"
+        android:layout_alignParentRight="true"
+        android:text="@string/p1score"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
 </RelativeLayout>

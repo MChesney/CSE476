@@ -35,5 +35,7 @@
     <string name="answer">"Answer: "</string>
     <string name="p1">Player1 Score</string>
     <string name="p2">Player2 Score</string>
+    <string name="p1score">P1 score</string>
+    <string name="p2score">P2 score</string>
 
 </resources>
