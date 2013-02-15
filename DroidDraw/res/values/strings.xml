@@ -31,5 +31,7 @@
     <string name="loser_image_description">Loser!</string>
     <string name="score">"Score: "</string>
     <string name="new_game">New Game</string>
+    <string name="clue">"Clue: "</string>
+    <string name="answer">"Answer: "</string>
 
 </resources>
