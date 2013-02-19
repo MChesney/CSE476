@@ -2,6 +2,7 @@ package edu.msu.cse.boggle.droiddraw;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -72,6 +73,14 @@ public class DrawView extends View {
 
 	public void setEditable(boolean isEditable) {
 		this.isEditable = isEditable;
+	}
+	
+	public void loadView(Bundle bundle) {
+		drawing.loadDrawing(bundle);
+	}
+	
+	public void saveView(Bundle bundle) {
+		drawing.saveDrawing(bundle);
 	}
 	
 }

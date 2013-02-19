@@ -30,17 +30,17 @@ public class EditActivity extends Activity {
 		drawView = (DrawView) this.findViewById(R.id.drawViewEdit);
 		drawView.setEditable(true);
 		
-		/*if (bundle != null) {
-			drawView.loadInstanceState(bundle);
-		}*/
+		if (bundle != null) {
+			drawView.loadView(bundle);
+		}
 	}
 	
-	/*@Override
+	@Override
 	protected void onSaveInstanceState(Bundle bundle) {
 		super.onSaveInstanceState(bundle);
 		
-		drawView.saveInstanceState(bundle);
-	}*/
+		drawView.saveView(bundle);
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -51,6 +51,9 @@ public class EditActivity extends Activity {
 	
 	public boolean onDoneButton(View view){
 		Intent intent = new Intent(this, GuessActivity.class);
+		Bundle bundle = new Bundle();
+		drawView.saveView(bundle);
+		intent.putExtras(bundle);
 		startActivity(intent);
 		return true;
 	}
@@ -63,8 +66,8 @@ public class EditActivity extends Activity {
 	
 	public void onToggleEdit(View view) {
 		ToggleButton toggle = (ToggleButton) this.findViewById(R.id.toggleDrawMove);
-		boolean isEditable = toggle.isChecked();
-		drawView.setEditable(isEditable);
+		boolean isMoving = toggle.isChecked();
+		drawView.setEditable(!isMoving);
 	}
 	
 	@Override
@@ -76,7 +79,6 @@ public class EditActivity extends Activity {
 			drawView.setColor(color);
 		
 		}
-	}
-		
+	}	
 
 }

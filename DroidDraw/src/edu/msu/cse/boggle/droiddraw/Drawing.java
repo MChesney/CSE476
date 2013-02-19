@@ -7,10 +7,18 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 
 public class Drawing {
+	
+	public static final String DRAWING = "drawing";
+	public static final String PARAMETERS = "parameters";
+	public static final String COLORS = "colors";
+	public static final String THICKNESSES = "thicknesses";
+	public static final String START_POINTS = "start_points";
+	public static final String END_POINTS = "end_points";
 	
 	public static final float INITIAL_THICKNESS = (float) 5.0;
 	
@@ -272,27 +280,6 @@ public class Drawing {
 	 * @return true if the touch is handled
 	 */
 	public boolean onTouchEvent(View view, MotionEvent event) {
-		/*float x = event.getX();
-		float y = event.getY();
-		
-		switch(event.getActionMasked()) {
-		case MotionEvent.ACTION_DOWN:
-			lastX = x;
-			lastY = y;
-			return true;
-			
-        case MotionEvent.ACTION_UP:
-        case MotionEvent.ACTION_CANCEL:
-        	return true;
-        	
-        case MotionEvent.ACTION_MOVE:
-        	addSegments(x, y);
-        	lastX = x;
-        	lastY = y;
-        	view.invalidate();
-        	return true;
-		}
-		return false;*/
 		int id = event.getPointerId(event.getActionIndex());
         
         switch(event.getActionMasked()) {
@@ -349,7 +336,29 @@ public class Drawing {
 	 * @return true if the touch is handled
 	 */
 	public boolean onTouchEventEditable(View view, MotionEvent event) {
-		int id = event.getPointerId(event.getActionIndex());
+		float x = event.getX();
+		float y = event.getY();
+		
+		switch(event.getActionMasked()) {
+		case MotionEvent.ACTION_DOWN:
+			lastX = x;
+			lastY = y;
+			return true;
+			
+        case MotionEvent.ACTION_UP:
+        case MotionEvent.ACTION_CANCEL:
+        	return true;
+        	
+        case MotionEvent.ACTION_MOVE:
+        	addSegments(x, y);
+        	lastX = x;
+        	lastY = y;
+        	view.invalidate();
+        	return true;
+		}
+		return false;
+		
+		/*int id = event.getPointerId(event.getActionIndex());
         
 		float x = event.getX();
 		float y = event.getY();
@@ -407,7 +416,7 @@ public class Drawing {
 
         	return true;
 		}
-		return false;
+		return false;*/
 	}
 	
     /**
@@ -444,8 +453,6 @@ public class Drawing {
      * Handle movement of the touches
      */
     private void move() {
-    	// TODO reorder?
-    	
         // If no touch1, we have nothing to do
         // This should not happen, but it never hurts
         // to check.
@@ -468,18 +475,18 @@ public class Drawing {
             /*
              * Rotation
              */
-            /*float angle1 = angle(touch1.lastTouch.x, touch1.lastTouch.y, touch2.lastTouch.x, touch2.lastTouch.y);
+            float angle1 = angle(touch1.lastTouch.x, touch1.lastTouch.y, touch2.lastTouch.x, touch2.lastTouch.y);
             float angle2 = angle(touch1.currTouch.x, touch1.currTouch.y, touch2.currTouch.x, touch2.currTouch.y);
             float da = angle2 - angle1;
-            rotate(da, touch1.currTouch.x, touch1.currTouch.y);*/
+            rotate(da, touch1.currTouch.x, touch1.currTouch.y);
             
             /*
              * Scaling
              */
-            float distance1 = distance(touch1.lastTouch.x, touch1.lastTouch.y, touch2.lastTouch.x, touch2.lastTouch.y);
+            /*float distance1 = distance(touch1.lastTouch.x, touch1.lastTouch.y, touch2.lastTouch.x, touch2.lastTouch.y);
             float distance2 = distance(touch1.currTouch.x, touch1.currTouch.y, touch2.currTouch.x, touch2.currTouch.y);
             float dd = distance2/distance1;
-            scale(dd);
+            scale(dd);*/
         }
     }
     
@@ -550,18 +557,59 @@ public class Drawing {
         float sa = (float) Math.sin(-params.angle);
 	
 		float prevX, prevY, currX, currY;
-		/*prevX = (lastX - params.translateX)*ca - (lastY - params.translateY)*sa;
+		prevX = (lastX - params.translateX)*ca - (lastY - params.translateY)*sa;
 		prevY = (lastX - params.translateX)*sa + (lastY - params.translateY)*ca;
 		currX = (x - params.translateX)*ca - (y - params.translateY)*sa;
-		currY = (x - params.translateX)*sa + (y - params.translateY)*ca;*/		
+		currY = (x - params.translateX)*sa + (y - params.translateY)*ca;		
 		
-		prevX = (lastX - params.translateX)/params.scale;
-		prevY = (lastY - params.translateY)/params.scale;
-		currX = (x - params.translateX)/params.scale;
-		currY = (y - params.translateY)/params.scale;	
+		//prevX = (lastX - params.translateX)/params.scale;
+		//prevY = (lastY - params.translateY)/params.scale;
+		//currX = (x - params.translateX)/params.scale;
+		//currY = (y - params.translateY)/params.scale;	
 			
 		Segment segment = new Segment(new Point(prevX, prevY), new Point(currX, currY), currColor, currThickness);
 		segments.add(segment);
+	}
+	
+	public void loadDrawing(Bundle bundle) {
+		params = (Parameters) bundle.getSerializable(PARAMETERS);
+		
+		int [] colors = bundle.getIntArray(COLORS);
+		float [] thicknesses = bundle.getFloatArray(THICKNESSES);
+		float [] startPoints = bundle.getFloatArray(START_POINTS);
+		float [] endPoints = bundle.getFloatArray(END_POINTS);
+		
+		for (int i = 0; i < colors.length; i++) {
+			Point prevPoint = new Point(startPoints[i*2], startPoints[i*2+1]);
+			Point currPoint = new Point(endPoints[i*2], endPoints[i*2+1]);
+			Segment segment = new Segment(prevPoint, currPoint, colors[i], thicknesses[i]);
+			segments.add(segment);
+		}
+
+	}
+	
+	public void saveDrawing(Bundle bundle) {
+		bundle.putSerializable(PARAMETERS, params);
+		
+		int [] colors = new int[segments.size()];
+		float [] thicknesses = new float[segments.size()];
+		float [] startPoints = new float[segments.size()*2];
+		float [] endPoints = new float[segments.size()*2];
+		
+		for (int i=0; i < segments.size(); i++) {
+			Segment segment = segments.get(i);
+			colors[i] = segment.getColor();
+			thicknesses[i] = segment.getThickness();
+			startPoints[i*2] = segment.getLastPoint().x;
+			startPoints[i*2+1] = segment.getLastPoint().y;
+			endPoints[i*2] = segment.getCurrPoint().x;
+			endPoints[i*2+1] = segment.getCurrPoint().y;
+		}
+		
+		bundle.putIntArray(COLORS, colors);
+		bundle.putFloatArray(THICKNESSES, thicknesses);
+		bundle.putFloatArray(START_POINTS, startPoints);
+		bundle.putFloatArray(END_POINTS, endPoints);
 	}
 
 }

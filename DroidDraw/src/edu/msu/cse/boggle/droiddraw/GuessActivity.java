@@ -15,16 +15,20 @@ public class GuessActivity extends Activity {
 	private DrawView drawView;
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+	protected void onCreate(Bundle bundle) {
+		super.onCreate(bundle);
 		setContentView(R.layout.activity_guess);
 		
 		drawView = (DrawView) this.findViewById(R.id.drawViewGuess);
 		drawView.setEditable(false);
 		
-		/*if (bundle != null) {
-			drawView.loadInstanceState(bundle);
-		}*/
+		// TODO
+		Bundle drawingFromEdit = getIntent().getExtras();
+		if (bundle != null) {
+			drawView.loadView(bundle);
+		} else if (drawingFromEdit != null) {
+			drawView.loadView(drawingFromEdit);
+		}
 	}
 
 	@Override
@@ -47,5 +51,12 @@ public class GuessActivity extends Activity {
 	
 	@Override
 	public void onBackPressed() {
+	}
+	
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		
+        drawView.saveView(outState);
 	}
 }
