@@ -37,5 +37,7 @@
     <string name="p2">Player2 Score</string>
     <string name="p1score">P1 score</string>
     <string name="p2score">P2 score</string>
+    <string name="draw">Draw</string>
+    <string name="move">Move</string>
 
 </resources>

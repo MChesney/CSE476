@@ -8,10 +8,15 @@ import android.view.View;
 
 public class DrawView extends View {
 	
-	/*
+	/**
 	 * The actual drawing
 	 */
 	private Drawing drawing;
+	
+	/**
+	 * If the drawing is editable (can draw lines) or can only be manipulated
+	 */
+	private boolean isEditable;
 
 	public DrawView(Context context) {
 		super(context);
@@ -30,6 +35,7 @@ public class DrawView extends View {
 	
 	private void init(Context context) {
 		drawing = new Drawing(context, this);
+		isEditable = false;
 	}
 	
 	@Override
@@ -41,7 +47,11 @@ public class DrawView extends View {
 	
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-		return drawing.onTouchEvent(this, event);
+		if (isEditable) {
+			return drawing.onTouchEventEditable(this, event);
+		} else {
+			return drawing.onTouchEvent(this, event);
+		}
 	}
 	
 	public Drawing getDrawing() {
@@ -52,5 +62,16 @@ public class DrawView extends View {
 		drawing.setCurrColor(color);
 	}
 	
+	public void setThickness(float thickness) {
+		drawing.setCurrThickness(thickness);
+	}
 
+	public boolean isEditable() {
+		return isEditable;
+	}
+
+	public void setEditable(boolean isEditable) {
+		this.isEditable = isEditable;
+	}
+	
 }

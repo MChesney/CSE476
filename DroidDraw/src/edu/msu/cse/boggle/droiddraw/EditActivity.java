@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.view.Menu;
 import android.view.View;
+import android.widget.ToggleButton;
 
 public class EditActivity extends Activity {
 
@@ -27,6 +28,7 @@ public class EditActivity extends Activity {
 		setContentView(R.layout.activity_edit);
 		
 		drawView = (DrawView) this.findViewById(R.id.drawViewEdit);
+		drawView.setEditable(true);
 		
 		/*if (bundle != null) {
 			drawView.loadInstanceState(bundle);
@@ -57,6 +59,12 @@ public class EditActivity extends Activity {
 		Intent intent = new Intent(this,  ColorSelectActivity.class);
 		startActivityForResult(intent, GOT_COLOR);
 		return true;
+	}
+	
+	public void onToggleEdit(View view) {
+		ToggleButton toggle = (ToggleButton) this.findViewById(R.id.toggleDrawMove);
+		boolean isEditable = toggle.isChecked();
+		drawView.setEditable(isEditable);
 	}
 	
 	@Override

@@ -123,4 +123,14 @@
         android:text="@string/p1score"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
+    <ToggleButton
+        android:id="@+id/toggleDrawMove"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:textOff="@string/draw"
+        android:textOn="@string/move" 
+        android:onClick="onToggleEdit"/>
+
 </RelativeLayout>

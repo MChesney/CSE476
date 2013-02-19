@@ -9,17 +9,18 @@ import android.view.View;
 
 public class GuessActivity extends Activity {
 	
-	/*
+	/**
 	 * The drawing view in this activity's view
 	 */
-	//private DrawView drawView;
+	private DrawView drawView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_guess);
 		
-		//drawView = (DrawView) this.findViewById(R.id.drawViewGuess);
+		drawView = (DrawView) this.findViewById(R.id.drawViewGuess);
+		drawView.setEditable(false);
 		
 		/*if (bundle != null) {
 			drawView.loadInstanceState(bundle);
@@ -31,13 +32,11 @@ public class GuessActivity extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.activity_guess, menu);
 		return true;
-		//testing
 	}
 	
 	public void onDrawPicture(View view){
 		Intent intent = new Intent(this, EditActivity.class);
 		startActivity(intent);
-		//works	
 	}
 	
 	public void onExit(View view){
