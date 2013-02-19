@@ -24,25 +24,28 @@ public class Players {
 	}
 
 	private static final class PlayersInfo implements Serializable {
-		// TODO ??? 
-		private static final long serialVersionUID = 1;
 		
-		/*
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = -1459156760421244376L;
+
+		/**
 		 * Player 1 name
 		 */
-		public String playerOneName = null;
+		public String playerOneName = "";
 		
-		/*
+		/**
 		 * Player 2 name
 		 */
-		public String playerTwoName = null;
+		public String playerTwoName = "";
 		
-		/*
+		/**
 		 * Player 1 score
 		 */
 		public int playerOneScore = 0;
 		
-		/*
+		/**
 		 * Player 2 score
 		 */
 		public int playerTwoScore = 0;
@@ -111,6 +114,14 @@ public class Players {
 		if (player.equals(PLAYERTWO)) {
 			playersInfo.playerTwoScore += increment;
 		}
+	}
+	
+	public void savePlayers(Bundle bundle) {
+		bundle.putSerializable(PLAYERINFORMATION, playersInfo);
+	}
+	
+	public void loadPlayers(Bundle bundle) {
+		playersInfo = (PlayersInfo) bundle.getSerializable(PLAYERINFORMATION);
 	}
 	
 }

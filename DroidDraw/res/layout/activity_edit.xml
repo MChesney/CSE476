@@ -106,21 +106,11 @@
         android:text="@string/color_set" />
 
     <TextView
-        android:id="@+id/player2score"
+        android:id="@+id/playerOne"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/drawViewEdit"
         android:layout_centerHorizontal="true"
-        android:text="@string/p2score"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/score1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/player2score"
-        android:layout_alignBottom="@+id/player2score"
-        android:layout_alignParentRight="true"
         android:text="@string/p1score"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -133,5 +123,15 @@
         android:textOff="@string/draw"
         android:textOn="@string/move" 
         android:onClick="onToggleEdit"/>
+
+    <TextView
+        android:id="@+id/playerTwo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/playerOne"
+        android:layout_alignBottom="@+id/playerOne"
+        android:layout_alignLeft="@+id/donebutton"
+        android:text="@string/p2score"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>

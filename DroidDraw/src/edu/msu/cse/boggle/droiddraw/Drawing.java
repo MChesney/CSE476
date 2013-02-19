@@ -19,6 +19,7 @@ public class Drawing {
 	public static final String THICKNESSES = "thicknesses";
 	public static final String START_POINTS = "start_points";
 	public static final String END_POINTS = "end_points";
+	public static final String EDITABLE = "editable";
 	
 	public static final float INITIAL_THICKNESS = (float) 5.0;
 	
@@ -147,7 +148,9 @@ public class Drawing {
     }
     
     private static final class Parameters implements Serializable {
-    	/**
+		private static final long serialVersionUID = -8605848629519027132L;
+
+		/**
     	 * The amount of X translation that has occurred
     	 */
     	public float translateX = 0;
@@ -220,7 +223,6 @@ public class Drawing {
     private Parameters params = new Parameters();
 
 	/**
-	 * TODO is this circular referencing?
      * The drawing view in this activity's view
      */
     private DrawView drawView;
@@ -580,14 +582,14 @@ public class Drawing {
 	 */
 	public void addSegments(float x, float y) {
 		// Calculate new x and y points from image scale, rotation, and translation
-        float ca = (float) Math.cos(-params.angle);
-        float sa = (float) Math.sin(-params.angle);
+        float ca = (float) Math.cos(params.angle);
+        float sa = (float) Math.sin(params.angle);
 	
 		float prevX, prevY, currX, currY;
-		prevX = (lastX - params.translateX)*ca - (lastY - params.translateY)*sa;
-		prevY = (lastX - params.translateX)*sa + (lastY - params.translateY)*ca;
-		currX = (x - params.translateX)*ca - (y - params.translateY)*sa;
-		currY = (x - params.translateX)*sa + (y - params.translateY)*ca;		
+		prevX = (lastX - params.translateX)*ca + (lastY - params.translateY)*sa;
+		prevY = -(lastX - params.translateX)*sa + (lastY - params.translateY)*ca;
+		currX = (x - params.translateX)*ca + (y - params.translateY)*sa;
+		currY = -(x - params.translateX)*sa + (y - params.translateY)*ca;		
 		
 		//prevX = (lastX - params.translateX)/params.scale;
 		//prevY = (lastY - params.translateY)/params.scale;
@@ -600,6 +602,7 @@ public class Drawing {
 	
 	public void loadDrawing(Bundle bundle) {
 		params = (Parameters) bundle.getSerializable(PARAMETERS);
+		isEditable = bundle.getBoolean(EDITABLE);
 		
 		int [] colors = bundle.getIntArray(COLORS);
 		float [] thicknesses = bundle.getFloatArray(THICKNESSES);
@@ -637,6 +640,7 @@ public class Drawing {
 		bundle.putFloatArray(THICKNESSES, thicknesses);
 		bundle.putFloatArray(START_POINTS, startPoints);
 		bundle.putFloatArray(END_POINTS, endPoints);
+		bundle.putBoolean(EDITABLE, isEditable);
 	}
 
 }

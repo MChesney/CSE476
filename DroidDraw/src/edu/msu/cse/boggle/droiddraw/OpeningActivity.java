@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.EditText;
 
 public class OpeningActivity extends Activity {
+	
+	public static final String RESET = "reset";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +38,12 @@ public class OpeningActivity extends Activity {
 			two.requestFocus();
 		} else {
 			Intent intent = new Intent(this,  EditActivity.class);
-			/*Bundle bundle = new Bundle();
-			bundle.putString(Player.PLAYERONENAME, playerOneName);
-			bundle.putString(Player.PLAYERTWONAME, playerTwoName);*/
+			Bundle bundle = new Bundle();
+			Players players = new Players();
+			players.setName(Players.PLAYERONE, playerOneName);
+			players.setName(Players.PLAYERTWO, playerTwoName);
+			players.savePlayers(bundle);
+			intent.putExtras(bundle);
 			startActivity(intent);
 		}
 		

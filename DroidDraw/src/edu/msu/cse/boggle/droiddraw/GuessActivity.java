@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 //import android.widget.EditText;
+import android.widget.TextView;
 
 public class GuessActivity extends Activity {
 	
@@ -13,6 +14,11 @@ public class GuessActivity extends Activity {
 	 * The drawing view in this activity's view
 	 */
 	private DrawView drawView;
+	
+	/**
+	 * The player information 
+	 */
+	private Players players = new Players();
 
 	@Override
 	protected void onCreate(Bundle bundle) {
@@ -23,12 +29,23 @@ public class GuessActivity extends Activity {
 		drawView.setEditable(false);
 		
 		// TODO
-		Bundle drawingFromEdit = getIntent().getExtras();
+		Bundle infoFromPrevActivity = getIntent().getExtras();
 		if (bundle != null) {
 			drawView.loadView(bundle);
-		} else if (drawingFromEdit != null) {
-			drawView.loadView(drawingFromEdit);
+			players.loadPlayers(bundle);
+		} else if (infoFromPrevActivity != null) {
+			drawView.loadView(infoFromPrevActivity);
+			players.loadPlayers(infoFromPrevActivity);
 		}
+		
+		TextView playerOne = (TextView) this.findViewById(R.id.playerOne);
+		TextView playerTwo = (TextView) this.findViewById(R.id.playerTwo);
+		
+		String playerOneInfo = players.getName(Players.PLAYERONE) + ": " + players.getScore(Players.PLAYERONE);
+		String playerTwoInfo = players.getName(Players.PLAYERTWO) + ": " + players.getScore(Players.PLAYERTWO);
+		
+		playerOne.setText(playerOneInfo);
+		playerTwo.setText(playerTwoInfo);
 	}
 
 	@Override
@@ -40,12 +57,18 @@ public class GuessActivity extends Activity {
 	
 	public void onDrawPicture(View view){
 		Intent intent = new Intent(this, EditActivity.class);
+		Bundle bundle = new Bundle();
+		players.savePlayers(bundle);
+		intent.putExtras(bundle);
 		startActivity(intent);
 		finish();
 	}
 	
 	public void onFinishGame(View view){
 		Intent intent = new Intent(this, ClosingActivity.class);
+		Bundle bundle = new Bundle();
+		players.savePlayers(bundle);
+		intent.putExtras(bundle);
 		startActivity(intent);
 		finish();
 	}

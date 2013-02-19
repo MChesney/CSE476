@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.view.Menu;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.ToggleButton;
 
 public class EditActivity extends Activity {
@@ -20,7 +21,7 @@ public class EditActivity extends Activity {
 	/*
 	 * The players
 	 */
-	//private Players players = new Players();
+	private Players players = new Players();
 	
 	@Override
 	protected void onCreate(Bundle bundle) {
@@ -30,9 +31,22 @@ public class EditActivity extends Activity {
 		drawView = (DrawView) this.findViewById(R.id.drawViewEdit);
 		drawView.setEditable(true);
 		
+		Bundle infoFromPrevActivity = getIntent().getExtras();
 		if (bundle != null) {
 			drawView.loadView(bundle);
+			players.loadPlayers(bundle);
+		} else if (infoFromPrevActivity != null) {
+			players.loadPlayers(infoFromPrevActivity);
 		}
+		
+		TextView playerOne = (TextView) this.findViewById(R.id.playerOne);
+		TextView playerTwo = (TextView) this.findViewById(R.id.playerTwo);
+		
+		String playerOneInfo = players.getName(Players.PLAYERONE) + ": " + players.getScore(Players.PLAYERONE);
+		String playerTwoInfo = players.getName(Players.PLAYERTWO) + ": " + players.getScore(Players.PLAYERTWO);
+		
+		playerOne.setText(playerOneInfo);
+		playerTwo.setText(playerTwoInfo);
 	}
 	
 	@Override
@@ -40,6 +54,7 @@ public class EditActivity extends Activity {
 		super.onSaveInstanceState(bundle);
 		
 		drawView.saveView(bundle);
+		players.savePlayers(bundle);
 	}
 
 	@Override
@@ -53,6 +68,7 @@ public class EditActivity extends Activity {
 		Intent intent = new Intent(this, GuessActivity.class);
 		Bundle bundle = new Bundle();
 		drawView.saveView(bundle);
+		players.savePlayers(bundle);
 		intent.putExtras(bundle);
 		startActivity(intent);
 		finish();
