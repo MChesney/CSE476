@@ -142,14 +142,8 @@
             android:id="@+id/newGameButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/new_game" />
-
-        <Button
-            android:id="@+id/exitButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/newGameButton"
-            android:text="@string/exit" />
+            android:text="@string/new_game" 
+            android:onClick="onNewGame"/>
 
     </RelativeLayout>
 

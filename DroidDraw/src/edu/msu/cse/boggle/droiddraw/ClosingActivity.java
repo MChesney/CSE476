@@ -2,7 +2,9 @@ package edu.msu.cse.boggle.droiddraw;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
+import android.view.View;
 
 public class ClosingActivity extends Activity {
 
@@ -17,6 +19,13 @@ public class ClosingActivity extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.activity_closing, menu);
 		return true;
+	}
+	
+	public void onNewGame(View view) {
+		Intent intent = new Intent(this, OpeningActivity.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		startActivity(intent);
+		finish();
 	}
 
 }

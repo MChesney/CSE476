@@ -14,7 +14,8 @@
     	<edu.msu.cse.boggle.droiddraw.DrawView
         	android:id="@+id/drawViewEdit"
         	android:layout_width="match_parent"
-        	android:layout_height="match_parent" />
+        	android:layout_height="match_parent" 
+        	android:background="@android:color/white"/>
 
     	<ToggleButton
     	    android:id="@+id/toggleDrawMove"

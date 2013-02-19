@@ -49,19 +49,18 @@ public class EditActivity extends Activity {
 		return true;
 	}
 	
-	public boolean onDoneButton(View view){
+	public void onDoneButton(View view){
 		Intent intent = new Intent(this, GuessActivity.class);
 		Bundle bundle = new Bundle();
 		drawView.saveView(bundle);
 		intent.putExtras(bundle);
 		startActivity(intent);
-		return true;
+		finish();
 	}
 	
-	public boolean onLineColor(View view){
+	public void onLineColor(View view){
 		Intent intent = new Intent(this,  ColorSelectActivity.class);
 		startActivityForResult(intent, GOT_COLOR);
-		return true;
 	}
 	
 	public void onToggleEdit(View view) {

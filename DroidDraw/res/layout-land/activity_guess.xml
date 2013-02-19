@@ -23,8 +23,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_toLeftOf="@+id/textView3"
-        android:background="@android:color/background_light"
-        android:padding="10dp" />
+        android:padding="10dp" 
+        android:background="@android:color/white" />
 
     <Chronometer
         android:id="@+id/time"
@@ -110,8 +110,8 @@
         android:layout_alignLeft="@+id/drawagain"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:onClick="onExit"
-        android:text="@string/exit" />
+        android:onClick="onFinishGame"
+        android:text="@string/finish_game" />
 
     <Button
         android:id="@+id/drawagain"

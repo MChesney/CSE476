@@ -175,6 +175,11 @@ public class Drawing {
     private ArrayList<Segment> segments = new ArrayList<Segment>();
     
     /**
+     * Whether or not the drawing is editable
+     */
+    private boolean isEditable = false;
+    
+    /**
      * Most recent X touch when dragging
      */
     private float lastX;
@@ -219,7 +224,18 @@ public class Drawing {
      * The drawing view in this activity's view
      */
     private DrawView drawView;
-    
+	
+	/**
+	 * Constructor for Drawing
+	 * Initializes paint color and thickness
+	 */
+	public Drawing(Context context, DrawView drawView) {
+		this.drawView = drawView;
+		currPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+		currPaint.setColor(currColor);
+		currPaint.setStrokeWidth(currThickness);
+	}
+	
     public int getCurrColor() {
 		return currColor;
 	}
@@ -238,17 +254,14 @@ public class Drawing {
 		currPaint.setStrokeWidth(currThickness);
 	}
 	
-	/**
-	 * Constructor for Drawing
-	 * Initializes paint color and thickness
-	 */
-	public Drawing(Context context, DrawView drawView) {
-		this.drawView = drawView;
-		currPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-		currPaint.setColor(currColor);
-		currPaint.setStrokeWidth(currThickness);
+	public boolean isEditable() {
+		return isEditable;
 	}
-	
+
+	public void setEditable(boolean isEditable) {
+		this.isEditable = isEditable;
+	}
+
 	/**
 	 * Draw the drawing by iterating through the array of segments
 	 */
@@ -280,6 +293,20 @@ public class Drawing {
 	 * @return true if the touch is handled
 	 */
 	public boolean onTouchEvent(View view, MotionEvent event) {
+		if (isEditable) {
+			return onTouchEventEdit(view, event);
+		} else {
+			return onTouchEventMove(view, event);
+		}
+	}
+	
+	/**
+	 * Handle a touch event from the view.
+	 * @param view The view that is the source of the touch
+	 * @param event The motion event describing the touch
+	 * @return true if the touch is handled
+	 */
+	public boolean onTouchEventMove(View view, MotionEvent event) {
 		int id = event.getPointerId(event.getActionIndex());
         
         switch(event.getActionMasked()) {
@@ -335,7 +362,7 @@ public class Drawing {
 	 * @param event The motion event describing the touch
 	 * @return true if the touch is handled
 	 */
-	public boolean onTouchEventEditable(View view, MotionEvent event) {
+	public boolean onTouchEventEdit(View view, MotionEvent event) {
 		float x = event.getX();
 		float y = event.getY();
 		

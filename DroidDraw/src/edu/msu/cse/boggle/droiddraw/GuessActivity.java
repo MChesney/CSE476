@@ -41,16 +41,13 @@ public class GuessActivity extends Activity {
 	public void onDrawPicture(View view){
 		Intent intent = new Intent(this, EditActivity.class);
 		startActivity(intent);
+		finish();
 	}
 	
-	public void onExit(View view){
+	public void onFinishGame(View view){
 		Intent intent = new Intent(this, ClosingActivity.class);
 		startActivity(intent);
-		
-	}
-	
-	@Override
-	public void onBackPressed() {
+		finish();
 	}
 	
 	@Override
