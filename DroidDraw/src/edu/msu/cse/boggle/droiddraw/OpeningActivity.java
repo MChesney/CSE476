@@ -9,8 +9,6 @@ import android.view.View;
 import android.widget.EditText;
 
 public class OpeningActivity extends Activity {
-	
-	public static final String RESET = "reset";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

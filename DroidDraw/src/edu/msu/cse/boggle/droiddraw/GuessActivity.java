@@ -28,7 +28,6 @@ public class GuessActivity extends Activity {
 		drawView = (DrawView) this.findViewById(R.id.drawViewGuess);
 		drawView.setEditable(false);
 		
-		// TODO
 		Bundle infoFromPrevActivity = getIntent().getExtras();
 		if (bundle != null) {
 			drawView.loadView(bundle);

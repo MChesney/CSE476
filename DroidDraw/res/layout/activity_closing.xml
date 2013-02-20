@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#999"
     tools:context=".ClosingActivity" >
 
     <FrameLayout
@@ -23,26 +24,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:adjustViewBounds="true"
             android:contentDescription="@string/winner_image_description"
-            android:src="@drawable/ic_launcher" />
+            android:src="@drawable/smiley_face" />
 
         <LinearLayout
             android:id="@+id/linearLayoutWinnerText"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" 
-            android:orientation="vertical"
-            android:layout_toRightOf="@+id/winnerImage">
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@+id/winnerImage"
+            android:gravity="center"
+            android:orientation="vertical" >
 
             <TextView
                 android:id="@+id/winnerText"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/winner"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
             
             <TextView
                 android:id="@+id/winnerScoreText"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/score"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -51,20 +54,21 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_toRightOf="@+id/linearLayoutWinnerText"
-            android:orientation="vertical">
+            android:gravity="center"
+            android:orientation="vertical" >
             
             <TextView
                 android:id="@+id/winnerName"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/placeholder"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
                 android:id="@+id/winnerScore"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/placeholder"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -83,26 +87,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:adjustViewBounds="true"
             android:contentDescription="@string/loser_image_description"
-            android:src="@drawable/ic_launcher" />
+            android:src="@drawable/frowney_face" />
 
         <LinearLayout
             android:id="@+id/linearLayoutLoserText"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" 
-            android:orientation="vertical"
-            android:layout_toRightOf="@+id/loserImage">
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@+id/loserImage"
+            android:gravity="center"
+            android:orientation="vertical" >
 
             <TextView
                 android:id="@+id/loserText"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/loser"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
                 android:id="@+id/loserScoreText"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/score"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -111,20 +117,21 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_toRightOf="@+id/linearLayoutLoserText"
-            android:orientation="vertical">
+            android:gravity="center"
+            android:orientation="vertical" >
             
             <TextView
                 android:id="@+id/loserName"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/placeholder"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
                 android:id="@+id/loserScore"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/placeholder"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -142,7 +149,12 @@
             android:id="@+id/newGameButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="#000"
+        	android:paddingBottom="10dp"
+        	android:paddingTop="10dp"
             android:text="@string/new_game" 
+            android:textAppearance="?android:attr/textAppearanceLarge"
+        	android:textColor="#fff"
             android:onClick="onNewGame"/>
 
     </RelativeLayout>

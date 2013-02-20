@@ -19,25 +19,25 @@ public class ClosingActivity extends Activity {
 		Bundle infoFromPrevActivity = getIntent().getExtras();
 		if (infoFromPrevActivity != null) {
 			players.loadPlayers(infoFromPrevActivity);
+		}
+		
+		TextView winnerName = (TextView) this.findViewById(R.id.winnerName);
+		TextView winnerScore = (TextView) this.findViewById(R.id.winnerScore);
+		TextView loserName = (TextView) this.findViewById(R.id.loserName);
+		TextView loserScore = (TextView) this.findViewById(R.id.loserScore);
+		
+		if (players.getScore(Players.PLAYERONE) > players.getScore(Players.PLAYERTWO)) {
+			winnerName.setText(players.getName(Players.PLAYERONE));
+			winnerScore.setText(""+players.getScore(Players.PLAYERONE));
 			
-			TextView winnerName = (TextView) this.findViewById(R.id.winnerName);
-			TextView winnerScore = (TextView) this.findViewById(R.id.winnerScore);
-			TextView loserName = (TextView) this.findViewById(R.id.loserName);
-			TextView loserScore = (TextView) this.findViewById(R.id.loserScore);
+			loserName.setText(players.getName(Players.PLAYERTWO));
+			loserScore.setText(""+players.getScore(Players.PLAYERTWO));			
+		} else {
+			winnerName.setText(players.getName(Players.PLAYERTWO));
+			winnerScore.setText(""+players.getScore(Players.PLAYERTWO));
 			
-			if (players.getScore(Players.PLAYERONE) > players.getScore(Players.PLAYERTWO)) {
-				winnerName.setText(players.getName(Players.PLAYERONE));
-				winnerScore.setText(""+players.getScore(Players.PLAYERONE));
-				
-				loserName.setText(players.getName(Players.PLAYERTWO));
-				loserScore.setText(""+players.getScore(Players.PLAYERTWO));			
-			} else {
-				winnerName.setText(players.getName(Players.PLAYERTWO));
-				winnerScore.setText(""+players.getScore(Players.PLAYERTWO));
-				
-				loserName.setText(players.getName(Players.PLAYERONE));
-				loserScore.setText(""+players.getScore(Players.PLAYERONE));
-			}
+			loserName.setText(players.getName(Players.PLAYERONE));
+			loserScore.setText(""+players.getScore(Players.PLAYERONE));
 		}
 
 	}
@@ -52,7 +52,6 @@ public class ClosingActivity extends Activity {
 	public void onNewGame(View view) {
 		Intent intent = new Intent(this, OpeningActivity.class);
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		intent.putExtra(OpeningActivity.RESET, true);
 		startActivity(intent);
 		finish();
 	}
