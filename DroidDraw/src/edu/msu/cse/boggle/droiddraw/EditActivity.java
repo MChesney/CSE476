@@ -95,16 +95,5 @@ public class EditActivity extends Activity {
 		
 		}
 	}
-	
-	private void setPlayers() {		
-		TextView playerOne = (TextView) this.findViewById(R.id.playerOne);
-		TextView playerTwo = (TextView) this.findViewById(R.id.playerTwo);
-		
-		String playerOneInfo = players.getName(Players.PLAYERONE) + ": " + players.getScore(Players.PLAYERONE);
-		String playerTwoInfo = players.getName(Players.PLAYERTWO) + ": " + players.getScore(Players.PLAYERTWO);
-		
-		playerOne.setText(playerOneInfo);
-		playerTwo.setText(playerTwoInfo);
-	}
 
 }

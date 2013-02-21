@@ -13,6 +13,7 @@ import android.view.View;
 
 public class Drawing {
 	
+	// Strings for saving/loading the drawing
 	public static final String DRAWING = "drawing";
 	public static final String PARAMETERS = "parameters";
 	public static final String COLORS = "colors";
@@ -268,11 +269,11 @@ public class Drawing {
 	 * Draw the drawing by iterating through the array of segments
 	 */
 	public void draw(Canvas canvas) {
-		// TODO
+		// Rotate, scale, and translate the drawing
 		canvas.save();
 		canvas.translate(params.translateX, params.translateY);
-		canvas.scale(params.scale, params.scale);
 		canvas.rotate(params.angle);
+		canvas.scale(params.scale, params.scale);
 	
 		float prevX, prevY, currX, currY;
 		Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -304,6 +305,7 @@ public class Drawing {
 	
 	/**
 	 * Handle a touch event from the view.
+	 * This handles multitouch.
 	 * @param view The view that is the source of the touch
 	 * @param event The motion event describing the touch
 	 * @return true if the touch is handled
@@ -360,6 +362,7 @@ public class Drawing {
 	
 	/**
 	 * Handle a touch event from the view.
+	 * This handles editing the drawing.
 	 * @param view The view that is the source of the touch
 	 * @param event The motion event describing the touch
 	 * @return true if the touch is handled
@@ -512,10 +515,10 @@ public class Drawing {
             /*
              * Scaling
              */
-            /*float distance1 = distance(touch1.lastTouch.x, touch1.lastTouch.y, touch2.lastTouch.x, touch2.lastTouch.y);
+            float distance1 = distance(touch1.lastTouch.x, touch1.lastTouch.y, touch2.lastTouch.x, touch2.lastTouch.y);
             float distance2 = distance(touch1.currTouch.x, touch1.currTouch.y, touch2.currTouch.x, touch2.currTouch.y);
             float dd = distance2/distance1;
-            scale(dd);*/
+            scale(dd);
         }
     }
     
@@ -582,28 +585,34 @@ public class Drawing {
 	 */
 	public void addSegments(float x, float y) {
 		// Calculate new x and y points from image scale, rotation, and translation
-        float ca = (float) Math.cos(params.angle);
-        float sa = (float) Math.sin(params.angle);
+        double rAngle = Math.toRadians(-params.angle);
+		float ca = (float) Math.cos(rAngle);
+        float sa = (float) Math.sin(rAngle);
 	
 		float prevX, prevY, currX, currY;
-		prevX = (lastX - params.translateX)*ca + (lastY - params.translateY)*sa;
-		prevY = -(lastX - params.translateX)*sa + (lastY - params.translateY)*ca;
-		currX = (x - params.translateX)*ca + (y - params.translateY)*sa;
-		currY = -(x - params.translateX)*sa + (y - params.translateY)*ca;		
+		prevX = (lastX - params.translateX)*ca - (lastY - params.translateY)*sa;
+		prevY = (lastX - params.translateX)*sa + (lastY - params.translateY)*ca;
+		currX = (x - params.translateX)*ca - (y - params.translateY)*sa;
+		currY = (x - params.translateX)*sa + (y - params.translateY)*ca;	
 		
-		//prevX = (lastX - params.translateX)/params.scale;
-		//prevY = (lastY - params.translateY)/params.scale;
-		//currX = (x - params.translateX)/params.scale;
-		//currY = (y - params.translateY)/params.scale;	
+		prevX = prevX/params.scale;
+		prevY = prevY/params.scale;
+		currX = currX/params.scale;
+		currY = currY/params.scale;	
 			
 		Segment segment = new Segment(new Point(prevX, prevY), new Point(currX, currY), currColor, currThickness);
 		segments.add(segment);
 	}
 	
+	/**
+	 * Load the drawing 
+	 */
 	public void loadDrawing(Bundle bundle) {
+		// Load the drawing parameters
 		params = (Parameters) bundle.getSerializable(PARAMETERS);
 		isEditable = bundle.getBoolean(EDITABLE);
 		
+		// Load the drawing segments
 		int [] colors = bundle.getIntArray(COLORS);
 		float [] thicknesses = bundle.getFloatArray(THICKNESSES);
 		float [] startPoints = bundle.getFloatArray(START_POINTS);
@@ -618,9 +627,15 @@ public class Drawing {
 
 	}
 	
+	/**
+	 * Save the drawing
+	 */
 	public void saveDrawing(Bundle bundle) {
+		// Save the drawing parameters
 		bundle.putSerializable(PARAMETERS, params);
+		bundle.putBoolean(EDITABLE, isEditable);
 		
+		// Save the drawing segments
 		int [] colors = new int[segments.size()];
 		float [] thicknesses = new float[segments.size()];
 		float [] startPoints = new float[segments.size()*2];
@@ -640,7 +655,6 @@ public class Drawing {
 		bundle.putFloatArray(THICKNESSES, thicknesses);
 		bundle.putFloatArray(START_POINTS, startPoints);
 		bundle.putFloatArray(END_POINTS, endPoints);
-		bundle.putBoolean(EDITABLE, isEditable);
 	}
 
 }

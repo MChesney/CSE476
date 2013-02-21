@@ -26,7 +26,6 @@ public class GuessActivity extends Activity {
 		setContentView(R.layout.activity_guess);
 		
 		drawView = (DrawView) this.findViewById(R.id.drawViewGuess);
-		drawView.setEditable(false);
 		
 		Bundle infoFromPrevActivity = getIntent().getExtras();
 		if (bundle != null) {
@@ -36,6 +35,8 @@ public class GuessActivity extends Activity {
 			drawView.loadView(infoFromPrevActivity);
 			players.loadPlayers(infoFromPrevActivity);
 		}
+		
+		drawView.setEditable(false);
 		
 		TextView playerOne = (TextView) this.findViewById(R.id.playerOne);
 		TextView playerTwo = (TextView) this.findViewById(R.id.playerTwo);

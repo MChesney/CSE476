@@ -54,7 +54,6 @@ public class OpeningActivity extends Activity {
         builder.setTitle(R.string.instructions);
         builder.setMessage(R.string.rules_of_game);
         builder.setPositiveButton(android.R.string.ok, null);
-		//builder.setNegativeButton(R.string.shuffle, listener);
         
         // Create the dialog box and show it
         AlertDialog alertDialog = builder.create();
