@@ -161,6 +161,11 @@ public class EditActivity extends Activity {
 	}
 	
 	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		//super.onBackPressed();
+	}
+	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		if(requestCode == GOT_COLOR && resultCode == Activity.RESULT_OK) {
