@@ -171,6 +171,16 @@ public class Drawing {
     	 */
     	public float angle = 0;
     	
+        /**
+         * The current color
+         */
+        private int currColor = Color.BLACK;
+        
+        /**
+         * The current thickness
+         */
+        private float currThickness = INITIAL_THICKNESS;
+    	
     }
     
     /**
@@ -194,19 +204,9 @@ public class Drawing {
     private float lastY;
     
     /**
-     * The current color
-     */
-    private int currColor = Color.BLACK;
-    
-    /**
      * The current paint
      */
     private Paint currPaint;
-    
-    /**
-     * The current thickness
-     */
-    private float currThickness = INITIAL_THICKNESS;
     
     /**
      * First touch status
@@ -235,25 +235,25 @@ public class Drawing {
 	public Drawing(Context context, DrawView drawView) {
 		this.drawView = drawView;
 		currPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-		currPaint.setColor(currColor);
-		currPaint.setStrokeWidth(currThickness);
+		currPaint.setColor(params.currColor);
+		currPaint.setStrokeWidth(params.currThickness);
 	}
 	
     public int getCurrColor() {
-		return currColor;
+		return params.currColor;
 	}
 
 	public void setCurrColor(int currColor) {
-		this.currColor = currColor;
+		params.currColor = currColor;
 		currPaint.setColor(currColor);
 	}
 
 	public float getCurrThickness() {
-		return currThickness;
+		return params.currThickness;
 	}
 
 	public void setCurrThickness(float currThickness) {
-		this.currThickness = currThickness;
+		params.currThickness = currThickness;
 		currPaint.setStrokeWidth(currThickness);
 	}
 	
@@ -600,7 +600,7 @@ public class Drawing {
 		currX = currX/params.scale;
 		currY = currY/params.scale;	
 			
-		Segment segment = new Segment(new Point(prevX, prevY), new Point(currX, currY), currColor, currThickness);
+		Segment segment = new Segment(new Point(prevX, prevY), new Point(currX, currY), params.currColor, params.currThickness);
 		segments.add(segment);
 	}
 	
