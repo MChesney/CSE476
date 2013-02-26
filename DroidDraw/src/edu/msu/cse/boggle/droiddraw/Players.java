@@ -22,6 +22,7 @@ public class Players {
 	public void setPlayersInfo(PlayersInfo playersInfo) {
 		this.playersInfo = playersInfo;
 	}
+	
 
 	private static final class PlayersInfo implements Serializable {
 		
@@ -49,6 +50,8 @@ public class Players {
 		 * Player 2 score
 		 */
 		public int playerTwoScore = 0;
+		
+		public String category ="";
 	}
 	
     /**
@@ -105,6 +108,13 @@ public class Players {
 		if (player.equals(PLAYERTWO)) {
 			playersInfo.playerTwoScore = score;
 		}
+	}
+	
+	public void setCategory(String cat){
+		playersInfo.category = cat;
+	}
+	public String getCategory(){
+		return playersInfo.category;
 	}
 	
 	public void incScore(String player, int increment) {

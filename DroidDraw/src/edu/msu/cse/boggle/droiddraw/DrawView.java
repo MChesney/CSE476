@@ -68,6 +68,9 @@ public class DrawView extends View {
 		drawing.setCurrThickness(thickness);
 	}
 
+	public float getThickness(){
+		return drawing.getCurrThickness();
+	}
 	/**
 	 * Find out if the canvas is editable
 	 */

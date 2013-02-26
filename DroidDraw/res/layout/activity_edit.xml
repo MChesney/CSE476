@@ -20,6 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
+        android:onClick="onThicknessButton"
         android:text="@string/linewidth" />
 
     <LinearLayout
@@ -109,8 +110,10 @@
         android:id="@+id/playerOne"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/colorselect"
         android:layout_below="@+id/drawViewEdit"
         android:layout_centerHorizontal="true"
+        android:layout_toRightOf="@+id/category"
         android:text="@string/p1score"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -131,6 +134,7 @@
         android:layout_alignBaseline="@+id/playerOne"
         android:layout_alignBottom="@+id/playerOne"
         android:layout_alignLeft="@+id/donebutton"
+        android:layout_toRightOf="@+id/playerOne"
         android:text="@string/p2score"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
