@@ -19,6 +19,7 @@ public class GuessActivity extends Activity {
 	 * The player information 
 	 */
 	private Players players = new Players();
+	private String category="" ;
 
 	@Override
 	protected void onCreate(Bundle bundle) {
@@ -31,21 +32,24 @@ public class GuessActivity extends Activity {
 		if (bundle != null) {
 			drawView.loadView(bundle);
 			players.loadPlayers(bundle);
+			
 		} else if (infoFromPrevActivity != null) {
 			drawView.loadView(infoFromPrevActivity);
 			players.loadPlayers(infoFromPrevActivity);
 		}
 		
+		category = players.getCategory();
 		drawView.setEditable(false);
 		
 		TextView playerOne = (TextView) this.findViewById(R.id.playerOne);
 		TextView playerTwo = (TextView) this.findViewById(R.id.playerTwo);
-		
+		TextView categoryText = (TextView) this.findViewById(R.id.category);
 		String playerOneInfo = players.getName(Players.PLAYERONE) + ": " + players.getScore(Players.PLAYERONE);
 		String playerTwoInfo = players.getName(Players.PLAYERTWO) + ": " + players.getScore(Players.PLAYERTWO);
 		
 		playerOne.setText(playerOneInfo);
 		playerTwo.setText(playerTwoInfo);
+		categoryText.setText(category);
 	}
 
 	@Override
@@ -73,10 +77,13 @@ public class GuessActivity extends Activity {
 		finish();
 	}
 	
+	
+	
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		
         drawView.saveView(outState);
 	}
+	
 }

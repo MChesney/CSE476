@@ -52,6 +52,8 @@ public class Players {
 		public int playerTwoScore = 0;
 		
 		public String category ="";
+		public String hint= "";
+		public String answer= "";
 	}
 	
     /**
@@ -117,6 +119,18 @@ public class Players {
 		return playersInfo.category;
 	}
 	
+	public void setHint(String hint){
+		playersInfo.hint = hint;
+	}
+	public String getHint(){
+		return playersInfo.hint;
+	}
+	public void setAnswer(String ans){
+		playersInfo.hint = ans;
+	}
+	public String getans(){
+		return playersInfo.answer;
+	}
 	public void incScore(String player, int increment) {
 		if (player.equals(PLAYERONE)) {
 			playersInfo.playerOneScore += increment;

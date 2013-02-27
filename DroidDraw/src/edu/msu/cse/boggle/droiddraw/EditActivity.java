@@ -102,6 +102,7 @@ public class EditActivity extends Activity {
 			break;
 		
 		}
+		players.setCategory(category);
 	}
 	
 	public void onThicknessButton(View view){
@@ -130,6 +131,7 @@ public class EditActivity extends Activity {
 		
 		drawView.saveView(bundle);
 		players.savePlayers(bundle);
+		
 	}
 
 	@Override

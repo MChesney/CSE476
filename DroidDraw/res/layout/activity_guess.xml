@@ -93,14 +93,15 @@
         android:text="@string/Drawpicture" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/category"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/textView2"
         android:layout_alignParentLeft="true"
         android:gravity="center"
         android:text="@string/category"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColorLink="@android:color/black" />
 
     <TextView
         android:id="@+id/playerOne"
