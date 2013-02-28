@@ -138,11 +138,7 @@ public class GuessActivity extends Activity {
 		playerOne.setText(playerOneInfo);
 		playerTwo.setText(playerTwoInfo);
 	}
-	public void cancel(long a)
-	{
-		if (a<0)
-			cdTimer.cancel();
-	}
+	
 	public void onDrawPicture(View view){
 		Intent intent = new Intent(this, EditActivity.class);
 		Bundle bundle = new Bundle();
