@@ -1,10 +1,13 @@
 package edu.msu.cse.boggle.droiddraw;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 //import android.widget.EditText;
 import android.widget.TextView;
 
@@ -14,13 +17,20 @@ public class GuessActivity extends Activity {
 	 * The drawing view in this activity's view
 	 */
 	private DrawView drawView;
-	
+	TextView hintdisplay;
+	TextView timerText;
+	TextView answerText;
+	EditText edit;
+	Button guess;
+	private CountDownTimer cdTimer;
 	/**
 	 * The player information 
 	 */
+	private long totaltime= 130000;
 	private Players players = new Players();
 	private String category="" ;
-
+	private String hint="" ;
+	private String answer="" ;
 	@Override
 	protected void onCreate(Bundle bundle) {
 		super.onCreate(bundle);
@@ -32,6 +42,7 @@ public class GuessActivity extends Activity {
 		if (bundle != null) {
 			drawView.loadView(bundle);
 			players.loadPlayers(bundle);
+			//hint=bundle.getString("clue");
 			
 		} else if (infoFromPrevActivity != null) {
 			drawView.loadView(infoFromPrevActivity);
@@ -40,7 +51,8 @@ public class GuessActivity extends Activity {
 		
 		category = players.getCategory();
 		drawView.setEditable(false);
-		
+		hint=this.getIntent().getExtras().getString("clue");
+		answer=this.getIntent().getExtras().getString("answer");
 		TextView playerOne = (TextView) this.findViewById(R.id.playerOne);
 		TextView playerTwo = (TextView) this.findViewById(R.id.playerTwo);
 		TextView categoryText = (TextView) this.findViewById(R.id.category);
@@ -50,6 +62,33 @@ public class GuessActivity extends Activity {
 		playerOne.setText(playerOneInfo);
 		playerTwo.setText(playerTwoInfo);
 		categoryText.setText(category);
+		 edit=(EditText) findViewById(R.id.editText1);
+		 guess= (Button)findViewById(R.id.guess);
+		 hintdisplay = (TextView) this.findViewById(R.id.clue);
+		 timerText = (TextView) this.findViewById(R.id.time);  
+		 answerText=(TextView) this.findViewById(R.id.Answer);  
+	      cdTimer=  new CountDownTimer(totaltime, 1000) {  
+	            public void onTick(long m) {  
+	            totaltime= m;
+	            timerText.setText("Time Remaining: "+m/1000);
+	            answerText.setText("");
+	             if(m/1000 <=120)
+	            {
+	            	hintdisplay.setText(hint);
+	            }
+	            
+	            }
+	            public void onFinish() {  
+	            	timerText.setText("Done!");
+	            	if((answerText.getText().toString()).equals("YOU WIN!"))
+		            {
+	            	answerText.setText(answer);
+		            }
+	            	edit.setEnabled(false);
+	            	guess.setEnabled(false);
+	            	
+	            }  
+	        }.start(); 
 	}
 
 	@Override
@@ -58,7 +97,7 @@ public class GuessActivity extends Activity {
 		getMenuInflater().inflate(R.menu.activity_guess, menu);
 		return true;
 	}
-	
+
 	public void onDrawPicture(View view){
 		Intent intent = new Intent(this, EditActivity.class);
 		Bundle bundle = new Bundle();
@@ -77,7 +116,22 @@ public class GuessActivity extends Activity {
 		finish();
 	}
 	
-	
+	public void onGuessButton(View view){
+		if((edit.getText().toString().toLowerCase()).equals(answer.toLowerCase()))
+		{
+			timerText.setText("Done!");
+			cdTimer.cancel();
+        	answerText.setText("YOU WIN!");
+        	edit.setEnabled(false);
+        	guess.setEnabled(false);
+		}
+		else
+		{
+			edit.setText("");
+			answerText.setText("Wrong");
+		}
+		
+	}
 	
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {

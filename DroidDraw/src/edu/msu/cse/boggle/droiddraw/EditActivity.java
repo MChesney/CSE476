@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.view.Menu;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
@@ -20,7 +21,7 @@ public class EditActivity extends Activity {
 	 * The drawing view in this activity's view
 	 */
 	private DrawView drawView;
-	
+	//final EditText edit=(EditText) findViewById(R.id.answerEdit);
 	/*
 	 * The players
 	 */
@@ -132,6 +133,7 @@ public class EditActivity extends Activity {
 		drawView.saveView(bundle);
 		players.savePlayers(bundle);
 		
+		
 	}
 
 	@Override
@@ -147,6 +149,10 @@ public class EditActivity extends Activity {
 		drawView.saveView(bundle);
 		players.savePlayers(bundle);
 		intent.putExtras(bundle);
+		String cluename = ((EditText)findViewById(R.id.clueEdit)).getText().toString();
+		intent.putExtra("clue", cluename);
+		String ansname = ((EditText)findViewById(R.id.answerEdit)).getText().toString();
+		intent.putExtra("answer", ansname);
 		startActivity(intent);
 		finish();
 	}
