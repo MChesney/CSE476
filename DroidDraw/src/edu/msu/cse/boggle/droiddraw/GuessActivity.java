@@ -1,5 +1,8 @@
 package edu.msu.cse.boggle.droiddraw;
 
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.app.Activity;
@@ -22,7 +25,11 @@ public class GuessActivity extends Activity {
 	TextView answerText;
 	EditText edit;
 	Button guess;
+	Button exit;
 	private CountDownTimer cdTimer;
+	//private Integer count=1;
+	//MediaPlayer mp = MediaPlayer.create(this, R.raw.lose);
+	
 	/**
 	 * The player information 
 	 */
@@ -49,6 +56,7 @@ public class GuessActivity extends Activity {
 			players.loadPlayers(infoFromPrevActivity);
 		}
 		
+		
 		category = players.getCategory();
 		drawView.setEditable(false);
 		hint=this.getIntent().getExtras().getString("clue");
@@ -64,15 +72,27 @@ public class GuessActivity extends Activity {
 		categoryText.setText(category);
 		 edit=(EditText) findViewById(R.id.editText1);
 		 guess= (Button)findViewById(R.id.guess);
+		 exit= (Button)findViewById(R.id.button1);
 		 hintdisplay = (TextView) this.findViewById(R.id.clue);
 		 timerText = (TextView) this.findViewById(R.id.time);  
 		 answerText=(TextView) this.findViewById(R.id.Answer);  
+		 if (players.getEditor()==1)
+			{
+			exit.setEnabled(false);
+			players.setEditor(2);
+			}
+		
+     	else
+     		players.setEditor(1);
+		
+		 final MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.lose);
+     	
 	      cdTimer=  new CountDownTimer(totaltime, 1000) {  
 	            public void onTick(long m) {  
 	            totaltime= m;
 	            timerText.setText("Time Remaining: "+m/1000);
 	            answerText.setText("");
-	             if(m/1000 <=120)
+	             if(m/1000 <=60)
 	            {
 	            	hintdisplay.setText(hint);
 	            }
@@ -80,12 +100,12 @@ public class GuessActivity extends Activity {
 	            }
 	            public void onFinish() {  
 	            	timerText.setText("Done!");
-	            	if((answerText.getText().toString()).equals("YOU WIN!"))
-		            {
+	            	
 	            	answerText.setText(answer);
-		            }
+	            	mp.start();
+		            
 	            	edit.setEnabled(false);
-	            	guess.setEnabled(false);
+	            	 guess.setEnabled(false);
 	            	
 	            }  
 	        }.start(); 
@@ -108,6 +128,7 @@ public class GuessActivity extends Activity {
 	}
 	
 	public void onFinishGame(View view){
+		
 		Intent intent = new Intent(this, ClosingActivity.class);
 		Bundle bundle = new Bundle();
 		players.savePlayers(bundle);
@@ -119,11 +140,19 @@ public class GuessActivity extends Activity {
 	public void onGuessButton(View view){
 		if((edit.getText().toString().toLowerCase()).equals(answer.toLowerCase()))
 		{
+			final MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.win);
+			mp.start();
 			timerText.setText("Done!");
 			cdTimer.cancel();
         	answerText.setText("YOU WIN!");
         	edit.setEnabled(false);
         	guess.setEnabled(false);
+        	if (players.getEditor()==1)
+        	{
+        		players.setScore("Players.one", 10);
+        	}
+        	else
+        		players.setScore("Players.two", 10);
 		}
 		else
 		{
@@ -138,6 +167,7 @@ public class GuessActivity extends Activity {
 		super.onSaveInstanceState(outState);
 		
         drawView.saveView(outState);
+        players.savePlayers(outState);
 	}
 	
 }

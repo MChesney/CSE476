@@ -50,10 +50,10 @@ public class Players {
 		 * Player 2 score
 		 */
 		public int playerTwoScore = 0;
+		public int editor=1;
 		
 		public String category ="";
-		public String hint= "";
-		public String answer= "";
+		
 	}
 	
     /**
@@ -105,10 +105,10 @@ public class Players {
 
 	public void setScore(String player, int score) {
 		if (player.equals(PLAYERONE)) {
-			playersInfo.playerOneScore = score;
+			playersInfo.playerOneScore += score;
 		}
 		if (player.equals(PLAYERTWO)) {
-			playersInfo.playerTwoScore = score;
+			playersInfo.playerTwoScore += score;
 		}
 	}
 	
@@ -119,18 +119,14 @@ public class Players {
 		return playersInfo.category;
 	}
 	
-	public void setHint(String hint){
-		playersInfo.hint = hint;
+	public void setEditor(Integer cat){
+		playersInfo.editor = cat;
 	}
-	public String getHint(){
-		return playersInfo.hint;
+	public Integer getEditor(){
+		return playersInfo.editor;
 	}
-	public void setAnswer(String ans){
-		playersInfo.hint = ans;
-	}
-	public String getans(){
-		return playersInfo.answer;
-	}
+	
+	
 	public void incScore(String player, int increment) {
 		if (player.equals(PLAYERONE)) {
 			playersInfo.playerOneScore += increment;
