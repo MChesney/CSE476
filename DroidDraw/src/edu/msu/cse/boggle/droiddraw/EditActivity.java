@@ -4,6 +4,7 @@ import java.util.Random;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.view.Menu;
@@ -53,6 +54,7 @@ public class EditActivity extends Activity {
 		} else if (infoFromPrevActivity != null) {
 			players.loadPlayers(infoFromPrevActivity);
 			createCategory();
+			popUp();
 		}
 		
 		
@@ -68,6 +70,23 @@ public class EditActivity extends Activity {
 		playerTwo.setText(playerTwoInfo);
 		
 		categoryText.setText(category);
+		
+	}
+	private void popUp(){
+		 AlertDialog.Builder builder = new AlertDialog.Builder(drawView.getContext());
+	        
+	        // Parameterize the builder
+	        builder.setTitle("Player Turn");
+	        if(players.getEditor() == 1){
+	        	builder.setMessage(players.getName(Players.PLAYERONE) + " turn");
+	        }else{
+	        	builder.setMessage(players.getName(Players.PLAYERTWO) + " turn");
+	        }
+	        builder.setPositiveButton(android.R.string.ok, null);
+	        
+	        // Create the dialog box and show it
+	        AlertDialog alertDialog = builder.create();
+	        alertDialog.show();
 	}
 	private void setThickness(float amount){
 		if(amount == smallThickness){
