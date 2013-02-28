@@ -170,7 +170,7 @@ public class GuessActivity extends Activity {
 	}
 	
 	public void onGuessButton(View view){
-		if((edit.getText().toString().toLowerCase(Locale.getDefault())).equals(answer.toLowerCase(Locale.getDefault())))
+		if((edit.getText().toString().toLowerCase(Locale.getDefault()).replaceAll(" ", "")).equals(answer.toLowerCase(Locale.getDefault()).replaceAll(" ", "")))
 		{
 			final MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.win);
 			mp.start();
