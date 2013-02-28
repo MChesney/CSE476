@@ -22,7 +22,7 @@
         android:text="@string/time" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/finish"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -77,7 +77,7 @@
         android:id="@+id/drawagain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button1"
+        android:layout_above="@+id/finish"
         android:layout_alignParentLeft="true"
         android:onClick="onDrawPicture"
         android:text="@string/Drawpicture" />

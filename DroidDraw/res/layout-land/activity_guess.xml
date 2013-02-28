@@ -30,8 +30,10 @@
         android:id="@+id/time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/category"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
+        android:gravity="right"
         android:text="@string/time" />
 
     <LinearLayout
@@ -48,6 +50,7 @@
             android:id="@+id/guess"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="onGuessButton"
             android:text="@string/guess" />
 
         <EditText
@@ -82,7 +85,7 @@
         android:text="@string/p1" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/finish"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/drawagain"
@@ -95,10 +98,10 @@
         android:id="@+id/drawagain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button1"
+        android:layout_above="@+id/finish"
         android:layout_alignParentRight="true"
         android:onClick="onDrawPicture"
-        android:padding="10dp"
+        android:padding="30dp"
         android:text="@string/Drawpicture" />
 
     <TextView

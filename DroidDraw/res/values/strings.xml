@@ -30,7 +30,7 @@
     <string name="score">"Score: "</string>
     <string name="new_game">New Game</string>
     <string name="clue">"Clue: "</string>
-    <string name="answer">"Answer: "</string>
+    <string name="answer">""</string>
     <string name="p1">Player1 Score</string>
     <string name="p2">Player2 Score</string>
     <string name="p1score">P1 score</string>
@@ -39,6 +39,6 @@
     <string name="move">Move</string>
     <string name="finish_game">Finish Game</string>
     <string name="time">time</string>
-    <string name="hint">&quot;hint&quot;</string>
+    <string name="hint">&quot;&quot;</string>
 
 </resources>
