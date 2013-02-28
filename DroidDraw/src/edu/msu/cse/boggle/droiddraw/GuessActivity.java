@@ -2,9 +2,7 @@ package edu.msu.cse.boggle.droiddraw;
 
 
 import java.util.Locale;
-
 import android.media.MediaPlayer;
-
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.app.Activity;
