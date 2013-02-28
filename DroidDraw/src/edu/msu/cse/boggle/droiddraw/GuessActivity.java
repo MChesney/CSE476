@@ -26,6 +26,7 @@ public class GuessActivity extends Activity {
 	EditText edit;
 	Button guess;
 	Button exit;
+	Button draw;
 	private CountDownTimer cdTimer;
 	//private Integer count=1;
 	//MediaPlayer mp = MediaPlayer.create(this, R.raw.lose);
@@ -73,6 +74,8 @@ public class GuessActivity extends Activity {
 		 edit=(EditText) findViewById(R.id.editText1);
 		 guess= (Button)findViewById(R.id.guess);
 		 exit= (Button)findViewById(R.id.button1);
+		 draw= (Button)findViewById(R.id.drawagain);
+		 draw.setEnabled(false);
 		 hintdisplay = (TextView) this.findViewById(R.id.clue);
 		 timerText = (TextView) this.findViewById(R.id.time);  
 		 answerText=(TextView) this.findViewById(R.id.Answer);  
@@ -106,7 +109,7 @@ public class GuessActivity extends Activity {
 		            
 	            	edit.setEnabled(false);
 	            	 guess.setEnabled(false);
-	            	
+	            	 draw.setEnabled(true);
 	            }  
 	        }.start(); 
 	}
@@ -147,12 +150,13 @@ public class GuessActivity extends Activity {
         	answerText.setText("YOU WIN!");
         	edit.setEnabled(false);
         	guess.setEnabled(false);
+        	 draw.setEnabled(true);
         	if (players.getEditor()==1)
         	{
-        		players.setScore("Players.one", 10);
+        		players.setScore("Players.one", (int)totaltime/100);
         	}
         	else
-        		players.setScore("Players.two", 10);
+        		players.setScore("Players.two", (int)totaltime/100);
 		}
 		else
 		{

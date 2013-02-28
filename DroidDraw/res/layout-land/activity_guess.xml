@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/drawagain"
         android:layout_alignParentRight="true"
+        android:layout_below="@id/time"
         android:gravity="center"
         android:text="@string/category"
         android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -22,31 +23,16 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_toLeftOf="@+id/clue"
-        android:padding="10dp" 
-        android:background="@android:color/white" />
+        android:background="@android:color/white"
+        android:padding="10dp" />
 
-    <Chronometer
+    <TextView
         android:id="@+id/time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="false"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_alignTop="@id/drawViewGuess" />
-
-    <TextView
-        android:id="@+id/clue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/category"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/time"
-        android:gravity="center"
-        android:paddingBottom="10dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:paddingTop="10dp"
-        android:text="@string/hint" />
+        android:text="@string/time" />
 
     <LinearLayout
         android:id="@+id/linearLayout1"
@@ -86,7 +72,7 @@
         android:paddingRight="10dp"
         android:paddingTop="10dp"
         android:text="@string/answer" />
-    
+
     <TextView
         android:id="@+id/playerOne"
         android:layout_width="wrap_content"
@@ -94,14 +80,6 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:text="@string/p1" />
-
-    <TextView
-        android:id="@+id/playerTwo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/time"
-        android:text="@string/p2" />
 
     <Button
         android:id="@+id/button1"
@@ -122,5 +100,27 @@
         android:onClick="onDrawPicture"
         android:padding="10dp"
         android:text="@string/Drawpicture" />
+
+    <TextView
+        android:id="@+id/clue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/category"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/category"
+        android:gravity="center"
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp"
+        android:text="@string/hint" />
+
+    <TextView
+        android:id="@+id/playerTwo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/category"
+        android:text="@string/p2" />
 
 </RelativeLayout>
