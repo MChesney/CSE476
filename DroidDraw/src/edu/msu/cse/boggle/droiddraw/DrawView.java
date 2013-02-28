@@ -50,6 +50,10 @@ public class DrawView extends View {
 	/**
 	 * Get the drawing
 	 */
+	public void inval()
+	{
+		invalidate();
+	}
 	public Drawing getDrawing() {
 		return drawing;
 	}
