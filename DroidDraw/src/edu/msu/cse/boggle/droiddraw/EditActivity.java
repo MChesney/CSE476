@@ -7,7 +7,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
-import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -18,12 +17,12 @@ public class EditActivity extends Activity {
 	private String category = "";
 	private static final int GOT_COLOR = 1;
 	
-	/*
+	/**
 	 * The drawing view in this activity's view
 	 */
 	private DrawView drawView;
-	//final EditText edit=(EditText) findViewById(R.id.answerEdit);
-	/*
+
+	/**
 	 * The players
 	 */
 	private Players players = new Players();
@@ -72,22 +71,31 @@ public class EditActivity extends Activity {
 		categoryText.setText(category);
 		
 	}
+	
+	/**
+	 * Alert the players as to whose turn it is
+	 */
 	private void popUp(){
-		 AlertDialog.Builder builder = new AlertDialog.Builder(drawView.getContext());
+		AlertDialog.Builder builder = new AlertDialog.Builder(drawView.getContext());
 	        
-	        // Parameterize the builder
-	        builder.setTitle("Player Turn");
-	        if(players.getEditor() == 1){
-	        	builder.setMessage(players.getName(Players.PLAYERONE) + " turn");
-	        }else{
-	        	builder.setMessage(players.getName(Players.PLAYERTWO) + " turn");
-	        }
-	        builder.setPositiveButton(android.R.string.ok, null);
+	    // Parameterize the builder
+	    builder.setTitle("Player Turn");
+	    if (players.getEditor() == 1){
+	    	builder.setMessage(players.getName(Players.PLAYERONE) + " turn");
+	    } else {
+	    	builder.setMessage(players.getName(Players.PLAYERTWO) + " turn");
+	    }
+	    builder.setPositiveButton(android.R.string.ok, null);
 	        
-	        // Create the dialog box and show it
-	        AlertDialog alertDialog = builder.create();
-	        alertDialog.show();
+	    // Create the dialog box and show it
+	    AlertDialog alertDialog = builder.create();
+	    alertDialog.show();
 	}
+	
+	/** 
+	 * Set the thickness of the paint brush
+	 * I believe only used in OnCreate()
+	 */
 	private void setThickness(float amount){
 		if(amount == smallThickness){
 			thickness = Thickness.Small;
@@ -101,6 +109,9 @@ public class EditActivity extends Activity {
 		}
 	}
 	
+	/**
+	 * Pick the category to be used for this round
+	 */
 	private void createCategory(){
 		Random random = new Random();
 		int num = random.nextInt(5);
@@ -145,21 +156,15 @@ public class EditActivity extends Activity {
 		}
 	}
 	
-	@Override
-	protected void onSaveInstanceState(Bundle bundle) {
-		super.onSaveInstanceState(bundle);
-		
-		drawView.saveView(bundle);
-		players.savePlayers(bundle);
-		
-		
+	public void onLineColor(View view){
+		Intent intent = new Intent(this,  ColorSelectActivity.class);
+		startActivityForResult(intent, GOT_COLOR);
 	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.activity_edit, menu);
-		return true;
+	
+	public void onToggleEdit(View view) {
+		ToggleButton toggle = (ToggleButton) this.findViewById(R.id.toggleDrawMove);
+		boolean isMoving = toggle.isChecked();
+		drawView.setEditable(!isMoving);
 	}
 	
 	public void onDoneButton(View view){
@@ -176,22 +181,12 @@ public class EditActivity extends Activity {
 		finish();
 	}
 	
-	public void onLineColor(View view){
-		Intent intent = new Intent(this,  ColorSelectActivity.class);
-		startActivityForResult(intent, GOT_COLOR);
-	}
-	
-	public void onToggleEdit(View view) {
-		ToggleButton toggle = (ToggleButton) this.findViewById(R.id.toggleDrawMove);
-		boolean isMoving = toggle.isChecked();
-		drawView.setEditable(!isMoving);
-	}
-	
+	/**
+	 * Do nothing when back is pressed
+	 */
 	@Override
-	public void onBackPressed() {
-		// TODO Auto-generated method stub
-		//super.onBackPressed();
-	}
+	public void onBackPressed() {}
+		
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
@@ -202,5 +197,14 @@ public class EditActivity extends Activity {
 		
 		}
 	}
-
+	
+	@Override
+	protected void onSaveInstanceState(Bundle bundle) {
+		super.onSaveInstanceState(bundle);
+		
+		drawView.saveView(bundle);
+		players.savePlayers(bundle);
+		
+		
+	}
 }

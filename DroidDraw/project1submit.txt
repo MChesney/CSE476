@@ -15,6 +15,7 @@ Member 1: Mairin Chesney
 Responsibility:
 Opening activity
 Drawing View
+(Also completed closing activity, player class, and maintaining proper activity stack)
 
 
 
@@ -30,4 +31,4 @@ Member 3: Sana Siddique
 
 Responsibility:
 Guessing activity
-Scorekeeping
+Score keeping

@@ -15,7 +15,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="edu.msu.cse.boggle.droiddraw.OpeningActivity"
-            android:label="@string/app_name" android:launchMode="singleTop">
+            android:label="@string/app_name"
+            android:launchMode="singleTop" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,6 +38,10 @@
         <activity
             android:name="edu.msu.cse.boggle.droiddraw.ClosingActivity"
             android:label="@string/title_activity_closing" >
+        </activity>
+        <activity
+            android:name="edu.msu.cse.boggle.droiddraw.CloudOpening"
+            android:label="@string/title_activity_cloud_opening" >
         </activity>
     </application>
 

@@ -42,7 +42,7 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:paddingTop="10dp"
-        android:text="@string/answer"
+        android:text="@string/blank"
         android:textColorHint="@android:color/darker_gray" />
 
     <LinearLayout

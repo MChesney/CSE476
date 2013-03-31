@@ -25,10 +25,6 @@ public class Players {
 	
 
 	private static final class PlayersInfo implements Serializable {
-		
-		/**
-		 * 
-		 */
 		private static final long serialVersionUID = -1459156760421244376L;
 
 		/**
