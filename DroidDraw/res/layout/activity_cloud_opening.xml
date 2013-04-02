@@ -29,4 +29,15 @@
         android:paddingTop ="20dp"
         android:paddingBottom ="20dp" />
 
+    <Button
+        android:id="@+id/button_start_game"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button_new_user"
+        android:layout_alignRight="@+id/button_new_user"
+        android:layout_below="@+id/button_new_user"
+        android:text="@string/temp_launch" 
+        android:textColor="#fff"
+        android:onClick="onStartGame"/>
+
 </RelativeLayout>

@@ -41,8 +41,9 @@
     <string name="time">time</string>
     <string name="hint">&quot;&quot;</string>
     <string name="blank"><String></String></string>
-    <string name="title_activity_cloud_opening">Cloud Opening</string>
+    <string name="title_activity_opening">Opening Activity</string>
     <string name="login">LOGIN</string>
     <string name="new_user">NEW USER</string>
+    <string name="temp_launch">TEMP: Launch Game</string>
 
 </resources>
