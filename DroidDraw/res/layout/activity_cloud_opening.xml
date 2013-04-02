@@ -2,13 +2,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="@drawable/colors"
     tools:context=".CloudOpening" >
 
-    <TextView
+    <Button
+        android:id="@+id/button_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/hello_world" />
+        android:layout_alignLeft="@+id/button_new_user"
+        android:layout_alignRight="@+id/button_new_user"
+        android:text="@string/login"
+        android:textSize="50sp"
+        android:textColor="#fff" 
+        android:paddingTop ="20dp"
+        android:paddingBottom ="20dp" />
+
+    <Button
+        android:id="@+id/button_new_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button_login"
+        android:text="@string/new_user"
+        android:textSize="50sp"
+        android:textColor="#fff"
+        android:paddingTop ="20dp"
+        android:paddingBottom ="20dp" />
 
 </RelativeLayout>

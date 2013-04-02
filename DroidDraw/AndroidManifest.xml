@@ -40,7 +40,7 @@
             android:label="@string/title_activity_closing" >
         </activity>
         <activity
-            android:name="edu.msu.cse.boggle.droiddraw.CloudOpening"
+            android:name="edu.msu.cse.boggle.droiddraw.CloudOpeningActivity"
             android:label="@string/title_activity_cloud_opening" >
         </activity>
     </application>
