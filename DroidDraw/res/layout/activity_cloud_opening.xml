@@ -24,14 +24,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/button_login"
-        android:onClick="onNew"
         android:paddingBottom="20dp"
         android:paddingTop="20dp"
         android:text="@string/new_user"
         android:textColor="#fff"
-        android:textSize="50sp" />
+        android:textSize="50sp"
+        android:onClick="onNewUser" />
 
-    <!--<Button
+    <Button
         android:id="@+id/button_start_game"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -40,6 +40,6 @@
         android:layout_below="@+id/button_new_user"
         android:text="@string/temp_launch" 
         android:textColor="#fff"
-        android:onClick="onStartGame"/>-->
+        android:onClick="onStartGame"/>
 
 </RelativeLayout>
