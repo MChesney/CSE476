@@ -44,5 +44,18 @@ public class CloudOpeningActivity extends Activity {
 		startActivity(intent);
 		
 	}
+	
+	public void onNew(View view) {
+		
+		Intent intent = new Intent(this,  NewActivity.class);
+		startActivity(intent);
+	}
+	
+public void onLogin(View view) {
+		
+		Intent intent = new Intent(this,  LoginActivity.class);
+		startActivity(intent);
+		
+	}
 
 }

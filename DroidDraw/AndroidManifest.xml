@@ -57,6 +57,21 @@
             android:label="@string/title_activity_opening" >
         </activity>
         
+        <activity
+            android:name="edu.msu.cse.boggle.droiddraw.NewActivity"
+            android:label="@string/title_activity_new" >
+        </activity>
+        
+        <activity
+            android:name="edu.msu.cse.boggle.droiddraw.LoginActivity"
+            android:label="@string/title_activity_login" >
+        </activity>
+        
+        <activity
+            android:name="edu.msu.cse.boggle.droiddraw.WaitingActivity"
+            android:label="@string/title_activity_waiting" >
+        </activity>
+        
         <receiver android:name="com.google.android.gcm.GCMBroadcastReceiver" android:permission="com.google.android.c2dm.permission.SEND" >
   			<intent-filter>
     			<action android:name="com.google.android.c2dm.intent.RECEIVE" />
