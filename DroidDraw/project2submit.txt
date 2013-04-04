@@ -25,7 +25,8 @@ Member 3: Paola De la Torre
 Responsibility: The sequencing of the activities
 
 
-Provide instructions on how to reach the first editing activity if the login button is not yet functional.
+Provide instructions on how to reach the first editing activity if the login button is not yet functional:
+If necessary, click on temporary start game button (login should be operational)
 
 User account the server-side communications is running under: chesne14
 
@@ -36,3 +37,13 @@ https://www.cse.msu.edu/~chesne14/teamcranium/user-login.php
 Where in the code the passive connection timeout is set (provide a script name and line number):
 
 Calls in the code to the server (provide a class name and function, or URL used for debugging):
+
+URLs for debugging:
+Pass - http://www.cse.msu.edu/~chesne14/teamcranium/user-login.php?magic=NechAtHa6RuzeR8x&user=chesne14&pw=drowssap&gcm=testssss
+Fail (gcm) - http://www.cse.msu.edu/~chesne14/teamcranium/user-login.php?magic=NechAtHa6RuzeR8x&user=chesne14&pw=drowssap&gcm=
+Fail (password) - http://www.cse.msu.edu/~chesne14/teamcranium/user-login.php?magic=NechAtHa6RuzeR8x&user=chesne14&pw=password&gcm=hello
+
+Pass - http://www.cse.msu.edu/~chesne14/teamcranium/user-add.php?magic=NechAtHa6RuzeR8x&user=somethingdifferent&pw=something&gcm=whattup
+Fail (gcm) - http://www.cse.msu.edu/~chesne14/teamcranium/user-add.php?magic=NechAtHa6RuzeR8x&user=somethingelse&pw=hello&gcm=
+Fail (password) - http://www.cse.msu.edu/~chesne14/teamcranium/user-add.php?magic=NechAtHa6RuzeR8x&user=somethingelse2&gcm=heygirl
+Fail (duplicate) - http://www.cse.msu.edu/~chesne14/teamcranium/user-add.php?magic=NechAtHa6RuzeR8x&user=somethingdifferent&pw=supp&gcm=heygirl

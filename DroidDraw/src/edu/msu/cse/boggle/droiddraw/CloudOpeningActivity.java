@@ -20,7 +20,7 @@ public class CloudOpeningActivity extends Activity {
 		if (regId.equals("")) {
 			GCMRegistrar.register(this, GCMIntentService.SENDER_ID);
 		} else {
-			// do something with regId...
+			Cloud.setGcmId(regId);
 		}
 	}
 
