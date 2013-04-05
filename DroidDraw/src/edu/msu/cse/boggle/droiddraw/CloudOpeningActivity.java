@@ -82,39 +82,83 @@ public class CloudOpeningActivity extends Activity {
 		layout.addView(password);
 		
 		alert_builder.setView(layout);
-		
 		alert_builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				params.usernameText = username.getText().toString();
 				params.passwordText = password.getText().toString();
-				
-				cloud.addUser(params.usernameText, params.passwordText);
-				
-//				if(params.nameText.equals("") || params.hintText.equals("")){
-//					Toast.makeText(getApplicationContext(), "You must set a title and a hint", Toast.LENGTH_SHORT).show();
-//				}
-//				else{
-//					Intent intent = new Intent(getBaseContext(), GuessingActivity.class);
-//					Bundle b = new Bundle();
-//					drawingView.saveDrawing(b);
-//					intent.putExtras(b);
-//					intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//					startActivity(intent);
-//				}
+				new Thread(new Runnable() {
+					@Override
+		            public void run() {
+						cloud.addUser(params.usernameText, params.passwordText);
+				}
+			}).start();
 			}
 		});
+		
 		alert_builder.setCancelable(false);
 		alert_builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				dialog.cancel();
 			}
 		});
+		
+		alert_builder.show();
+	}
+	
+	public void onLogin(View view) {
+		final AlertDialog.Builder alert_builder = new AlertDialog.Builder(this);
+		
+		LinearLayout layout = new LinearLayout(this);
+		layout.setOrientation(1); //Vertical
+		
+		final EditText username = new EditText(this);
+		final EditText password = new EditText(this);
+		
+		username.setHint("");
+		password.setHint("");
+		
+		username.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
+		username.setActivated(true);
+		password.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
+		
+		final TextView usernameTitle = new TextView(this);
+		final TextView passwordTitle = new TextView(this);
+		
+		usernameTitle.setText("Username");
+		passwordTitle.setText("Password");
+		
+		layout.addView(usernameTitle);
+		layout.addView(username);
+		layout.addView(passwordTitle);
+		layout.addView(password);
+		
+		alert_builder.setView(layout);
+		alert_builder.setPositiveButton("Login", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				params.usernameText = username.getText().toString();
+				params.passwordText = password.getText().toString();
+				new Thread(new Runnable() {
+					@Override
+		            public void run() {
+						cloud.loginUser(params.usernameText, params.passwordText);
+				}
+			}).start();
+			}
+		});
+		
+		alert_builder.setCancelable(false);
+		alert_builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.cancel();
+			}
+		});
+		
 		alert_builder.show();
 	}
 	

@@ -24,13 +24,13 @@ public class Cloud {
     private static final String MAGIC = "NechAtHa6RuzeR8x";
     //private static final String USER = "chesne14";
     //private static final String PASSWORD = "drowssap";
-    //private static String GCMID = "";
+    private static String GCMID = "";
     
     // I believe these two are done
     // To add user - USER_ADD_URL + "?user=" + USER + "&magic=" + MAGIC + "&pw=" + PASSWORD  + $gcm + GCMID; 
     private static final String USER_ADD_URL = "https://www.cse.msu.edu/~chesne14/teamcranium/user-add.php";
     // To login user - USER_LOGIN_URL + "?user=" + USER + "&magic=" + MAGIC + "&pw=" + PASSWORD + $gcm + GCMID;
-    //private static final String USER_LOGIN_URL = "https://www.cse.msu.edu/~chesne14/teamcranium/user-login.php";
+    private static final String USER_LOGIN_URL = "https://www.cse.msu.edu/~chesne14/teamcranium/user-login.php";
     
     // I haven't touched these two yet
     //private static final String DRAWING_SAVE_URL = "https://www.cse.msu.edu/~chesne14/teamcranium/drawing-save.php";
@@ -43,7 +43,7 @@ public class Cloud {
 	
 	// This might be a really bad way to do this...
 	public static void setGcmId(String id) {
-		//GCMID = id;
+		GCMID = id;
 	}
 	
 	
@@ -75,84 +75,51 @@ public class Cloud {
     
     public boolean addUser (String username, String password){
     	
-    	XmlSerializer xml = Xml.newSerializer();
-        StringWriter writer = new StringWriter();
-        
-        try {
-            xml.setOutput(writer);
-            
-            xml.startDocument("UTF-8", true);
-            
-            xml.startTag(null, "teamcranium");
-            xml.attribute(null, "user", username);
-            xml.attribute(null, "magic", MAGIC);
-            xml.attribute(null, "pw", password);
-            xml.endTag(null, "teamcranium");
-            
-            xml.endDocument();
-
-        } catch (IOException e) {
-            // This won't occur when writing to a string
-            return false;
-        }
-        
-        final String xmlStr = writer.toString();
-        
-        /*
-         * Convert the XML into HTTP POST data
-         */
-        String postDataStr;
-        try {
-            postDataStr = "xml=" + URLEncoder.encode(xmlStr, "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            return false;
-        }
-        
-        /*
-         * Send the data to the server
-         */
-        byte[] postData = postDataStr.getBytes();
+    	String query = USER_ADD_URL + "?user=" + username + "&magic=" + MAGIC + "&pw=" + password  + "&gcm=" + GCMID;
     	
-    	if(postData.toString().equals(""))
-    		return false;
-    	
-    	InputStream stream = null;
-        try {
-            URL url = new URL(USER_ADD_URL);
+    	try {
+            URL url = new URL(query);
 
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-
-            conn.setDoOutput(true);
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Length", Integer.toString(postData.length));
-            conn.setUseCaches(false);
-
-            OutputStream out = conn.getOutputStream();
-            out.write(postData);
-            out.close();
-
             int responseCode = conn.getResponseCode();
             if(responseCode != HttpURLConnection.HTTP_OK) {
                 return false;
-            } 
+            }
             
-            stream = conn.getInputStream();
+            InputStream stream = conn.getInputStream();
 //            logStream(stream);
-            
             return XMLParser(stream);
-            
+
         } catch (MalformedURLException e) {
+            // Should never happen
             return false;
         } catch (IOException ex) {
             return false;
-        } finally {
-            if(stream != null) {
-                try {
-                    stream.close();
-                } catch(IOException ex) {
-                    // Fail silently
-                }
+        }
+    }
+    
+    public boolean loginUser (String username, String password){
+    	
+    	String query = USER_LOGIN_URL + "?user=" + username + "&magic=" + MAGIC + "&pw=" + password + "&gcm=" + GCMID;
+    	
+    	try {
+            URL url = new URL(query);
+
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            int responseCode = conn.getResponseCode();
+            if(responseCode != HttpURLConnection.HTTP_OK) {
+                return false;
             }
+            
+            InputStream stream = conn.getInputStream();
+            logStream(stream);
+            return XMLParser(stream);
+
+        } catch (MalformedURLException e) {
+            // Should never happen
+            return false;
+        } catch (IOException ex) {
+            return false;
         }
     }
     
