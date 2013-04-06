@@ -47,3 +47,7 @@ Pass - http://www.cse.msu.edu/~chesne14/teamcranium/user-add.php?magic=NechAtHa6
 Fail (gcm) - http://www.cse.msu.edu/~chesne14/teamcranium/user-add.php?magic=NechAtHa6RuzeR8x&user=somethingelse&pw=hello&gcm=
 Fail (password) - http://www.cse.msu.edu/~chesne14/teamcranium/user-add.php?magic=NechAtHa6RuzeR8x&user=somethingelse2&gcm=heygirl
 Fail (duplicate) - http://www.cse.msu.edu/~chesne14/teamcranium/user-add.php?magic=NechAtHa6RuzeR8x&user=somethingdifferent&pw=supp&gcm=heygirl
+
+Functions in Cloud Class that make calls to the server:
+public boolean loginUser (String username, String password)
+public boolean addUser (String username, String password)

@@ -25,8 +25,9 @@ public class Cloud {
     //private static final String USER = "chesne14";
     //private static final String PASSWORD = "drowssap";
     private static String GCMID = "";
-    
-    // I believe these two are done
+   
+
+	// I believe these two are done
     // To add user - USER_ADD_URL + "?user=" + USER + "&magic=" + MAGIC + "&pw=" + PASSWORD  + $gcm + GCMID; 
     private static final String USER_ADD_URL = "https://www.cse.msu.edu/~chesne14/teamcranium/user-add.php";
     // To login user - USER_LOGIN_URL + "?user=" + USER + "&magic=" + MAGIC + "&pw=" + PASSWORD + $gcm + GCMID;
@@ -45,8 +46,9 @@ public class Cloud {
 	public static void setGcmId(String id) {
 		GCMID = id;
 	}
-	
-	
+    public static String getGCMID() {
+		return GCMID;
+	}
 
     public boolean XMLParser(InputStream stream){
     	/**
@@ -57,7 +59,7 @@ public class Cloud {
             xmlR.setInput(stream, UTF8);
             
             xmlR.nextTag();      // Advance to first tag
-            xmlR.require(XmlPullParser.START_TAG, null, "teamcranium");
+            xmlR.require(XmlPullParser.START_TAG, null, "users");
             
             String status = xmlR.getAttributeValue(null, "status");
             if(status.equals("no")) {
@@ -112,7 +114,7 @@ public class Cloud {
             }
             
             InputStream stream = conn.getInputStream();
-            logStream(stream);
+//            logStream(stream);
             return XMLParser(stream);
 
         } catch (MalformedURLException e) {

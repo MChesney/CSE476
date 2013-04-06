@@ -1,0 +1,42 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/colors"
+    tools:context=".OpeningActivity" >
+
+    <ImageView
+        android:id="@+id/androidImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/playerTwoText"
+        android:layout_alignParentLeft="true"
+        android:contentDescription="@string/android_description"
+        android:src="@drawable/android_transparent" />
+
+    <LinearLayout
+        android:id="@+id/buttonLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true" >
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/playerTwoText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/buttonLayout"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:background="#000"
+        android:gravity="center_vertical|center_horizontal"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:text="@string/text_waiting"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#fff" />
+
+</RelativeLayout>

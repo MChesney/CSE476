@@ -14,33 +14,6 @@
         android:contentDescription="@string/android_description"
         android:src="@drawable/android_transparent" />
 
-    <TextView
-        android:id="@+id/playerOneText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/playerTwoText"
-        android:layout_alignParentLeft="true"
-        android:background="#000"
-        android:paddingBottom="10dp"
-        android:paddingTop="10dp"
-        android:text="@string/player_one"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#fff" />
-
-    <EditText
-        android:id="@+id/playerTwoEdit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/playerTwoText"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/playerTwoText"
-        android:layout_toRightOf="@+id/playerTwoText"
-        android:background="#000"
-        android:textColor="#fff" 
-	    android:textCursorDrawable="@null"
-        android:ems="10"
-        android:hint="@string/player_two_edit_hint" />
-
     <EditText
         android:id="@+id/playerOneEdit"
         android:layout_width="wrap_content"
@@ -48,13 +21,13 @@
         android:layout_alignBottom="@+id/playerOneText"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/playerOneText"
-        android:layout_toRightOf="@+id/playerOneText"
+        android:layout_toRightOf="@+id/playerTwoText"
         android:background="#000"
-        android:textColor="#fff" 
-	    android:textCursorDrawable="@null"
         android:ems="10"
-        android:hint="@string/player_one_edit_hint" >
-        
+        android:hint="@string/player_one_edit_hint"
+        android:textColor="#fff"
+        android:textCursorDrawable="@null" >
+
         <requestFocus />
     </EditText>
 
@@ -70,35 +43,74 @@
             android:id="@+id/startGame"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="1.00"
             android:background="#222"
+            android:onClick="onStartGame"
             android:text="@string/start_game"
-            android:textColor="#fff" 
-            android:onClick="onStartGame"/>
-
+            android:textColor="#fff" />
+        
         <Button
             android:id="@+id/instructions"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="1.00"
             android:background="#222"
+            android:onClick="onInstructions"
             android:text="@string/instructions"
-            android:textColor="#fff" 
-            android:onClick="onInstructions" />
-
+            android:textColor="#fff" />
     </LinearLayout>
+
+    <CheckBox
+        android:id="@+id/checkBox1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/buttonLayout"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:background="#000"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="@string/check_remember"
+        android:textColor="#fff" />
 
     <TextView
         android:id="@+id/playerTwoText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/buttonLayout"
-        android:layout_alignParentLeft="true"
+        android:layout_above="@+id/checkBox1"
         android:background="#000"
         android:paddingBottom="10dp"
         android:paddingTop="10dp"
-        android:text="@string/player_two"
+        android:text="@string/text_password"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#fff" />
+
+    <TextView
+        android:id="@+id/playerOneText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/playerTwoText"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/playerOneEdit"
+        android:background="#000"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:text="@string/player_one"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#fff" />
+
+    <EditText
+        android:id="@+id/PlayerPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/playerTwoText"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/playerTwoText"
+        android:layout_toRightOf="@+id/playerTwoText"
+        android:background="#000"
+        android:ems="10"
+        android:hint="@string/player_two_edit_hint"
+        android:textColor="#fff"
+        android:textCursorDrawable="@null" 
+        android:inputType="textPassword"/>
 
 </RelativeLayout>
