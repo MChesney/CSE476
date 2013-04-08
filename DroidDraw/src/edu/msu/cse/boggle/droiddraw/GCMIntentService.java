@@ -7,6 +7,9 @@ import com.google.android.gcm.GCMBaseIntentService;
 
 public class GCMIntentService extends GCMBaseIntentService {
 	public static final String SENDER_ID = "600039815168";
+	public static final String DRAWING = "drawing";
+	public static final String GUESS = "guess";
+	public static final String END = "end";
 
 	public GCMIntentService() {
 		super(SENDER_ID);
@@ -19,25 +22,34 @@ public class GCMIntentService extends GCMBaseIntentService {
 	}
 
 	@Override
-	protected void onError(Context arg0, String arg1) {
+	protected void onError(Context context, String message) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	protected void onMessage(Context arg0, Intent arg1) {
+	protected void onMessage(Context context, Intent message) {
+		String msg = message.getStringExtra("message");
+		
+		if (msg.equals(DRAWING)) {
+			String drawid = message.getStringExtra("id");
+			// fetch drawing
+		} else if (msg.equals(GUESS)) {
+			// fetch guess data
+			// I think just updated score
+		} else if (msg.equals(END)) {
+			// end the game
+		}
+	}
+
+	@Override
+	protected void onRegistered(Context context, String message) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	protected void onRegistered(Context arg0, String arg1) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	protected void onUnregistered(Context arg0, String arg1) {
+	protected void onUnregistered(Context context, String message) {
 		// TODO Auto-generated method stub
 
 	}

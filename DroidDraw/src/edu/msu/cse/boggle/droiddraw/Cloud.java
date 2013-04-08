@@ -35,7 +35,11 @@ public class Cloud {
     
     // I haven't touched these two yet
     //private static final String DRAWING_SAVE_URL = "https://www.cse.msu.edu/~chesne14/teamcranium/drawing-save.php";
-    //private static final String DRAWING_LOAD_URL = "https://www.cse.msu.edu/~chesne14/teamcranium/drawing-load.php";
+    // To load drawing - DRAWING_LOAD_URL + "?user=" + USER + "&magic=" + MAGIC + "&pw=" + PASSWORD + $drawid + DRAWID;
+    private static final String DRAWING_LOAD_URL = "https://www.cse.msu.edu/~chesne14/teamcranium/drawing-load.php";
+    
+    // To notify of end game - END_GAME_URL + "?user=" + USER + "&magic=" + MAGIC + "&pw=" + PASSWORD;
+    private static final String END_GAME_URL = "https://www.cse.msu.edu/~chesne14/teamcranium/end-game.php";
     private static final String UTF8 = "UTF-8";
 	
 	public Cloud() {
@@ -46,6 +50,7 @@ public class Cloud {
 	public static void setGcmId(String id) {
 		GCMID = id;
 	}
+	
     public static String getGCMID() {
 		return GCMID;
 	}
@@ -59,7 +64,7 @@ public class Cloud {
             xmlR.setInput(stream, UTF8);
             
             xmlR.nextTag();      // Advance to first tag
-            xmlR.require(XmlPullParser.START_TAG, null, "users");
+            xmlR.require(XmlPullParser.START_TAG, null, "droiddraw");
             
             String status = xmlR.getAttributeValue(null, "status");
             if(status.equals("no")) {
@@ -89,7 +94,7 @@ public class Cloud {
             }
             
             InputStream stream = conn.getInputStream();
-//            logStream(stream);
+            //logStream(stream);
             return XMLParser(stream);
 
         } catch (MalformedURLException e) {
@@ -114,7 +119,7 @@ public class Cloud {
             }
             
             InputStream stream = conn.getInputStream();
-//            logStream(stream);
+            //logStream(stream);
             return XMLParser(stream);
 
         } catch (MalformedURLException e) {

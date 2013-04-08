@@ -176,9 +176,8 @@ public class CloudOpeningActivity extends Activity {
 	}
 	
 	private static class Parameters implements Serializable {
-
-		private static final long serialVersionUID = 1L;
-
+		private static final long serialVersionUID = -1246586533002567020L;
+		
 		private String usernameText;
 		private String passwordText;
 
