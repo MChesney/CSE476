@@ -656,5 +656,11 @@ public class Drawing {
 		bundle.putFloatArray(START_POINTS, startPoints);
 		bundle.putFloatArray(END_POINTS, endPoints);
 	}
+	
+    public ArrayList<Segment> getSegments() {
+    	ArrayList<Segment> segs = new ArrayList<Segment>(segments.size());
+    	for (Segment item : segments) segs.add(item);
+    	return segs;
+    }
 
 }
