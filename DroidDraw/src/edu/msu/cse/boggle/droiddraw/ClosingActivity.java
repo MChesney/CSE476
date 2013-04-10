@@ -14,30 +14,30 @@ public class ClosingActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_closing);
 		
-		Players players = new Players();
+		/* TODO Players players = new Players();
 		
 		Bundle infoFromPrevActivity = getIntent().getExtras();
 		if (infoFromPrevActivity != null) {
 			players.loadPlayers(infoFromPrevActivity);
-		}
+		}*/
 		
 		TextView winnerName = (TextView) this.findViewById(R.id.winnerName);
 		TextView winnerScore = (TextView) this.findViewById(R.id.winnerScore);
 		TextView loserName = (TextView) this.findViewById(R.id.loserName);
 		TextView loserScore = (TextView) this.findViewById(R.id.loserScore);
 		
-		if (players.getScore(Players.PLAYERONE) > players.getScore(Players.PLAYERTWO)) {
-			winnerName.setText(players.getName(Players.PLAYERONE));
-			winnerScore.setText(""+players.getScore(Players.PLAYERONE));
+		if (Game.getScore(Game.PLAYERONE) > Game.getScore(Game.PLAYERTWO)) {
+			winnerName.setText(Game.getName(Game.PLAYERONE));
+			winnerScore.setText(""+Game.getScore(Game.PLAYERONE));
 			
-			loserName.setText(players.getName(Players.PLAYERTWO));
-			loserScore.setText(""+players.getScore(Players.PLAYERTWO));			
+			loserName.setText(Game.getName(Game.PLAYERTWO));
+			loserScore.setText(""+Game.getScore(Game.PLAYERTWO));			
 		} else {
-			winnerName.setText(players.getName(Players.PLAYERTWO));
-			winnerScore.setText(""+players.getScore(Players.PLAYERTWO));
+			winnerName.setText(Game.getName(Game.PLAYERTWO));
+			winnerScore.setText(""+Game.getScore(Game.PLAYERTWO));
 			
-			loserName.setText(players.getName(Players.PLAYERONE));
-			loserScore.setText(""+players.getScore(Players.PLAYERONE));
+			loserName.setText(Game.getName(Game.PLAYERONE));
+			loserScore.setText(""+Game.getScore(Game.PLAYERONE));
 		}
 
 	}

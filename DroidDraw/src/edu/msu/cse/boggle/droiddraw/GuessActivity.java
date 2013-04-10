@@ -17,8 +17,6 @@ public class GuessActivity extends Activity {
 	
 	private static final String TIME = "time";
 	private static final String ANS = "ans";
-	private static final String ANSWER = "answer";
-	private static final String CLUE = "clue";
 	
 	/**
 	 * The drawing view in this activity's view
@@ -37,10 +35,10 @@ public class GuessActivity extends Activity {
 	 * The player information 
 	 */
 	private long totaltime= 130000;
-	private Players players = new Players();
+	/* TODO private Game players = new Game();
 	private String category="" ;
 	private String hint="" ;
-	private String answer="" ;
+	private String answer="" ;*/
 	
 	@Override
 	protected void onCreate(Bundle bundle) {
@@ -53,32 +51,26 @@ public class GuessActivity extends Activity {
 		answerText=(TextView) this.findViewById(R.id.Answer);
 		if (bundle != null) {
 			drawView.loadView(bundle);
-			players.loadPlayers(bundle);
 			
 			totaltime = bundle.getLong(TIME);
 			answerText.setText(bundle.getCharSequence(ANS));
 			
 		} else if (infoFromPrevActivity != null) {
 			drawView.loadView(infoFromPrevActivity);
-			players.loadPlayers(infoFromPrevActivity);
 		}
 		
-			
-		hint=this.getIntent().getExtras().getString(CLUE);
-		answer=this.getIntent().getExtras().getString(ANSWER);
 		TextView playerOne = (TextView) this.findViewById(R.id.playerOne);
 		TextView playerTwo = (TextView) this.findViewById(R.id.playerTwo);
 		
 		TextView categoryText = (TextView) this.findViewById(R.id.category);
 		
-		String playerOneInfo = players.getName(Players.PLAYERONE) + ": " + players.getScore(Players.PLAYERONE);
-		String playerTwoInfo = players.getName(Players.PLAYERTWO) + ": " + players.getScore(Players.PLAYERTWO);
+		String playerOneInfo = Game.getName(Game.PLAYERONE) + ": " + Game.getScore(Game.PLAYERONE);
+		String playerTwoInfo = Game.getName(Game.PLAYERTWO) + ": " + Game.getScore(Game.PLAYERTWO);
 		
 		playerOne.setText(playerOneInfo);
 		playerTwo.setText(playerTwoInfo);
 		
-		category = players.getCategory();
-		categoryText.setText(category);
+		categoryText.setText(Game.getCategory());
 		
 		drawView.setEditable(false);
 		edit=(EditText) findViewById(R.id.editText1);
@@ -97,19 +89,19 @@ public class GuessActivity extends Activity {
 	            	timerText.setText("Time Left: " + m/1000);
 	            	if(m/1000 <=60)
 	            	{
-	            		hintdisplay.setText("Clue: " + hint);
+	            		hintdisplay.setText("Clue: " + Game.getHint());
 	            	}
 	    	  }
 	            
 	    	  public void onFinish() {  
 	            	
 	    		  if (!(answerText.getText().toString()).equals("YOU WIN!")) {
-	    			  answerText.setText("Answer: "+ answer);
+	    			  answerText.setText("Answer: "+ Game.answer);
 	    			  timerText.setText("Done!");
 	    			  edit.setEnabled(false);
 	    			  guess.setEnabled(false);
 	    			  draw.setEnabled(true);
-	    			  if (players.getEditor()==2)
+	    			  if (Game.getEditor()==2)
 	    			  {
 	    				  exit.setEnabled(true);
 	    			  }
@@ -127,29 +119,23 @@ public class GuessActivity extends Activity {
 	
 	public void onDrawPicture(View view) {
 		Intent intent = new Intent(this, EditActivity.class);
-		Bundle bundle = new Bundle();
-		if (players.getEditor()==2) {
-			players.setEditor(1);
+		if (Game.getEditor()==2) {
+			Game.setEditor(1);
     	} else {
-    		players.setEditor(2);
+    		Game.setEditor(2);
     	}
-		players.savePlayers(bundle);
-		intent.putExtras(bundle);
 		startActivity(intent);
 		finish();
 	}
 	
 	public void onFinishGame(View view) {		
 		Intent intent = new Intent(this, ClosingActivity.class);
-		Bundle bundle = new Bundle();
-		players.savePlayers(bundle);
-		intent.putExtras(bundle);
 		startActivity(intent);
 		finish();
 	}
 	
 	public void onGuessButton(View view) {
-		if((edit.getText().toString().toLowerCase(Locale.getDefault()).replaceAll(" ", "")).equals(answer.toLowerCase(Locale.getDefault()).replaceAll(" ", "")))
+		if((edit.getText().toString().toLowerCase(Locale.getDefault()).replaceAll(" ", "")).equals(Game.getAnswer().toLowerCase(Locale.getDefault()).replaceAll(" ", "")))
 		{
 			final MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.win);
 			mp.start();
@@ -160,11 +146,11 @@ public class GuessActivity extends Activity {
         	edit.setEnabled(false);
         	guess.setEnabled(false);
         	 draw.setEnabled(true);
-        	if (players.getEditor()==2) {
-        		players.setScore(Players.PLAYERONE, (int)totaltime/100);
+        	if (Game.getEditor()==2) {
+        		Game.setScore(Game.PLAYERONE, (int)totaltime/100);
         		exit.setEnabled(true);
         	} else {
-        		players.setScore(Players.PLAYERTWO, (int)totaltime/100);
+        		Game.setScore(Game.PLAYERTWO, (int)totaltime/100);
         	}
         	totaltime=0;
 		}
@@ -183,7 +169,6 @@ public class GuessActivity extends Activity {
 		outState.putLong(TIME, totaltime);
 		outState.putCharSequence(ANS, answerText.getText());
         drawView.saveView(outState);
-        players.savePlayers(outState);
 	}
 	
 }

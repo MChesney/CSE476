@@ -35,6 +35,10 @@ public class GCMIntentService extends GCMBaseIntentService {
 		if (msg.equals(START)) {
 			String playerOne = message.getStringExtra("playerone");
 			String playerTwo = message.getStringExtra("playertwo");
+			if (playerOne.equals(Game.playerSelf)) {
+				//...
+			}
+			
 		} else if (msg.equals(DRAW)) {
 			String drawid = message.getStringExtra("id");
 			// fetch drawing

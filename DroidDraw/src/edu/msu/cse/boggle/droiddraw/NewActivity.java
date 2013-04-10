@@ -64,11 +64,7 @@ public void onStartGame(View view) {
                         public void run() {
                             if(loggedIn) {
                             	Intent intent = new Intent(activity,  EditActivity.class);
-                        		Bundle bundle = new Bundle();
-                        		Players players = new Players();
-                        		players.setName(Players.PLAYERSELF, playerName);
-                        		players.savePlayers(bundle);
-                        		intent.putExtras(bundle);
+                        		Game.playerSelf = playerName;
                         		startActivity(intent);
                             }else {
                                 // Failure

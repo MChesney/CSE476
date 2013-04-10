@@ -45,12 +45,8 @@ public class CloudOpeningActivity extends Activity {
 	public void onStartGame(View view) {
 		
 		Intent intent = new Intent(this,  EditActivity.class);
-		Bundle bundle = new Bundle();
-		Players players = new Players();
-		players.setName(Players.PLAYERONE, "temp1");
-		players.setName(Players.PLAYERTWO, "temp2");
-		players.savePlayers(bundle);
-		intent.putExtras(bundle);
+		Game.setName(Game.PLAYERONE, "temp1");
+		Game.setName(Game.PLAYERTWO, "temp2");
 		startActivity(intent);
 		
 	}

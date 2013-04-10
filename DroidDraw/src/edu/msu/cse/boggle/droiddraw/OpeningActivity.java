@@ -36,12 +36,8 @@ public class OpeningActivity extends Activity {
 			two.requestFocus();
 		} else {
 			Intent intent = new Intent(this,  EditActivity.class);
-			Bundle bundle = new Bundle();
-			Players players = new Players();
-			players.setName(Players.PLAYERONE, playerOneName);
-			players.setName(Players.PLAYERTWO, playerTwoName);
-			players.savePlayers(bundle);
-			intent.putExtras(bundle);
+			Game.setName(Game.PLAYERONE, playerOneName);
+			Game.setName(Game.PLAYERTWO, playerTwoName);
 			startActivity(intent);
 		}
 		

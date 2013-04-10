@@ -14,7 +14,6 @@ import android.widget.ToggleButton;
 
 public class EditActivity extends Activity {
 
-	private String category = "";
 	private static final int GOT_COLOR = 1;
 	
 	/**
@@ -22,10 +21,6 @@ public class EditActivity extends Activity {
 	 */
 	private DrawView drawView;
 
-	/**
-	 * The players
-	 */
-	private Players players = new Players();
 	private enum Thickness{Small, Med, Large};
 	private Thickness thickness = Thickness.Small;
 	private float smallThickness = 5.0f;
@@ -47,11 +42,8 @@ public class EditActivity extends Activity {
 		Bundle infoFromPrevActivity = getIntent().getExtras();
 		if (bundle != null) {
 			drawView.loadView(bundle);
-			players.loadPlayers(bundle);
-			category = players.getCategory();
 			setThickness(drawView.getThickness());
 		} else if (infoFromPrevActivity != null) {
-			players.loadPlayers(infoFromPrevActivity);
 			createCategory();
 			popUp();
 		}
@@ -62,13 +54,13 @@ public class EditActivity extends Activity {
 		
 		TextView categoryText = (TextView) this.findViewById(R.id.category);
 		
-		String playerOneInfo = players.getName(Players.PLAYERONE) + ": " + players.getScore(Players.PLAYERONE);
-		String playerTwoInfo = players.getName(Players.PLAYERTWO) + ": " + players.getScore(Players.PLAYERTWO);
+		String playerOneInfo = Game.getName(Game.PLAYERONE) + ": " + Game.getScore(Game.PLAYERONE);
+		String playerTwoInfo = Game.getName(Game.PLAYERTWO) + ": " + Game.getScore(Game.PLAYERTWO);
 		
 		playerOne.setText(playerOneInfo);
 		playerTwo.setText(playerTwoInfo);
 		
-		categoryText.setText(category);
+		categoryText.setText(Game.getCategory());
 		
 	}
 	
@@ -80,10 +72,10 @@ public class EditActivity extends Activity {
 	        
 	    // Parameterize the builder
 	    builder.setTitle("Player Turn");
-	    if (players.getEditor() == 1){
-	    	builder.setMessage(players.getName(Players.PLAYERONE) + " turn");
+	    if (Game.getEditor() == 1){
+	    	builder.setMessage(Game.getName(Game.PLAYERONE) + " turn");
 	    } else {
-	    	builder.setMessage(players.getName(Players.PLAYERTWO) + " turn");
+	    	builder.setMessage(Game.getName(Game.PLAYERTWO) + " turn");
 	    }
 	    builder.setPositiveButton(android.R.string.ok, null);
 	        
@@ -117,23 +109,21 @@ public class EditActivity extends Activity {
 		int num = random.nextInt(5);
 		switch(num){
 		case 0:
-			category = "Animal";
+			Game.setCategory("Animal");
 			break;
 		case 1:
-			category = "Building";
+			Game.setCategory("Building");
 			break;
 		case 2:
-			category = "Object";
+			Game.setCategory("Object");
 			break;
 		case 3:
-			category = "Action";
+			Game.setCategory("Action");
 			break;
 		case 4: 
-			category = "MSU";
+			Game.setCategory("MSU");
 			break;
-		
 		}
-		players.setCategory(category);
 	}
 	
 	public void onThicknessButton(View view){
@@ -171,7 +161,6 @@ public class EditActivity extends Activity {
 		Intent intent = new Intent(this, GuessActivity.class);
 		Bundle bundle = new Bundle();
 		drawView.saveView(bundle);
-		players.savePlayers(bundle);
 		intent.putExtras(bundle);
 		String cluename = ((EditText)findViewById(R.id.clueEdit)).getText().toString();
 		intent.putExtra("clue", cluename);
@@ -203,8 +192,6 @@ public class EditActivity extends Activity {
 		super.onSaveInstanceState(bundle);
 		
 		drawView.saveView(bundle);
-		players.savePlayers(bundle);
-		
 		
 	}
 }
