@@ -27,13 +27,13 @@ public void onStartGame(View view) {
 		EditText two = (EditText) findViewById(R.id.PlayerPassword);
 		
 		
-		final String playerOneName = one.getText().toString();
-		final String playerOnePassword = two.getText().toString();
+		final String playerName = one.getText().toString();
+		final String playerPassword = two.getText().toString();
 		
 		
-		if (playerOneName.length() == 0) {
+		if (playerName.length() == 0) {
 			one.requestFocus();
-		} else if (playerOnePassword.length() == 0) {
+		} else if (playerPassword.length() == 0) {
 			two.requestFocus();
 		} else {
 
@@ -43,7 +43,7 @@ public void onStartGame(View view) {
 			new Thread(new Runnable() {
 				@Override
 	            public void run() {
-					final boolean loggedIn = cloud.loginUser(playerOneName, playerOnePassword);
+					final boolean loggedIn = cloud.loginUser(playerName, playerPassword);
 					
 					mainHandler.post(new Runnable() {
 
@@ -53,21 +53,20 @@ public void onStartGame(View view) {
                             	Intent intent = new Intent(activity,  EditActivity.class);
                     			Bundle bundle = new Bundle();
                     			Players players = new Players();
-                    			players.setName(Players.PLAYERONE, playerOneName);
-                    			players.setName(Players.PLAYERTWO, "temp2");
+                    			players.setName(Players.PLAYERSELF, playerName);
                     			players.savePlayers(bundle);
                     			intent.putExtras(bundle);
                     			startActivity(intent);
                             }else {
                                 // Failure
-                            	Toast.makeText(activity, R.string.login_fail, Toast.LENGTH_SHORT).show();
-                                }
-                            }    
-                        });
-			}
-		}).start();
-		
-	}}
+                            	Toast.makeText(activity, R.string.login_fail, Toast.LENGTH_SHORT).show();       
+                            }
+                        }    
+					});
+				}
+			}).start();	
+		}
+	}
 	
 	public void onInstructions(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());

@@ -27,11 +27,11 @@ public void onStartGame(View view) {
 		EditText two = (EditText) findViewById(R.id.playerPasswordcheck);
 		EditText three = (EditText) findViewById(R.id.playerPassword);
 		
-		final String playerOneName = one.getText().toString();
+		final String playerName = one.getText().toString();
 		String playerPasswordcheck = two.getText().toString();
 		final String playerPassword = three.getText().toString();
 		
-		if (playerOneName.length() == 0) {
+		if (playerName.length() == 0) {
 			one.requestFocus();
 		} else if (playerPasswordcheck.length() == 0) {
 			two.requestFocus();
@@ -56,7 +56,7 @@ public void onStartGame(View view) {
 			new Thread(new Runnable() {
 				@Override
 	            public void run() {
-					final boolean loggedIn = cloud.addUser(playerOneName, playerPassword);
+					final boolean loggedIn = cloud.addUser(playerName, playerPassword);
 					
 					mainHandler.post(new Runnable() {
 
@@ -66,8 +66,7 @@ public void onStartGame(View view) {
                             	Intent intent = new Intent(activity,  EditActivity.class);
                         		Bundle bundle = new Bundle();
                         		Players players = new Players();
-                        		players.setName(Players.PLAYERONE, playerOneName);
-                        		players.setName(Players.PLAYERTWO, "temp2");
+                        		players.setName(Players.PLAYERSELF, playerName);
                         		players.savePlayers(bundle);
                         		intent.putExtras(bundle);
                         		startActivity(intent);

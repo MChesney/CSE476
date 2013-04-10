@@ -7,7 +7,8 @@ import com.google.android.gcm.GCMBaseIntentService;
 
 public class GCMIntentService extends GCMBaseIntentService {
 	public static final String SENDER_ID = "600039815168";
-	public static final String DRAWING = "drawing";
+	public static final String START = "start";
+	public static final String DRAW = "draw";
 	public static final String GUESS = "guess";
 	public static final String END = "end";
 
@@ -31,7 +32,10 @@ public class GCMIntentService extends GCMBaseIntentService {
 	protected void onMessage(Context context, Intent message) {
 		String msg = message.getStringExtra("message");
 		
-		if (msg.equals(DRAWING)) {
+		if (msg.equals(START)) {
+			String playerOne = message.getStringExtra("playerone");
+			String playerTwo = message.getStringExtra("playertwo");
+		} else if (msg.equals(DRAW)) {
 			String drawid = message.getStringExtra("id");
 			// fetch drawing
 		} else if (msg.equals(GUESS)) {

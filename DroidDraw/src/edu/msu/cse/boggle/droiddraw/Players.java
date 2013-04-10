@@ -9,6 +9,7 @@ public class Players {
 	public final static String PLAYERINFORMATION = "Players.information";
 	public final static String PLAYERONE = "Players.one";
 	public final static String PLAYERTWO = "Players.two";
+	public final static String PLAYERSELF = "Players.self";
 	
 	/*
 	 * Player Information
@@ -26,6 +27,11 @@ public class Players {
 
 	private static final class PlayersInfo implements Serializable {
 		private static final long serialVersionUID = -1459156760421244376L;
+		
+		/**
+		 * Self name
+		 */
+		public String playerSelfName = "";
 
 		/**
 		 * Player 1 name
@@ -71,6 +77,9 @@ public class Players {
 	}
 	
 	public String getName(String player) {
+		if (player.equals(PLAYERSELF)) {
+			return playersInfo.playerSelfName;
+		}
 		if (player.equals(PLAYERONE)) {
 			return playersInfo.playerOneName;
 		}
@@ -81,6 +90,9 @@ public class Players {
 	}
 	
 	public void setName(String player, String name) {
+		if (player.equals(PLAYERSELF)) {
+			playersInfo.playerSelfName = name;
+		}
 		if (player.equals(PLAYERONE)) {
 			playersInfo.playerOneName = name;
 		}
@@ -120,8 +132,7 @@ public class Players {
 	}
 	public Integer getEditor(){
 		return playersInfo.editor;
-	}
-	
+	}	
 	
 	public void incScore(String player, int increment) {
 		if (player.equals(PLAYERONE)) {
