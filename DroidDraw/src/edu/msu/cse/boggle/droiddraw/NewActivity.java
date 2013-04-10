@@ -63,11 +63,12 @@ public void onStartGame(View view) {
                         @Override
                         public void run() {
                             if(loggedIn) {
-                            	Intent intent = new Intent(activity,  EditActivity.class);
-                        		Game.playerSelf = playerName;
+                            	Game.playerSelf = playerName;
+                            	Intent intent = new Intent(activity,  WaitingActivity.class);
                         		startActivity(intent);
-                            }else {
+                            } else {
                                 // Failure
+                            	// TODO two users already logged in
                             	Toast.makeText(activity, R.string.user_already_exists, Toast.LENGTH_SHORT).show();
                                 }
                             }    

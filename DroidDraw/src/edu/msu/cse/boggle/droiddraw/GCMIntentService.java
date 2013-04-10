@@ -31,13 +31,15 @@ public class GCMIntentService extends GCMBaseIntentService {
 	@Override
 	protected void onMessage(Context context, Intent message) {
 		String msg = message.getStringExtra("message");
+		String name = Game.playerSelf;
 		
 		if (msg.equals(START)) {
-			String playerOne = message.getStringExtra("playerone");
-			String playerTwo = message.getStringExtra("playertwo");
-			if (playerOne.equals(Game.playerSelf)) {
+			String playerOne = message.getStringExtra("playerOne");
+			String playerTwo = message.getStringExtra("playerTwo");
+			//if (playerOne!=null && playerOne.equals(Game.playerSelf)) {
 				//...
-			}
+				//int xx = 0;
+			//}
 			
 		} else if (msg.equals(DRAW)) {
 			String drawid = message.getStringExtra("id");

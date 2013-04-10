@@ -119,7 +119,7 @@ public class Cloud {
             }
             
             InputStream stream = conn.getInputStream();
-            logStream(stream);
+//            logStream(stream);
             return XMLParser(stream);
 
         } catch (MalformedURLException e) {
