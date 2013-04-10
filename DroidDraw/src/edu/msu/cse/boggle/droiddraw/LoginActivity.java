@@ -41,82 +41,82 @@ public class LoginActivity extends Activity {
 			cb.setChecked(true);
 		}
 	}
-
-		
-	public void onStartGame(View view) {
-			
-			EditText one = (EditText) findViewById(R.id.playerOneEdit);
-			EditText two = (EditText) findViewById(R.id.PlayerPassword);
-			
-			
-			final String playerName = one.getText().toString();
-			final String playerPassword = two.getText().toString();
-			
-			
-			if (playerName.length() == 0) {
-				one.requestFocus();
-			} else if (playerPassword.length() == 0) {
-				two.requestFocus();
-			} else {
 	
-				final ContextWrapper activity = this;
-				final Handler mainHandler = new Handler(this.getMainLooper());
-		        
-				new Thread(new Runnable() {
-					@Override
-		            public void run() {
-						final boolean loggedIn = cloud.loginUser(playerName, playerPassword);
-						
-						mainHandler.post(new Runnable() {
+	public void onStartGame(View view) {
+		
+		EditText one = (EditText) findViewById(R.id.playerOneEdit);
+		EditText two = (EditText) findViewById(R.id.PlayerPassword);
+		
+		
+		final String playerName = one.getText().toString().trim();
+		final String playerPassword = two.getText().toString();
+		
+		
+		if (playerName.length() == 0) {
+			one.requestFocus();
+		} else if (playerPassword.length() == 0) {
+			two.requestFocus();
+		} else {
 
-	                        @Override
-	                        public void run() {
-	                            if(loggedIn) {
-	                            	Intent intent = new Intent(activity,  WaitingActivity.class);
-	                    			Game.playerSelf = playerName;
-	                    			startActivity(intent);
-	                            }else {
-	                                // Failure
-	                            	// TODO two users already logged in
-	                            	Toast.makeText(activity, R.string.login_fail, Toast.LENGTH_SHORT).show();       
-	                            }
-	                        }    
-						});
-					}
-				}).start();		
-			}
-		}
-		
-		public void onInstructions(View view) {
-	        AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+			final ContextWrapper activity = this;
+			final Handler mainHandler = new Handler(this.getMainLooper());
 	        
-	        // Parameterize the builder
-	        builder.setTitle(R.string.instructions);
-	        builder.setMessage(R.string.rules_of_game);
-	        builder.setPositiveButton(android.R.string.ok, null);
-	        
-	        // Create the dialog box and show it
-	        AlertDialog alertDialog = builder.create();
-	        alertDialog.show();
-			
-			
-		}
-		
-		public void onRememberChecked(View view){
-			
-			EditText one = (EditText) findViewById(R.id.playerOneEdit);
-			EditText two = (EditText) findViewById(R.id.PlayerPassword);
-			
-			
-			final String playerName = one.getText().toString();
-			final String playerPassword = two.getText().toString();
-			
-			
-			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-			Editor ed = prefs.edit();
-			ed.putString(KEY_USERNAME, playerName);
-			ed.putString(KEY_PASSWORD, playerPassword);
-			ed.putString(REMEMBER, "remember_checked");
-			ed.commit();
+			new Thread(new Runnable() {
+				@Override
+	            public void run() {
+					final boolean loggedIn = cloud.loginUser(playerName, playerPassword);
+					
+					mainHandler.post(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            if(loggedIn) {
+                            	Game.setName(Game.PLAYERSELF, playerName);
+                            	Game.setPassword(playerPassword);
+                            	Game.setWaitStatus(Game.WAITFORPLAYER);
+                            	Intent intent = new Intent(activity,  WaitingActivity.class);
+                    			startActivity(intent);
+                            }else {
+                                // Failure
+                            	// TODO two users already logged in
+                            	Toast.makeText(activity, R.string.login_fail, Toast.LENGTH_SHORT).show();       
+                            }
+                        }    
+					});
+				}
+			}).start();	
 		}
 	}
+	
+	public void onInstructions(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+        
+        // Parameterize the builder
+        builder.setTitle(R.string.instructions);
+        builder.setMessage(R.string.rules_of_game);
+        builder.setPositiveButton(android.R.string.ok, null);
+        
+        // Create the dialog box and show it
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+		
+	}
+		
+	public void onRememberChecked(View view){
+		
+		EditText one = (EditText) findViewById(R.id.playerOneEdit);
+		EditText two = (EditText) findViewById(R.id.PlayerPassword);
+		
+		
+		final String playerName = one.getText().toString();
+		final String playerPassword = two.getText().toString();
+		
+		
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+		Editor ed = prefs.edit();
+		ed.putString(KEY_USERNAME, playerName);
+		ed.putString(KEY_PASSWORD, playerPassword);
+		ed.putString(REMEMBER, "remember_checked");
+		ed.commit();
+	}
+}

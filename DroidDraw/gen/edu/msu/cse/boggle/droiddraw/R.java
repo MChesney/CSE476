@@ -55,7 +55,7 @@ public final class R {
         public static final int loserScoreText=0x7f08000a;
         public static final int loserText=0x7f080009;
         public static final int lowerEmptyFrame=0x7f08000e;
-        public static final int menu_settings=0x7f080035;
+        public static final int menu_settings=0x7f080036;
         public static final int newGameButton=0x7f08000d;
         public static final int playerOne=0x7f08001d;
         public static final int playerOneEdit=0x7f080029;
@@ -69,6 +69,7 @@ public final class R {
         public static final int time=0x7f080022;
         public static final int toggleDrawMove=0x7f08001e;
         public static final int upperEmptyFrame=0x7f080000;
+        public static final int waiting=0x7f080035;
         public static final int winnerImage=0x7f080001;
         public static final int winnerName=0x7f080005;
         public static final int winnerScore=0x7f080006;

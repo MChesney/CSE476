@@ -3,13 +3,16 @@ package edu.msu.cse.boggle.droiddraw;
 import java.util.Random;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.graphics.Color;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 public class EditActivity extends Activity {
@@ -28,6 +31,8 @@ public class EditActivity extends Activity {
 	private float largeThickness = 15.0f;
 	private TextView lineButton;
 	
+	private Cloud cloud = new Cloud();
+	
 	@Override
 	protected void onCreate(Bundle bundle) {
 		super.onCreate(bundle);
@@ -44,9 +49,9 @@ public class EditActivity extends Activity {
 			drawView.loadView(bundle);
 			setThickness(drawView.getThickness());
 		} else if (infoFromPrevActivity != null) {
-			createCategory();
 			popUp();
 		}
+		createCategory();
 		
 		
 		TextView playerOne = (TextView) this.findViewById(R.id.playerOne);
@@ -158,16 +163,39 @@ public class EditActivity extends Activity {
 	}
 	
 	public void onDoneButton(View view){
-		Intent intent = new Intent(this, GuessActivity.class);
-		Bundle bundle = new Bundle();
-		drawView.saveView(bundle);
-		intent.putExtras(bundle);
-		String cluename = ((EditText)findViewById(R.id.clueEdit)).getText().toString();
-		intent.putExtra("clue", cluename);
-		String ansname = ((EditText)findViewById(R.id.answerEdit)).getText().toString();
-		intent.putExtra("answer", ansname);
-		startActivity(intent);
-		finish();
+
+		final ContextWrapper activity = this;
+		final Handler mainHandler = new Handler(this.getMainLooper());
+		
+		Game.setHint(((EditText)findViewById(R.id.clueEdit)).getText().toString());
+		Game.setAnswer(((EditText)findViewById(R.id.answerEdit)).getText().toString());
+		
+		new Thread(new Runnable() {
+			@Override
+            public void run() {
+				
+				final boolean didFinishDrawing = cloud.addDrawing(drawView);
+				
+				mainHandler.post(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        if(didFinishDrawing) {
+                        	Game.setWaitStatus(Game.WAITFORGUESS);
+                        	Intent intent = new Intent(activity,  WaitingActivity.class);
+                        	intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    		startActivity(intent);
+                    		finish();
+                        } else {
+                            // Failure
+                        	// TODO two users already logged in
+                        	Toast.makeText(activity, R.string.user_already_exists, Toast.LENGTH_SHORT).show();
+                            }
+                        }    
+                    });
+		}
+	}).start();
+		
 	}
 	
 	/**
