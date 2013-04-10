@@ -1,7 +1,10 @@
 package edu.msu.cse.boggle.droiddraw;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+
+import org.xmlpull.v1.XmlSerializer;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -657,10 +660,20 @@ public class Drawing {
 		bundle.putFloatArray(END_POINTS, endPoints);
 	}
 	
-    public ArrayList<Segment> getSegments() {
-    	ArrayList<Segment> segs = new ArrayList<Segment>(segments.size());
-    	for (Segment item : segments) segs.add(item);
-    	return segs;
+    public void saveXml(XmlSerializer xml) throws IOException {
+    	for (int i = 0; i < segments.size(); i++) {
+    		xml.startTag(null, "segment");
+        
+    		xml.attribute(null, "segid", Integer.toString(i));
+    		xml.attribute(null, "color", Integer.toString(segments.get(i).getColor()));
+    		xml.attribute(null, "thickness", Float.toString(segments.get(i).getThickness()));
+    		xml.attribute(null, "lastx", Float.toString(segments.get(i).getLastPoint().x));
+    		xml.attribute(null, "lasty", Float.toString(segments.get(i).getLastPoint().y));
+    		xml.attribute(null, "currx", Float.toString(segments.get(i).getCurrPoint().x));
+    		xml.attribute(null, "curry", Float.toString(segments.get(i).getCurrPoint().y));
+        
+    		xml.endTag(null,  "segment");
+    	}
     }
 
 }
