@@ -96,7 +96,7 @@ public class GuessActivity extends Activity {
 	    	  public void onFinish() {  
 	            	
 	    		  if (!(answerText.getText().toString()).equals("YOU WIN!")) {
-	    			  answerText.setText("Answer: "+ Game.answer);
+	    			  answerText.setText("Answer: "+ Game.getAnswer());
 	    			  timerText.setText("Done!");
 	    			  edit.setEnabled(false);
 	    			  guess.setEnabled(false);

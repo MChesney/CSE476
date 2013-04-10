@@ -27,7 +27,7 @@ public void onStartGame(View view) {
 		EditText two = (EditText) findViewById(R.id.playerPasswordcheck);
 		EditText three = (EditText) findViewById(R.id.playerPassword);
 		
-		final String playerName = one.getText().toString();
+		final String playerName = one.getText().toString().trim();
 		String playerPasswordcheck = two.getText().toString();
 		final String playerPassword = three.getText().toString();
 		
@@ -63,7 +63,7 @@ public void onStartGame(View view) {
                         @Override
                         public void run() {
                             if(loggedIn) {
-                            	Game.playerSelf = playerName;
+                            	Game.setName(Game.PLAYERSELF, playerName);
                             	Intent intent = new Intent(activity,  WaitingActivity.class);
                         		startActivity(intent);
                             } else {

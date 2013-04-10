@@ -51,7 +51,7 @@
     <string name="temp_launch">TEMP: Launch Game</string>
     <string name="text_password">Password:</string>
     <string name="check_remember">Remember</string>
-    <string name="text_waiting">Waiting...</string>
+    <string name="text_waiting">Waiting</string>
     <string name="login_fail">Login Failed</string>
     <string name="user_already_exists">User Already Exists</string>
 

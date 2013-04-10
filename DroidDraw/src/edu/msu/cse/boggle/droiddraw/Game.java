@@ -4,21 +4,25 @@ public class Game {
 	
 	public static String PLAYERONE = "playerOne";
 	public static String PLAYERTWO = "playerTwo";
+	public static String PLAYERSELF = "playerSelf";
 	
-	public static String playerOneName = "";
-	public static String playerTwoName = "";
+	private static String playerOneName = "";
+	private static String playerTwoName = "";
+	private static String playerSelf = "";
+	private static int playerSelfNumber = -1;
 	
-	public static int playerOneScore = 0;
-	public static int playerTwoScore = 0;
+	private static int playerOneScore = 0;
+	private static int playerTwoScore = 0;
 	
-	public static String playerSelf = "";
-	
-	public static int editor = 1;
-	public static String hint = "";
-	public static String answer = "";
-	public static String category = "";
+	private static int editor = 1;
+	private static String hint = "";
+	private static String answer = "";
+	private static String category = "";
 	
 	public static String getName(String player) {
+		if (player.equals(PLAYERSELF)) {
+			return playerSelf;
+		}
 		if (player.equals(PLAYERONE)) {
 			return playerOneName;
 		}
@@ -29,6 +33,9 @@ public class Game {
 	}
 	
 	public static void setName(String player, String name) {
+		if (player.equals(PLAYERSELF)) {
+			playerSelf = name;
+		}
 		if (player.equals(PLAYERONE)) {
 			playerOneName = name;
 		}
@@ -96,5 +103,14 @@ public class Game {
 			playerTwoScore += increment;
 		}
 	}
+	
+	public static int getSelfNumber() {
+		return playerSelfNumber;
+	}
+
+	public static void setSelfNumber(int playerSelfNumber) {
+		Game.playerSelfNumber = playerSelfNumber;
+	}
+
 	
 }

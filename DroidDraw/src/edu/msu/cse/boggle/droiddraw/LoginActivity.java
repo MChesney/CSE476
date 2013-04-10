@@ -27,7 +27,7 @@ public void onStartGame(View view) {
 		EditText two = (EditText) findViewById(R.id.PlayerPassword);
 		
 		
-		final String playerName = one.getText().toString();
+		final String playerName = one.getText().toString().trim();
 		final String playerPassword = two.getText().toString();
 		
 		
@@ -51,7 +51,7 @@ public void onStartGame(View view) {
                         public void run() {
                             if(loggedIn) {
                             	Intent intent = new Intent(activity,  WaitingActivity.class);
-                    			Game.playerSelf = playerName;
+                    			Game.setName(Game.PLAYERSELF, playerName);
                     			startActivity(intent);
                             }else {
                                 // Failure
