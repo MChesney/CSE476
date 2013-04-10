@@ -64,6 +64,7 @@ public void onStartGame(View view) {
                         public void run() {
                             if(loggedIn) {
                             	Game.setName(Game.PLAYERSELF, playerName);
+                            	Game.setWaitStatus(Game.WAITFORPLAYER);
                             	Intent intent = new Intent(activity,  WaitingActivity.class);
                         		startActivity(intent);
                             } else {

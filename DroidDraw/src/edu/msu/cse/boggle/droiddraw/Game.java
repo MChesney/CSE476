@@ -2,9 +2,9 @@ package edu.msu.cse.boggle.droiddraw;
 
 public class Game {
 	
-	public static String PLAYERONE = "playerOne";
-	public static String PLAYERTWO = "playerTwo";
-	public static String PLAYERSELF = "playerSelf";
+	public static final String PLAYERONE = "playerOne";
+	public static final String PLAYERTWO = "playerTwo";
+	public static final String PLAYERSELF = "playerSelf";
 	
 	private static String playerOneName = "";
 	private static String playerTwoName = "";
@@ -18,6 +18,12 @@ public class Game {
 	private static String hint = "";
 	private static String answer = "";
 	private static String category = "";
+	
+	// Waiting statuses
+	public static final String WAITFORPLAYER = "Waiting for second player";
+	public static final String WAITFORDRAW = "Waiting for player to draw";
+	public static final String WAITFORGUESS = "Waiting for player to guess";
+	public static String waitStatus = "";
 	
 	public static String getName(String player) {
 		if (player.equals(PLAYERSELF)) {
@@ -110,6 +116,14 @@ public class Game {
 
 	public static void setSelfNumber(int playerSelfNumber) {
 		Game.playerSelfNumber = playerSelfNumber;
+	}
+	
+	public static String getWaitStatus() {
+		return waitStatus;
+	}
+	
+	public static void setWaitStatus(String status) {
+		waitStatus = status;
 	}
 
 	

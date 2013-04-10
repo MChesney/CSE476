@@ -55,6 +55,7 @@ public class GCMIntentService extends GCMBaseIntentService {
 			}
 			if (playerTwo.equals(Game.getName(Game.PLAYERSELF))) {
 				Game.setSelfNumber(2);
+				Game.setWaitStatus(Game.WAITFORDRAW);
 				Intent intent = new Intent(this, WaitingActivity.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -76,6 +77,7 @@ public class GCMIntentService extends GCMBaseIntentService {
 				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				startActivity(intent);
 			} else {
+				Game.setWaitStatus(Game.WAITFORDRAW);
 				Intent intent = new Intent(this, WaitingActivity.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -96,6 +98,7 @@ public class GCMIntentService extends GCMBaseIntentService {
 				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				startActivity(intent);
 			} else {
+				Game.setWaitStatus(Game.WAITFORGUESS);
 				Intent intent = new Intent(this, WaitingActivity.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

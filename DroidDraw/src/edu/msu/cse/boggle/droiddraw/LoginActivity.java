@@ -50,8 +50,9 @@ public void onStartGame(View view) {
                         @Override
                         public void run() {
                             if(loggedIn) {
+                            	Game.setName(Game.PLAYERSELF, playerName);
+                            	Game.setWaitStatus(Game.WAITFORPLAYER);
                             	Intent intent = new Intent(activity,  WaitingActivity.class);
-                    			Game.setName(Game.PLAYERSELF, playerName);
                     			startActivity(intent);
                             }else {
                                 // Failure
