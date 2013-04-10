@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -18,15 +19,14 @@ public class LoginActivity extends Activity {
 	private Cloud cloud = new Cloud();
 	static final String KEY_USERNAME = "username";
 	static final String KEY_PASSWORD = "password";
-	
-	static boolean rememberChecked = false;
+	static final String REMEMBER = "remember_not_checked";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
-		
-		if (rememberChecked)
+	
+		if (REMEMBER.equals("remember_checked"))
 		{
 			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 			String username = prefs.getString(KEY_USERNAME, "Default Value if not found");
@@ -34,9 +34,11 @@ public class LoginActivity extends Activity {
 			
 			EditText one = (EditText) findViewById(R.id.playerOneEdit);
 			EditText two = (EditText) findViewById(R.id.PlayerPassword);
+			CheckBox cb = (CheckBox) this.findViewById(R.id.checkBox1);
 			
 			one.setText(username);
 			two.setText(password);
+			cb.setChecked(true);
 		}
 	}
 
@@ -105,15 +107,16 @@ public class LoginActivity extends Activity {
 			EditText one = (EditText) findViewById(R.id.playerOneEdit);
 			EditText two = (EditText) findViewById(R.id.PlayerPassword);
 			
+			
 			final String playerName = one.getText().toString();
 			final String playerPassword = two.getText().toString();
+			
 			
 			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 			Editor ed = prefs.edit();
 			ed.putString(KEY_USERNAME, playerName);
 			ed.putString(KEY_PASSWORD, playerPassword);
+			ed.putString(REMEMBER, "remember_checked");
 			ed.commit();
-			
-			rememberChecked = true;
 		}
 	}
