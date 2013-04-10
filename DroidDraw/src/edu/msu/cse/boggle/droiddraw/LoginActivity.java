@@ -66,21 +66,22 @@ public class LoginActivity extends Activity {
 						final boolean loggedIn = cloud.loginUser(playerName, playerPassword);
 						
 						mainHandler.post(new Runnable() {
-	
+
 	                        @Override
 	                        public void run() {
 	                            if(loggedIn) {
-	                            	Intent intent = new Intent(activity,  EditActivity.class);
+	                            	Intent intent = new Intent(activity,  WaitingActivity.class);
 	                    			Game.playerSelf = playerName;
 	                    			startActivity(intent);
 	                            }else {
 	                                // Failure
+	                            	// TODO two users already logged in
 	                            	Toast.makeText(activity, R.string.login_fail, Toast.LENGTH_SHORT).show();       
 	                            }
 	                        }    
 						});
 					}
-				}).start();	
+				}).start();		
 			}
 		}
 		
@@ -95,6 +96,7 @@ public class LoginActivity extends Activity {
 	        // Create the dialog box and show it
 	        AlertDialog alertDialog = builder.create();
 	        alertDialog.show();
+			
 			
 		}
 		
