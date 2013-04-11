@@ -26,6 +26,16 @@ public class Game {
 	public static final String WAITFORGUESS = "Waiting for player to guess";
 	public static String waitStatus = "";
 	
+	private static String drawID = ""; 
+	
+	public static String getDrawID() {
+		return drawID;
+	}
+
+	public static void setDrawID(String drawID) {
+		Game.drawID = drawID;
+	}
+
 	public static String getName(String player) {
 		if (player.equals(PLAYERSELF)) {
 			return playerSelfName;

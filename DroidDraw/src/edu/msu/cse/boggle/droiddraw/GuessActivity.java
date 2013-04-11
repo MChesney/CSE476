@@ -12,11 +12,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class GuessActivity extends Activity {
 	
 	private static final String TIME = "time";
 	private static final String ANS = "ans";
+	
+	private Cloud cloud = new Cloud();
 	
 	/**
 	 * The drawing view in this activity's view
@@ -44,6 +47,13 @@ public class GuessActivity extends Activity {
 	protected void onCreate(Bundle bundle) {
 		super.onCreate(bundle);
 		setContentView(R.layout.activity_guess);
+		
+		new Thread(new Runnable() {
+			@Override
+            public void run() {
+				cloud.loadDrawing();
+		}
+	}).start();
 		
 		drawView = (DrawView) this.findViewById(R.id.drawViewGuess);
 		

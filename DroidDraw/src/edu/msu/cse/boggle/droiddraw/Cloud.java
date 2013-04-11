@@ -210,6 +210,31 @@ public class Cloud {
         }
     }
     
+    public boolean loadDrawing (){
+    	
+    	String query = DRAWING_LOAD_URL + "?user=" + Game.getName(Game.PLAYERSELF) + "&magic=" + MAGIC + "&pw=" + Game.getPassword() + "&drawid=" + Game.getDrawID();
+    	
+    	try {
+            URL url = new URL(query);
+
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            int responseCode = conn.getResponseCode();
+            if(responseCode != HttpURLConnection.HTTP_OK) {
+                return false;
+            }
+            
+            InputStream stream = conn.getInputStream();
+            logStream(stream);
+            return XMLParser(stream);
+
+        } catch (MalformedURLException e) {
+            // Should never happen
+            return false;
+        } catch (IOException ex) {
+            return false;
+        }
+    }
+    
     public static void logStream(InputStream stream) {
         BufferedReader reader = new BufferedReader(
                 new InputStreamReader(stream));
