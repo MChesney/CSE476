@@ -210,7 +210,7 @@ public class Cloud {
         }
     }
     
-    public boolean loadDrawing (){
+    public InputStream loadDrawing (){
     	
     	String query = DRAWING_LOAD_URL + "?user=" + Game.getName(Game.PLAYERSELF) + "&magic=" + MAGIC + "&pw=" + Game.getPassword() + "&drawid=" + Game.getDrawID();
     	
@@ -220,18 +220,18 @@ public class Cloud {
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             int responseCode = conn.getResponseCode();
             if(responseCode != HttpURLConnection.HTTP_OK) {
-                return false;
+                return null;
             }
             
             InputStream stream = conn.getInputStream();
-            logStream(stream);
-            return XMLParser(stream);
+            //logStream(stream);
+            return stream;
 
         } catch (MalformedURLException e) {
             // Should never happen
-            return false;
+            return null;
         } catch (IOException ex) {
-            return false;
+            return null;
         }
     }
     
@@ -247,5 +247,26 @@ public class Cloud {
         } catch (IOException ex) {
             return;
         }
+    }
+    
+    /**
+     * Skip the XML parser to the end tag for whatever 
+     * tag we are currently within.
+     * @param xml the parser
+     * @throws IOException
+     * @throws XmlPullParserException
+     */
+    public static void skipToEndTag(XmlPullParser xml) 
+            throws IOException, XmlPullParserException {
+        int tag;
+        do
+        {
+            tag = xml.next();
+            if(tag == XmlPullParser.START_TAG) {
+                // Recurse over any start tag
+                skipToEndTag(xml);
+            }
+        } while(tag != XmlPullParser.END_TAG && 
+        tag != XmlPullParser.END_DOCUMENT);
     }
 }

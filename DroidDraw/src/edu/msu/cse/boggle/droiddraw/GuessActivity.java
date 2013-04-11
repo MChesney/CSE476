@@ -1,12 +1,19 @@
 package edu.msu.cse.boggle.droiddraw;
 
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Locale;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Xml;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -48,12 +55,60 @@ public class GuessActivity extends Activity {
 		super.onCreate(bundle);
 		setContentView(R.layout.activity_guess);
 		
-		new Thread(new Runnable() {
-			@Override
+		/*
+         * Create a thread to load the hatting from the cloud
+         */
+        new Thread(new Runnable() {
+
+            @Override
             public void run() {
-				cloud.loadDrawing();
-		}
-	}).start();
+                // Create a cloud object and get the XML
+                Cloud cloud = new Cloud();
+                InputStream stream = cloud.loadDrawing();
+                
+                // Test for an error
+                boolean fail = stream == null;
+                if(!fail) {
+                    try {
+                        XmlPullParser xml = Xml.newPullParser();
+                        xml.setInput(stream, "UTF-8");       
+                        
+                        xml.nextTag();      // Advance to first tag
+                        xml.require(XmlPullParser.START_TAG, null, "droiddraw");
+                        String status = xml.getAttributeValue(null, "status");
+                        if(status.equals("yes")) {
+                        	Game.setHint(xml.getAttributeValue(null, "hint"));
+                        	Game.setAnswer(xml.getAttributeValue(null, "answer"));
+                        	Game.setCategory(xml.getAttributeValue(null, "category"));
+                        
+                            /*while(xml.nextTag() == XmlPullParser.START_TAG) {
+                                if(xml.getName().equals("segment")) {
+                                	
+                                    drawView.loadXml(xml);
+                                    break;
+                                }
+                                
+                                Cloud.skipToEndTag(xml);
+                            }*/
+                        } else {
+                            fail = true;
+                        }
+                        
+                    } catch(IOException ex) {
+                        fail = true;
+                    } catch(XmlPullParserException ex) {
+                        fail = true;
+                    } finally {
+                        try {
+                            stream.close(); 
+                        } catch(IOException ex) {
+                        }
+                    }
+                }
+                // TODO right location???
+                final boolean fail1 = fail;
+            }
+        }).start();
 		
 		drawView = (DrawView) this.findViewById(R.id.drawViewGuess);
 		
@@ -83,10 +138,10 @@ public class GuessActivity extends Activity {
 		categoryText.setText(Game.getCategory());
 		
 		drawView.setEditable(false);
-		edit=(EditText) findViewById(R.id.editText1);
-		guess= (Button)findViewById(R.id.guess);
-		exit= (Button)findViewById(R.id.finish);
-		draw= (Button)findViewById(R.id.drawagain);
+		edit = (EditText) findViewById(R.id.editText1);
+		guess = (Button)findViewById(R.id.guess);
+		exit = (Button)findViewById(R.id.finish);
+		draw = (Button)findViewById(R.id.drawagain);
 		draw.setEnabled(false);
 		exit.setEnabled(false);
 		hintdisplay = (TextView) this.findViewById(R.id.clue);
