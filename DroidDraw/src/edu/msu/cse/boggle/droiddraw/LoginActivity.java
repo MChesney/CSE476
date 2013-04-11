@@ -76,7 +76,7 @@ public class LoginActivity extends Activity {
                             	Game.setWaitStatus(Game.WAITFORPLAYER);
                             	Intent intent = new Intent(activity,  WaitingActivity.class);
                     			startActivity(intent);
-                            }else {
+                            } else {
                                 // Failure
                             	// TODO two users already logged in
                             	Toast.makeText(activity, R.string.login_fail, Toast.LENGTH_SHORT).show();       

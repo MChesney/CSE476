@@ -53,66 +53,11 @@ public class GuessActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle bundle) {
 		super.onCreate(bundle);
-		setContentView(R.layout.activity_guess);
-		
-		/*
-         * Create a thread to load the hatting from the cloud
-         */
-        new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-                // Create a cloud object and get the XML
-                Cloud cloud = new Cloud();
-                InputStream stream = cloud.loadDrawing();
-                
-                // Test for an error
-                boolean fail = stream == null;
-                if(!fail) {
-                    try {
-                        XmlPullParser xml = Xml.newPullParser();
-                        xml.setInput(stream, "UTF-8");       
-                        
-                        xml.nextTag();      // Advance to first tag
-                        xml.require(XmlPullParser.START_TAG, null, "droiddraw");
-                        String status = xml.getAttributeValue(null, "status");
-                        if(status.equals("yes")) {
-                        	Game.setHint(xml.getAttributeValue(null, "hint"));
-                        	Game.setAnswer(xml.getAttributeValue(null, "answer"));
-                        	Game.setCategory(xml.getAttributeValue(null, "category"));
-                        
-                            /*while(xml.nextTag() == XmlPullParser.START_TAG) {
-                                if(xml.getName().equals("segment")) {
-                                	
-                                    drawView.loadXml(xml);
-                                    break;
-                                }
-                                
-                                Cloud.skipToEndTag(xml);
-                            }*/
-                        } else {
-                            fail = true;
-                        }
-                        
-                    } catch(IOException ex) {
-                        fail = true;
-                    } catch(XmlPullParserException ex) {
-                        fail = true;
-                    } finally {
-                        try {
-                            stream.close(); 
-                        } catch(IOException ex) {
-                        }
-                    }
-                }
-                // TODO right location???
-                final boolean fail1 = fail;
-            }
-        }).start();
+		setContentView(R.layout.activity_guess);	
 		
 		drawView = (DrawView) this.findViewById(R.id.drawViewGuess);
 		
-		Bundle infoFromPrevActivity = getIntent().getExtras();
+		//Bundle infoFromPrevActivity = getIntent().getExtras();
 		answerText=(TextView) this.findViewById(R.id.Answer);
 		if (bundle != null) {
 			drawView.loadView(bundle);
@@ -120,13 +65,14 @@ public class GuessActivity extends Activity {
 			totaltime = bundle.getLong(TIME);
 			answerText.setText(bundle.getCharSequence(ANS));
 			
-		} else if (infoFromPrevActivity != null) {
-			drawView.loadView(infoFromPrevActivity);
+		} else {
+			loadCloudDrawing();
+			//if (infoFromPrevActivity != null) {
+			//drawView.loadView(infoFromPrevActivity);
 		}
 		
 		TextView playerOne = (TextView) this.findViewById(R.id.playerOne);
-		TextView playerTwo = (TextView) this.findViewById(R.id.playerTwo);
-		
+		TextView playerTwo = (TextView) this.findViewById(R.id.playerTwo);		
 		TextView categoryText = (TextView) this.findViewById(R.id.category);
 		
 		String playerOneInfo = Game.getName(Game.PLAYERONE) + ": " + Game.getScore(Game.PLAYERONE);
@@ -134,7 +80,6 @@ public class GuessActivity extends Activity {
 		
 		playerOne.setText(playerOneInfo);
 		playerTwo.setText(playerTwoInfo);
-		
 		categoryText.setText(Game.getCategory());
 		
 		drawView.setEditable(false);
@@ -234,6 +179,64 @@ public class GuessActivity extends Activity {
 		outState.putLong(TIME, totaltime);
 		outState.putCharSequence(ANS, answerText.getText());
         drawView.saveView(outState);
+	}
+	
+	private void loadCloudDrawing() {
+        new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                // Create a cloud object and get the XML
+                Cloud cloud = new Cloud();
+                InputStream stream = cloud.loadDrawing();
+                
+                // Test for an error
+                boolean fail = stream == null;
+                if(!fail) {
+                    try {
+                        XmlPullParser xml = Xml.newPullParser();
+                        xml.setInput(stream, "UTF-8");       
+                        
+                        xml.nextTag();      // Advance to first tag
+                        xml.require(XmlPullParser.START_TAG, null, "droiddraw");
+                        String status = xml.getAttributeValue(null, "status");
+                        if(status.equals("yes")) {
+                        	Game.setHint(xml.getAttributeValue(null, "hint"));
+                        	Game.setAnswer(xml.getAttributeValue(null, "answer"));
+                        	Game.setCategory(xml.getAttributeValue(null, "category"));
+                        
+                            /*while(xml.nextTag() == XmlPullParser.START_TAG) {
+                                if(xml.getName().equals("segment")) {
+                                	
+                                    drawView.loadXml(xml);
+                                    break;
+                                }
+                                
+                                Cloud.skipToEndTag(xml);
+                            }*/
+                        	
+                        	drawView.loadXml(xml);
+                        	
+                        } else {
+                            fail = true;
+                        }
+                        
+                    } catch(IOException ex) {
+                        fail = true;
+                    } catch(XmlPullParserException ex) {
+                        fail = true;
+                    } finally {
+                        try {
+                            stream.close(); 
+                        } catch(IOException ex) {
+                        }
+                    }
+                }
+                // TODO right location???
+                final boolean fail1 = fail;
+            }
+        }).start();
+		
 	}
 	
 }
