@@ -13,8 +13,8 @@ public class GCMIntentService extends GCMBaseIntentService {
 	public static final String END = "end";
 	
 	public static final String PLAYER = "player";
-	public static final String PLAYERONESCORE = "playerOneScore";
-	public static final String PLAYERTWOSCORE = "playerTwoScore";
+	public static final String PLAYERONESCORE = "p1Score";
+	public static final String PLAYERTWOSCORE = "p2Score";
 	public static final String DRAWID = "drawid";
 
 	public GCMIntentService() {
@@ -64,15 +64,15 @@ public class GCMIntentService extends GCMBaseIntentService {
 			
 		// Game ready for someone to draw
 		} else if (msg.equals(DRAW)) {
-			int player = message.getIntExtra(PLAYER, -1);
+			Integer playerNum = Integer.getInteger(message.getStringExtra(PLAYER));
 			
-			int playerOneScore = message.getIntExtra(PLAYERONESCORE, Game.getScore(Game.PLAYERONE));
-			int playerTwoScore = message.getIntExtra(PLAYERTWOSCORE, Game.getScore(Game.PLAYERONE));
+			Integer playerOneScore = Integer.getInteger(message.getStringExtra(PLAYERONESCORE));
+			Integer playerTwoScore = Integer.getInteger(message.getStringExtra(PLAYERTWOSCORE));
 			Game.setScore(Game.PLAYERONE, playerOneScore);
 			Game.setScore(Game.PLAYERTWO, playerTwoScore);
-			Game.setEditor(player);
+			//Game.setEditor(player);
 			
-			if (player == Game.getSelfNumber()) {
+			if (playerNum == Game.getSelfNumber()) {
 				Intent intent = new Intent(this, EditActivity.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				startActivity(intent);
@@ -89,14 +89,7 @@ public class GCMIntentService extends GCMBaseIntentService {
 			String player = message.getStringExtra(PLAYER);
 			Game.setDrawID(message.getStringExtra(DRAWID));
 			
-			int playerNum = -1;
-			if (player.equals("1")) {
-				playerNum = 1;
-				//Game.setEditor(1);
-			} else {
-				playerNum = 2;
-				//Game.setEditor(2);
-			}
+			Integer playerNum = Integer.getInteger(message.getStringExtra(PLAYER));
 			
 			if (playerNum == Game.getSelfNumber()) {
 				// fetch drawing
