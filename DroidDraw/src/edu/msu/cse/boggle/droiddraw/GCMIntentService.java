@@ -86,12 +86,19 @@ public class GCMIntentService extends GCMBaseIntentService {
 		
 		// Game ready for someone to guess
 		} else if (msg.equals(GUESS)) {
-			int player = message.getIntExtra(PLAYER, -1);
+			String player = message.getStringExtra(PLAYER);
 			String drawid = message.getStringExtra(DRAWID);
 			
-			Game.setEditor(player);
+			int playerNum = -1;
+			if (player.equals("1")) {
+				playerNum = 1;
+				//Game.setEditor(1);
+			} else {
+				playerNum = 2;
+				//Game.setEditor(2);
+			}
 			
-			if (player == Game.getSelfNumber()) {
+			if (playerNum == Game.getSelfNumber()) {
 				// fetch drawing
 				
 				Intent intent = new Intent(this, GuessActivity.class);

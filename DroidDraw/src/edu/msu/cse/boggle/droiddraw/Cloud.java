@@ -146,7 +146,7 @@ public class Cloud {
             xml.attribute(null, "answer", Game.getAnswer());
             xml.attribute(null, "category", Game.getCategory());
             
-//            view.saveXml(view, xml);
+            view.saveXml(xml);
             
             xml.endTag(null, "droiddraw");
             
@@ -195,7 +195,7 @@ public class Cloud {
             } 
             
             stream = conn.getInputStream();
-//            logStream(stream);
+            //logStream(stream);
             return XMLParser(stream);
             
         } catch (MalformedURLException e) {
