@@ -11,7 +11,8 @@ public class Game {
 	private static String playerSelfName = "";
 	private static String playerSelfPassword = "";
 	private static int playerSelfNumber = -1;
-	
+	private static String gcmId = "";
+
 	private static int playerOneScore = 0;
 	private static int playerTwoScore = 0;
 	
@@ -141,6 +142,14 @@ public class Game {
 	
 	public static void setWaitStatus(String status) {
 		waitStatus = status;
+	}
+	
+	public static String getGcmId() {
+		return gcmId;
+	}
+
+	public static void setGcmId(String gcmId) {
+		Game.gcmId = gcmId;
 	}
 
 	

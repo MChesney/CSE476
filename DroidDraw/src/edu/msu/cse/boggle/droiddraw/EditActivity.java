@@ -53,7 +53,6 @@ public class EditActivity extends Activity {
 		}
 		createCategory();
 		
-		
 		TextView playerOne = (TextView) this.findViewById(R.id.playerOne);
 		TextView playerTwo = (TextView) this.findViewById(R.id.playerTwo);
 		
@@ -190,11 +189,11 @@ public class EditActivity extends Activity {
                             // Failure
                         	// TODO two users already logged in
                         	Toast.makeText(activity, R.string.user_already_exists, Toast.LENGTH_SHORT).show();
-                            }
-                        }    
-                    });
-		}
-	}).start();
+                        }
+                    }    
+				});
+			}
+		}).start();
 		
 	}
 	
