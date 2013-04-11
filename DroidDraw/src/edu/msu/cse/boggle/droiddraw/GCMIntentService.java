@@ -87,7 +87,7 @@ public class GCMIntentService extends GCMBaseIntentService {
 		// Game ready for someone to guess
 		} else if (msg.equals(GUESS)) {
 			String player = message.getStringExtra(PLAYER);
-			String drawid = message.getStringExtra(DRAWID);
+			Game.setDrawID(message.getStringExtra(DRAWID));
 			
 			int playerNum = -1;
 			if (player.equals("1")) {
