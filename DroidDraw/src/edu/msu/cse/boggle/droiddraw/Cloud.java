@@ -145,13 +145,10 @@ public class Cloud {
             xml.attribute(null, "hint", Game.getHint());
             xml.attribute(null, "answer", Game.getAnswer());
             xml.attribute(null, "category", Game.getCategory());
-            
             view.saveXml(xml);
-            
             xml.endTag(null, "droiddraw");
-            
             xml.endDocument();
-            
+             
         } catch (IOException e) {
             // This won't occur when writing to a string
             return false;
