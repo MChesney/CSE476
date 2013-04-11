@@ -199,6 +199,7 @@ public class EditActivity extends Activity {
 	
 	/**
 	 * Do nothing when back is pressed
+	 * TODO
 	 */
 	@Override
 	public void onBackPressed() {}

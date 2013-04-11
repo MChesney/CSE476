@@ -64,7 +64,14 @@ public class GCMIntentService extends GCMBaseIntentService {
 			
 		// Game ready for someone to draw
 		} else if (msg.equals(DRAW)) {
-			Integer playerNum = Integer.getInteger(message.getStringExtra(PLAYER));
+			String player = message.getStringExtra(PLAYER);
+			int playerNum = -1;
+			if (player.equals("1")) {
+				playerNum = 1;
+			}
+			if (player.equals("2")) {
+				playerNum = 2;
+			}
 			
 			Integer playerOneScore = Integer.getInteger(message.getStringExtra(PLAYERONESCORE));
 			Integer playerTwoScore = Integer.getInteger(message.getStringExtra(PLAYERTWOSCORE));
@@ -86,10 +93,16 @@ public class GCMIntentService extends GCMBaseIntentService {
 		
 		// Game ready for someone to guess
 		} else if (msg.equals(GUESS)) {
-			String player = message.getStringExtra(PLAYER);
 			Game.setDrawID(message.getStringExtra(DRAWID));
 			
-			Integer playerNum = Integer.getInteger(message.getStringExtra(PLAYER));
+			String player = message.getStringExtra(PLAYER);
+			int playerNum = -1;
+			if (player.equals("1")) {
+				playerNum = 1;
+			}
+			if (player.equals("2")) {
+				playerNum = 2;
+			}
 			
 			if (playerNum == Game.getSelfNumber()) {
 				// fetch drawing
