@@ -1,5 +1,9 @@
 package edu.msu.cse.boggle.droiddraw;
 
+import java.io.IOException;
+
+import org.xmlpull.v1.XmlSerializer;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.os.Bundle;
@@ -102,6 +106,10 @@ public class DrawView extends View {
 	public void saveView(Bundle bundle) {
 		drawing.saveDrawing(bundle);
 	}
+	
+    public void saveXml(XmlSerializer xml) throws IOException {
+    	drawing.saveXml(xml);
+    }
 	
 	
 }
