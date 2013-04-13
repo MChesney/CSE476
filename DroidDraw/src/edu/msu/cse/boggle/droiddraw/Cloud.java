@@ -22,7 +22,6 @@ import android.util.Xml;
 public class Cloud {
 
     private static final String MAGIC = "NechAtHa6RuzeR8x";
-    //private static String GCMID = "";
     
     // To add user - USER_ADD_URL + "?user=" + USER + "&magic=" + MAGIC + "&pw=" + PASSWORD  + $gcm + GCMID; 
     private static final String USER_ADD_URL = "https://www.cse.msu.edu/~chesne14/teamcranium/user-add.php";
@@ -98,12 +97,15 @@ public class Cloud {
             xml.attribute(null, "hint", Game.getHint());
             xml.attribute(null, "answer", Game.getAnswer());
             xml.attribute(null, "category", Game.getCategory());
+            xml.attribute(null, "p1score", Integer.toString(Game.getScore(Game.PLAYERONE)));
+            xml.attribute(null, "p2score", Integer.toString(Game.getScore(Game.PLAYERONE)));
             view.saveXml(xml);
             xml.endTag(null, "droiddraw");
             xml.endDocument();
              
         } catch (IOException e) {
             // This won't occur when writing to a string
+        	android.util.Log.d("IOException1", e.toString());
             return false;
         }
         
@@ -145,12 +147,14 @@ public class Cloud {
             } 
             
             stream = conn.getInputStream();
-            //logStream(stream);
+//            logStream(stream);
             return XMLParser(stream);
             
         } catch (MalformedURLException e) {
+        	android.util.Log.d("MalformedURLException1", e.toString());
             return false;
         } catch (IOException ex) {
+        	android.util.Log.d("IOException2", ex.toString());
             return false;
         } finally {
             if(stream != null) {
@@ -158,6 +162,7 @@ public class Cloud {
                     stream.close();
                 } catch(IOException ex) {
                     // Fail silently
+                	android.util.Log.d("IOException3", ex.toString());
                 }
             }
         }
@@ -180,7 +185,7 @@ public class Cloud {
         try {
             String line;
             while ((line = reader.readLine()) != null) {
-                Log.e("476", line);
+                Log.i("476", line);
             }
         } catch (IOException ex) {
             return;

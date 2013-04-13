@@ -33,6 +33,13 @@ User account the server-side communications is running under: chesne14
 Paths to all server-side scripts:
 https://www.cse.msu.edu/~chesne14/teamcranium/user-add.php
 https://www.cse.msu.edu/~chesne14/teamcranium/user-login.php
+    
+https://www.cse.msu.edu/~chesne14/teamcranium/drawing-save.php
+https://www.cse.msu.edu/~chesne14/teamcranium/drawing-load.php
+    
+https://www.cse.msu.edu/~chesne14/teamcranium/guess-save-load.php
+    
+https://www.cse.msu.edu/~chesne14/teamcranium/end-game.php
 
 Where in the code the passive connection timeout is set (provide a script name and line number):
 

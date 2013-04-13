@@ -114,10 +114,7 @@ public class GuessActivity extends Activity {
 	    			  edit.setEnabled(false);
 	    			  guess.setEnabled(false);
 	    			  draw.setEnabled(true);
-	    			  if (Game.getEditor()==2)
-	    			  {
-	    				  exit.setEnabled(true);
-	    			  }
+	    			  exit.setEnabled(true);
 	    		  }
 	    	  }  
 	    }.start(); 
@@ -136,15 +133,15 @@ public class GuessActivity extends Activity {
     	} else {
     		Game.setEditor(2);
     	}
-		//Intent intent = new Intent(this, EditActivity.class);
-		//startActivity(intent);
-		//finish();
+		Intent intent = new Intent(this, EditActivity.class);
+		startActivity(intent);
+		finish();
 		
-		final ContextWrapper activity = this;
+		/*final ContextWrapper activity = this;
 		final Handler mainHandler = new Handler(this.getMainLooper());
 		
-		Game.setHint(((EditText)findViewById(R.id.clueEdit)).getText().toString());
-		Game.setAnswer(((EditText)findViewById(R.id.answerEdit)).getText().toString());
+		//Game.setHint(((EditText)findViewById(R.id.clueEdit)).getText().toString());
+		//Game.setAnswer(((EditText)findViewById(R.id.answerEdit)).getText().toString());
 		
 		new Thread(new Runnable() {
 			@Override
@@ -173,7 +170,7 @@ public class GuessActivity extends Activity {
                     }    
 				});
 			}
-		}).start();
+		}).start();*/
 	}
 	
 	public void onFinishGame(View view) {		
@@ -242,16 +239,10 @@ public class GuessActivity extends Activity {
                         	Game.setHint(xml.getAttributeValue(null, "hint"));
                         	Game.setAnswer(xml.getAttributeValue(null, "answer"));
                         	Game.setCategory(xml.getAttributeValue(null, "category"));
-                        
-                            /*while(xml.nextTag() == XmlPullParser.START_TAG) {
-                                if(xml.getName().equals("segment")) {
-                                	
-                                    drawView.loadXml(xml);
-                                    break;
-                                }
-                                
-                                Cloud.skipToEndTag(xml);
-                            }*/
+                        	String p1 = xml.getAttributeValue(null, "p1score");
+                        	String p2 = xml.getAttributeValue(null, "p2score");
+                        	//Game.setScore(Game.PLAYERONE, Integer.getInteger(xml.getAttributeValue(null, "p1score")));
+                        	//Game.setScore(Game.PLAYERTWO, Integer.getInteger(xml.getAttributeValue(null, "p2score")));
                         	
                         	drawView.loadXml(xml);
                         	
@@ -270,8 +261,6 @@ public class GuessActivity extends Activity {
                         }
                     }
                 }
-                // TODO right location???
-                final boolean fail1 = fail;
             }
         }).start();
 		
