@@ -2,6 +2,8 @@ package edu.msu.cse.boggle.droiddraw;
 
 import java.io.IOException;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlSerializer;
 
 import android.content.Context;
@@ -111,5 +113,17 @@ public class DrawView extends View {
     	drawing.saveXml(xml);
     }
 	
+    public void loadXml(XmlPullParser xml) throws IOException, XmlPullParserException {
+        drawing.loadXml(xml);
+        
+        post(new Runnable() {
+
+            @Override
+            public void run() {
+                invalidate();
+            }
+            
+        });
+    }
 	
 }

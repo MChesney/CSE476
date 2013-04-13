@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlSerializer;
 
 import android.content.Context;
@@ -392,66 +394,6 @@ public class Drawing {
         	return true;
 		}
 		return false;
-		
-		/*int id = event.getPointerId(event.getActionIndex());
-        
-		float x = event.getX();
-		float y = event.getY();
-		
-		switch(event.getActionMasked()) {
-		case MotionEvent.ACTION_DOWN:
-            touch1.id = id;
-            touch2.id = -1;
-            getPositions(event);
-        	touch1.copyToLast();
-			lastX = x;
-			lastY = y;
-			return true;
-			
-        case MotionEvent.ACTION_POINTER_DOWN:
-            if(touch1.id >= 0 && touch2.id < 0) {
-                touch2.id = id;
-                getPositions(event);
-                touch2.copyToLast();
-                return true;
-            }
-            break;
-			
-        case MotionEvent.ACTION_UP:
-        case MotionEvent.ACTION_CANCEL:
-            touch1.id = -1;
-            touch2.id = -1;
-            drawView.invalidate();
-        	return true;
-        	
-        case MotionEvent.ACTION_POINTER_UP:
-            if(id == touch2.id) {
-                touch2.id = -1;
-            } else if(id == touch1.id) {
-                // Make what was touch2 now be touch1 by 
-                // swapping the objects.
-                Touch t = touch1;
-                touch1 = touch2;
-                touch2 = t;
-                touch2.id = -1;
-            }
-            drawView.invalidate();
-            return true;
-        	
-        case MotionEvent.ACTION_MOVE:
-        	if (touch2.id == -1) {
-            	addSegments(x, y);
-            	lastX = x;
-            	lastY = y;
-            	drawView.invalidate();
-        	} else {
-        		getPositions(event);
-        		move();
-        	}
-
-        	return true;
-		}
-		return false;*/
 	}
 	
     /**
@@ -674,6 +616,27 @@ public class Drawing {
         
     		xml.endTag(null,  "segment");
     	}
+    }
+    
+    public void loadXml(XmlPullParser xml) throws IOException, XmlPullParserException {
+    	segments.clear();
+    	
+    	while(xml.nextTag() == XmlPullParser.START_TAG) {
+    		if (xml.getName().equals("segment")) {
+    			Integer color = Integer.parseInt(xml.getAttributeValue(null, "color"));
+    			Float thickness = Float.parseFloat(xml.getAttributeValue(null, "thickness"));
+    			Float lastx = Float.parseFloat(xml.getAttributeValue(null, "lastx"));
+    			Float lasty = Float.parseFloat(xml.getAttributeValue(null, "lasty"));
+    			Float currx = Float.parseFloat(xml.getAttributeValue(null, "currx"));
+    			Float curry = Float.parseFloat(xml.getAttributeValue(null, "curry"));
+    			
+    			Segment segment = new Segment(new Point(lastx, lasty), new Point(currx, curry), color, thickness);
+    			segments.add(segment);
+    		}
+    		
+    		Cloud.skipToEndTag(xml);
+    	}
+        
     }
 
 }
