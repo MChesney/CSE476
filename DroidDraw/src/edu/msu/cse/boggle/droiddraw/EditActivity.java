@@ -183,9 +183,8 @@ public class EditActivity extends Activity {
                         if(didFinishDrawing) {
                         	Game.setWaitStatus(Game.WAITFORGUESS);
                         	Intent intent = new Intent(activity,  WaitingActivity.class);
-                        	intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        	//intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     		startActivity(intent);
-                    		finish();
                         } else {
                             // Failure
                         	// TODO two users already logged in

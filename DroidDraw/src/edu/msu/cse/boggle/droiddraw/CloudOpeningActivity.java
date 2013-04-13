@@ -42,14 +42,14 @@ public class CloudOpeningActivity extends Activity {
 	}
 	
 	// This is only a temporary function for the checkpoint
-	public void onStartGame(View view) {
+	/*public void onStartGame(View view) {
 		
 		Intent intent = new Intent(this,  EditActivity.class);
 		Game.setName(Game.PLAYERONE, "temp1");
 		Game.setName(Game.PLAYERTWO, "temp2");
 		startActivity(intent);
 		
-	}
+	}*/
 //	public void onNewUser(View view) {
 //		final AlertDialog.Builder alert_builder = new AlertDialog.Builder(this);
 //		

@@ -16,6 +16,7 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlSerializer;
 
+import android.os.Bundle;
 import android.util.Log;
 import android.util.Xml;
 
@@ -31,8 +32,6 @@ public class Cloud {
     private static final String DRAWING_SAVE_URL = "https://www.cse.msu.edu/~chesne14/teamcranium/drawing-save.php";
     // To load drawing - DRAWING_LOAD_URL + "?user=" + USER + "&magic=" + MAGIC + "&pw=" + PASSWORD + $drawid + DRAWID;
     private static final String DRAWING_LOAD_URL = "https://www.cse.msu.edu/~chesne14/teamcranium/drawing-load.php";
-    
-    private static final String UPDATE_SCORES_URL = "https://www.cse.msu.edu/~chesne14/teamcranium/guess-save-load.php";
     
     // To notify of end game - END_GAME_URL + "?user=" + USER + "&magic=" + MAGIC + "&pw=" + PASSWORD;
     private static final String END_GAME_URL = "https://www.cse.msu.edu/~chesne14/teamcranium/end-game.php";
@@ -98,7 +97,7 @@ public class Cloud {
             xml.attribute(null, "answer", Game.getAnswer());
             xml.attribute(null, "category", Game.getCategory());
             xml.attribute(null, "p1score", Integer.toString(Game.getScore(Game.PLAYERONE)));
-            xml.attribute(null, "p2score", Integer.toString(Game.getScore(Game.PLAYERONE)));
+            xml.attribute(null, "p2score", Integer.toString(Game.getScore(Game.PLAYERTWO)));
             view.saveXml(xml);
             xml.endTag(null, "droiddraw");
             xml.endDocument();
@@ -171,11 +170,6 @@ public class Cloud {
     public InputStream loadDrawing() {
     	String query = DRAWING_LOAD_URL + "?user=" + Game.getName(Game.PLAYERSELF) + "&magic=" + MAGIC + "&pw=" + Game.getPassword() + "&drawid=" + Game.getDrawID();
     	return getInputStream(query);
-    }
-    
-    public boolean updateScores() {
-    	String query = UPDATE_SCORES_URL + "?user=" + Game.getName(Game.PLAYERSELF) + "&magic=" + MAGIC + "&pw=" + Game.getPassword() + "&p1score=" + Game.getScore(Game.PLAYERONE) + "&p2score=" + Game.getScore(Game.PLAYERTWO);
-    	return XMLParser(getInputStream(query));
     }
     
     public static void logStream(InputStream stream) {

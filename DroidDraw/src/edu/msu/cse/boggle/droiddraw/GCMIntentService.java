@@ -2,6 +2,7 @@ package edu.msu.cse.boggle.droiddraw;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 
 import com.google.android.gcm.GCMBaseIntentService;
 
@@ -16,6 +17,8 @@ public class GCMIntentService extends GCMBaseIntentService {
 	public static final String PLAYERONESCORE = "p1Score";
 	public static final String PLAYERTWOSCORE = "p2Score";
 	public static final String DRAWID = "drawid";
+	
+	GuessActivity guessActivity = new GuessActivity();
 
 	public GCMIntentService() {
 		super(SENDER_ID);
@@ -58,31 +61,9 @@ public class GCMIntentService extends GCMBaseIntentService {
 				Game.setWaitStatus(Game.WAITFORDRAW);
 				Intent intent = new Intent(this, WaitingActivity.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				//intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(intent);
 			}
-			
-		// Game ready for someone to draw
-		/*} else if (msg.equals(DRAW)) {
-			String player = message.getStringExtra(PLAYER);
-			
-			Integer playerOneScore = Integer.getInteger(message.getStringExtra(PLAYERONESCORE));
-			Integer playerTwoScore = Integer.getInteger(message.getStringExtra(PLAYERTWOSCORE));
-			Game.setScore(Game.PLAYERONE, playerOneScore);
-			Game.setScore(Game.PLAYERTWO, playerTwoScore);
-			//Game.setEditor(player);
-			
-			if (player.equals(Game.getName(Game.PLAYERSELF))) {
-				Intent intent = new Intent(this, EditActivity.class);
-				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-				startActivity(intent);
-			} else {
-				Game.setWaitStatus(Game.WAITFORDRAW);
-				Intent intent = new Intent(this, WaitingActivity.class);
-				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				startActivity(intent);
-			}*/
 		
 		// Game ready for someone to guess
 		} else if (msg.equals(GUESS)) {
@@ -92,22 +73,10 @@ public class GCMIntentService extends GCMBaseIntentService {
 			//Integer playerTwoScore = Integer.getInteger(message.getStringExtra(PLAYERTWOSCORE));
 			//Game.setScore(Game.PLAYERONE, playerOneScore);
 			//Game.setScore(Game.PLAYERTWO, playerTwoScore);
-			
-			String player = message.getStringExtra(PLAYER);
-			
-			if (player.equals(Game.getName(Game.PLAYERSELF))) {
-				// fetch drawing
 				
-				Intent intent = new Intent(this, GuessActivity.class);
-				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-				startActivity(intent);
-			} else {
-				Game.setWaitStatus(Game.WAITFORGUESS);
-				Intent intent = new Intent(this, WaitingActivity.class);
-				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				startActivity(intent);
-			}
+			Intent intent = new Intent(this, GuessActivity.class);
+			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			startActivity(intent); 
 		
 		// Game ending
 		} else if (msg.equals(END)) {

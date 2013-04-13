@@ -36,11 +36,11 @@
         </activity>
         <activity
             android:name="edu.msu.cse.boggle.droiddraw.EditActivity"
-            android:label="@string/title_activity_edit" >
+            android:label="@string/title_activity_edit" android:noHistory="true">
         </activity>
         <activity
             android:name="edu.msu.cse.boggle.droiddraw.GuessActivity"
-            android:label="@string/title_activity_guess" >
+            android:label="@string/title_activity_guess" android:noHistory="true">
         </activity>
         <activity
             android:name="edu.msu.cse.boggle.droiddraw.ColorSelectActivity"
@@ -67,7 +67,7 @@
         
         <activity
             android:name="edu.msu.cse.boggle.droiddraw.WaitingActivity"
-            android:label="@string/title_activity_waiting" android:launchMode="singleTop">
+            android:label="@string/title_activity_waiting" android:noHistory="true">
         </activity>
         
         <receiver android:name="com.google.android.gcm.GCMBroadcastReceiver" android:permission="com.google.android.c2dm.permission.SEND" >

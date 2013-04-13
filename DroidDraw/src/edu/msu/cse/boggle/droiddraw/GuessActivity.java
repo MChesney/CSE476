@@ -135,48 +135,11 @@ public class GuessActivity extends Activity {
     	}
 		Intent intent = new Intent(this, EditActivity.class);
 		startActivity(intent);
-		finish();
-		
-		/*final ContextWrapper activity = this;
-		final Handler mainHandler = new Handler(this.getMainLooper());
-		
-		//Game.setHint(((EditText)findViewById(R.id.clueEdit)).getText().toString());
-		//Game.setAnswer(((EditText)findViewById(R.id.answerEdit)).getText().toString());
-		
-		new Thread(new Runnable() {
-			@Override
-            public void run() {
-				
-				final boolean didUpdateScores = cloud.updateScores();
-				
-				mainHandler.post(new Runnable() {
-
-                    @Override
-                    public void run() {
-                        if(didUpdateScores) {
-                        	//Game.setWaitStatus(Game.WAITFORGUESS);
-                        	//Intent intent = new Intent(activity,  WaitingActivity.class);
-                        	//intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    		//startActivity(intent);
-                    		//finish();
-                    		Intent intent = new Intent(activity, EditActivity.class);
-                    		startActivity(intent);
-                    		finish();
-                        } else {
-                            // Failure
-                        	// TODO two users already logged in
-                        	Toast.makeText(activity, R.string.user_already_exists, Toast.LENGTH_SHORT).show();
-                        }
-                    }    
-				});
-			}
-		}).start();*/
 	}
 	
 	public void onFinishGame(View view) {		
 		Intent intent = new Intent(this, ClosingActivity.class);
 		startActivity(intent);
-		finish();
 	}
 	
 	public void onGuessButton(View view) {

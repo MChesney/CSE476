@@ -116,13 +116,11 @@ public class DrawView extends View {
     public void loadXml(XmlPullParser xml) throws IOException, XmlPullParserException {
         drawing.loadXml(xml);
         
-        post(new Runnable() {
-
-            @Override
-            public void run() {
-                invalidate();
-            }
-            
+        post (new Runnable() {
+        	@Override
+        	public void run() {
+        		invalidate();
+        	}
         });
     }
 	
