@@ -96,6 +96,7 @@ public class LoginActivity extends Activity {
                             	Game.setWaitStatus(Game.WAITFORPLAYER);
                             	Intent intent = new Intent(activity,  WaitingActivity.class);
                     			startActivity(intent);
+                    			finish();
                             } else {
                                 // Failure
                             	// TODO two users already logged in

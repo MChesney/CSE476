@@ -70,52 +70,20 @@ public class Cloud {
     
     public boolean addUser (String username, String password){
     	String query = USER_ADD_URL + "?user=" + username + "&magic=" + MAGIC + "&pw=" + password  + "&gcm=" + Game.getGcmId(); 
-    	return XMLParser(getInputStream(query));
-    	
-    	/*try {
-            URL url = new URL(query);
-
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            int responseCode = conn.getResponseCode();
-            if(responseCode != HttpURLConnection.HTTP_OK) {
-                return false;
-            }
-            
-            InputStream stream = conn.getInputStream();
-//            logStream(stream);
-            return XMLParser(stream);
-
-        } catch (MalformedURLException e) {
-            // Should never happen
-            return false;
-        } catch (IOException ex) {
-            return false;
-        }*/
+    	InputStream stream = getInputStream(query);
+    	if(stream != null) {
+    		return XMLParser(stream);
+    	}
+    	return false;
     }
     
     public boolean loginUser (String username, String password){
     	String query = USER_LOGIN_URL + "?user=" + username + "&magic=" + MAGIC + "&pw=" + password + "&gcm=" + Game.getGcmId();
-    	return XMLParser(getInputStream(query));
-    	
-    	/*try {
-            URL url = new URL(query);
-
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            int responseCode = conn.getResponseCode();
-            if(responseCode != HttpURLConnection.HTTP_OK) {
-                return false;
-            }
-            
-            InputStream stream = conn.getInputStream();
-//            logStream(stream);
-            return XMLParser(stream);
-
-        } catch (MalformedURLException e) {
-            // Should never happen
-            return false;
-        } catch (IOException ex) {
-            return false;
-        }*/
+    	InputStream stream = getInputStream(query);
+    	if(stream != null) {
+    		return XMLParser(stream);
+    	}
+    	return false;
     }
     
     public boolean addDrawing (DrawView view){
@@ -143,7 +111,6 @@ public class Cloud {
              
         } catch (IOException e) {
             // This won't occur when writing to a string
-        	android.util.Log.d("IOException1", e.toString());
             return false;
         }
         
@@ -189,10 +156,8 @@ public class Cloud {
             return XMLParser(stream);
             
         } catch (MalformedURLException e) {
-        	android.util.Log.d("MalformedURLException1", e.toString());
             return false;
         } catch (IOException ex) {
-        	android.util.Log.d("IOException2", ex.toString());
             return false;
         } finally {
             if(stream != null) {
@@ -200,7 +165,6 @@ public class Cloud {
                     stream.close();
                 } catch(IOException ex) {
                     // Fail silently
-                	android.util.Log.d("IOException3", ex.toString());
                 }
             }
         }
@@ -213,12 +177,20 @@ public class Cloud {
     
     public boolean finishGame() {
     	String query = END_GAME_URL + "?user=" + Game.getName(Game.PLAYERSELF) + "&magic=" + MAGIC + "&pw=" + Game.getPassword() + "&gameid=" + Game.getGameId();
-    	return XMLParser(getInputStream(query));
+    	InputStream stream = getInputStream(query);
+    	if(stream != null) {
+    		return XMLParser(stream);
+    	}
+    	return false;
     }
     
     public boolean endSession() {
     	String query = END_SESSION_URL + "?user=" + Game.getName(Game.PLAYERSELF) + "&magic=" + MAGIC + "&pw=" + Game.getPassword() + "&gameid=" + Game.getGameId();
-    	return XMLParser(getInputStream(query));
+    	InputStream stream = getInputStream(query);
+    	if(stream != null) {
+    		return XMLParser(stream);
+    	}
+    	return false;
     }
     
     public static void logStream(InputStream stream) {

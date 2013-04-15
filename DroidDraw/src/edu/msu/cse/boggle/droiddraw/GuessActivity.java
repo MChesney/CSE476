@@ -137,14 +137,13 @@ public class GuessActivity extends Activity {
 
                     @Override
                     public void run() {
-                        if(didEndGame) {
-                        	Intent intent = new Intent(activity,  ClosingActivity.class);
-                    		startActivity(intent);
+                        if(!didEndGame) {
+                        	//Intent intent = new Intent(activity,  ClosingActivity.class);
+                    		//startActivity(intent);
                     		finish();
                         } else {
                             // Failure
-                        	// TODO two users already logged in
-                        	Toast.makeText(activity, "Problem with OnDoneButton", Toast.LENGTH_SHORT).show();
+                        	Toast.makeText(activity, "Problem with Connection", Toast.LENGTH_SHORT).show();
                         }
                     }    
 				});
@@ -228,5 +227,34 @@ public class GuessActivity extends Activity {
         }).start();
 		
 	}
+
+	/*@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		
+		final ContextWrapper activity = this;
+		final Handler mainHandler = new Handler(this.getMainLooper());
+		
+		new Thread(new Runnable() {
+			@Override
+            public void run() {
+				
+				final boolean didEndGame = cloud.finishGame();
+			
+				mainHandler.post(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        if(!didEndGame) {
+                        	Toast.makeText(activity, "Problem with Connection", Toast.LENGTH_SHORT).show();
+                        } else {
+                        	finish();
+                        }
+                    }    
+				});
+			}
+		}).start();
+	}*/
 	
 }

@@ -3,10 +3,13 @@ package edu.msu.cse.boggle.droiddraw;
 import com.google.android.gcm.GCMRegistrar;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.app.Activity;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Toast;
 
 public class CloudOpeningActivity extends Activity {
 
