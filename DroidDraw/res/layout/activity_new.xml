@@ -141,6 +141,7 @@
         android:layout_below="@+id/playerPasswordcheck"
         android:background="#000"
         android:gravity="center_vertical|center_horizontal"
+        android:onClick="onRememberChecked"
         android:text="@string/check_remember"
         android:textColor="#fff" />
 
