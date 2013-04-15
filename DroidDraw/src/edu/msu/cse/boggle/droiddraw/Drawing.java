@@ -636,7 +636,6 @@ public class Drawing {
     		
     		Cloud.skipToEndTag(xml);
     	}
-        
     }
 
 }

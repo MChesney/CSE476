@@ -39,18 +39,10 @@ public class GuessActivity extends Activity {
 	TextView answerText;
 	EditText edit;
 	Button guess;
-	Button exit;
 	Button draw;
-	private CountDownTimer cdTimer;
 	
-	/**
-	 * The player information 
-	 */
-	private long totaltime= 130000;
-	/* TODO private Game players = new Game();
-	private String category="" ;
-	private String hint="" ;
-	private String answer="" ;*/
+	private CountDownTimer cdTimer;
+	private long totaltime = 130000;
 	
 	@Override
 	protected void onCreate(Bundle bundle) {
@@ -88,10 +80,8 @@ public class GuessActivity extends Activity {
 		drawView.setEditable(false);
 		edit = (EditText) findViewById(R.id.editText1);
 		guess = (Button)findViewById(R.id.guess);
-		exit = (Button)findViewById(R.id.finish);
 		draw = (Button)findViewById(R.id.drawagain);
 		draw.setEnabled(false);
-		exit.setEnabled(false);
 		hintdisplay = (TextView) this.findViewById(R.id.clue);
 		timerText = (TextView) this.findViewById(R.id.time);  
      	
@@ -114,7 +104,6 @@ public class GuessActivity extends Activity {
 	    			  edit.setEnabled(false);
 	    			  guess.setEnabled(false);
 	    			  draw.setEnabled(true);
-	    			  exit.setEnabled(true);
 	    		  }
 	    	  }  
 	    }.start(); 
@@ -136,47 +125,37 @@ public class GuessActivity extends Activity {
 		Intent intent = new Intent(this, EditActivity.class);
 		startActivity(intent);
 		finish();
-		
-		/*final ContextWrapper activity = this;
+	}
+	
+	public void onFinishGame(View view){
+
+		final ContextWrapper activity = this;
 		final Handler mainHandler = new Handler(this.getMainLooper());
-		
-		//Game.setHint(((EditText)findViewById(R.id.clueEdit)).getText().toString());
-		//Game.setAnswer(((EditText)findViewById(R.id.answerEdit)).getText().toString());
 		
 		new Thread(new Runnable() {
 			@Override
             public void run() {
 				
-				final boolean didUpdateScores = cloud.updateScores();
-				
+				final boolean didEndGame = cloud.finishGame();
+			
 				mainHandler.post(new Runnable() {
 
                     @Override
                     public void run() {
-                        if(didUpdateScores) {
-                        	//Game.setWaitStatus(Game.WAITFORGUESS);
-                        	//Intent intent = new Intent(activity,  WaitingActivity.class);
-                        	//intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    		//startActivity(intent);
-                    		//finish();
-                    		Intent intent = new Intent(activity, EditActivity.class);
+                        if(didEndGame) {
+                        	Intent intent = new Intent(activity,  ClosingActivity.class);
                     		startActivity(intent);
                     		finish();
                         } else {
                             // Failure
                         	// TODO two users already logged in
-                        	Toast.makeText(activity, R.string.user_already_exists, Toast.LENGTH_SHORT).show();
+                        	Toast.makeText(activity, "Problem with OnDoneButton", Toast.LENGTH_SHORT).show();
                         }
                     }    
 				});
 			}
-		}).start();*/
-	}
-	
-	public void onFinishGame(View view) {		
-		Intent intent = new Intent(this, ClosingActivity.class);
-		startActivity(intent);
-		finish();
+		}).start();
+		
 	}
 	
 	public void onGuessButton(View view) {
@@ -192,10 +171,9 @@ public class GuessActivity extends Activity {
         	guess.setEnabled(false);
         	 draw.setEnabled(true);
         	if (Game.getEditor()==2) {
-        		Game.setScore(Game.PLAYERONE, (int)totaltime/100);
-        		exit.setEnabled(true);
+        		Game.incScore(Game.PLAYERONE, (int)totaltime/100);
         	} else {
-        		Game.setScore(Game.PLAYERTWO, (int)totaltime/100);
+        		Game.incScore(Game.PLAYERTWO, (int)totaltime/100);
         	}
         	totaltime=0;
 		}
@@ -221,8 +199,6 @@ public class GuessActivity extends Activity {
 
             @Override
             public void run() {
-                // Create a cloud object and get the XML
-                Cloud cloud = new Cloud();
                 InputStream stream = cloud.loadDrawing();
                 
                 // Test for an error
@@ -239,10 +215,8 @@ public class GuessActivity extends Activity {
                         	Game.setHint(xml.getAttributeValue(null, "hint"));
                         	Game.setAnswer(xml.getAttributeValue(null, "answer"));
                         	Game.setCategory(xml.getAttributeValue(null, "category"));
-                        	String p1 = xml.getAttributeValue(null, "p1score");
-                        	String p2 = xml.getAttributeValue(null, "p2score");
-                        	//Game.setScore(Game.PLAYERONE, Integer.getInteger(xml.getAttributeValue(null, "p1score")));
-                        	//Game.setScore(Game.PLAYERTWO, Integer.getInteger(xml.getAttributeValue(null, "p2score")));
+                        	Game.setScore(Game.PLAYERONE, Integer.parseInt(xml.getAttributeValue(null, "p1score")));
+                        	Game.setScore(Game.PLAYERTWO, Integer.parseInt(xml.getAttributeValue(null, "p2score")));
                         	
                         	drawView.loadXml(xml);
                         	

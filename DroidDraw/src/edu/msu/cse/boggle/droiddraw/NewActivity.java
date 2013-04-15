@@ -2,11 +2,15 @@ package edu.msu.cse.boggle.droiddraw;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ContextWrapper;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -95,5 +99,34 @@ public void onStartGame(View view) {
         alertDialog.show();
 		
 	}
-	
+	public void onRememberChecked(View view){
+		
+		EditText one = (EditText) findViewById(R.id.playerOneEdit);
+		EditText two = (EditText) findViewById(R.id.playerPassword);
+		
+		final String playerName = one.getText().toString().trim();
+		final String playerPassword = two.getText().toString();
+		
+		checkLogin(playerName, playerPassword);
+	}
+	public void checkLogin(String playerName, String playerPassword){
+		
+		CheckBox rememberCB = (CheckBox) findViewById(R.id.checkBox1);
+		
+		
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+	    Editor ed = prefs.edit();
+	    
+		if(rememberCB.isChecked()){
+		    ed.putString(LoginActivity.KEY_USERNAME, playerName);
+		    ed.putString(LoginActivity.KEY_PASSWORD, playerPassword);
+		    ed.putBoolean(LoginActivity.KEY_REMEMBER, true);
+		    ed.commit();
+		    
+		    
+		}else{
+			ed.putBoolean(LoginActivity.KEY_REMEMBER, false);
+			ed.commit();
+		}
+	}
 }
