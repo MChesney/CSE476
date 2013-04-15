@@ -1,61 +1,89 @@
+------------------------------------------------------------------------------------------------------------------------
+
 Project 2 Submission
 
 Group Name: Cranium
 
-When you have completed the project, complete the following form and include it with your project. Include this file as a text file in the folder with your project when you turn it in. 
-
-For the Checkpoint, Describe a sequence of operations to create a new account and log onto the server:
-
+When you have completed the project, complete the following form and include it with your project. Include this file as a text file in the folder with your project when you turn it in.
 A functionality checklist will not be provided for the project. Treat this as you would a request from a client and identify what the client requires. 
 
-Member 1: Mairin Chesney
+------------------------------------------------------------------------------------------------------------------------
 
+Member 1: Mairin Chesney
 Responsibility: Server-side communications
 
-
-
 Member 2: Phil Getzen
-
 Responsibility: Client-side communications
 
-
-
 Member 3: Paola De la Torre
-
 Responsibility: The sequencing of the activities
 
+------------------------------------------------------------------------------------------------------------------------
 
-Provide instructions on how to reach the first editing activity if the login button is not yet functional:
-If necessary, click on temporary start game button (login should be operational)
+Provide instructions on how to reach the first editing activity if the login button is not yet functional: N/A
 
 User account the server-side communications is running under: chesne14
 
 Paths to all server-side scripts:
 https://www.cse.msu.edu/~chesne14/teamcranium2/user-add.php
 https://www.cse.msu.edu/~chesne14/teamcranium2/user-login.php
-    
 https://www.cse.msu.edu/~chesne14/teamcranium2/drawing-save.php
 https://www.cse.msu.edu/~chesne14/teamcranium2/drawing-load.php
-    
 https://www.cse.msu.edu/~chesne14/teamcranium2/end-game.php
-https://www.cse.msu.edu/~chesne14/teamcranium2/end-session.php
 
 Where in the code the passive connection timeout is set (provide a script name and line number):
+Passive timeout is being implemented when a user leaves an activity that they are supposed to be in. We use the method onBackPressed() in EditingActivity and GuessingActivity
+
+------------------------------------------------------------------------------------------------------------------------
 
 Calls in the code to the server (provide a class name and function, or URL used for debugging):
 
+
 URLs for debugging:
+
+User Login:
 Pass - http://www.cse.msu.edu/~chesne14/teamcranium2/user-login.php?magic=NechAtHa6RuzeR8x&user=chesne14&pw=drowssap&gcm=testssss
 Fail (gcm) - http://www.cse.msu.edu/~chesne14/teamcranium2/user-login.php?magic=NechAtHa6RuzeR8x&user=chesne14&pw=drowssap&gcm=
 Fail (password) - http://www.cse.msu.edu/~chesne14/teamcranium2/user-login.php?magic=NechAtHa6RuzeR8x&user=chesne14&pw=password&gcm=hello
 
+New User:
 Pass - http://www.cse.msu.edu/~chesne14/teamcranium2/user-add.php?magic=NechAtHa6RuzeR8x&user=somethingdifferent&pw=something&gcm=whattup
 Fail (gcm) - http://www.cse.msu.edu/~chesne14/teamcranium2/user-add.php?magic=NechAtHa6RuzeR8x&user=somethingelse&pw=hello&gcm=
 Fail (password) - http://www.cse.msu.edu/~chesne14/teamcranium2/user-add.php?magic=NechAtHa6RuzeR8x&user=somethingelse2&gcm=heygirl
 Fail (duplicate) - http://www.cse.msu.edu/~chesne14/teamcranium2/user-add.php?magic=NechAtHa6RuzeR8x&user=somethingdifferent&pw=supp&gcm=heygirl
 
+Add Drawing:
+POST
+
+Load Drawing:
 Pass - http://www.cse.msu.edu/~chesne14/teamcranium2/drawing-load.php?magic=NechAtHa6RuzeR8x&user=me&pw=me&drawid=h516b14ff855b0&gameid=g516b43332085
+Fail (magic) - http://www.cse.msu.edu/~chesne14/teamcranium2/drawing-load.php?magic=NechAtHa6RuzeR8&user=me&pw=me&drawid=h516b14ff855b0&gameid=g516b43332085
+Fail (password) - http://www.cse.msu.edu/~chesne14/teamcranium2/drawing-load.php?magic=NechAtHa6RuzeR8x&user=me&pw=jumbulaya&drawid=h516b14ff855b0&gameid=g516b43332085
+
+Finish Game:
+Pass - https://www.cse.msu.edu/~chesne14/teamcranium2/end-game.php?user=uuuu&magic=NechAtHa6RuzeR8x&pw=uuuu&gameid=g516c6ef7e9965
+Fail (magic) - https://www.cse.msu.edu/~chesne14/teamcranium2/end-game.php?user=uuuu&magic=NechAtHa6RuzeR8&pw=uuuu&gameid=g516c6ef7e9965
+Fail (password) - https://www.cse.msu.edu/~chesne14/teamcranium2/end-game.php?user=uuuu&magic=NechAtHa6RuzeR8x&pw=uuuupppp&gameid=g516c6ef7e9965
+
 
 Functions in Cloud Class that make calls to the server:
+
 public boolean loginUser (String username, String password)
 public boolean addUser (String username, String password)
+public boolean addDrawing (DrawView view)
+public InputStream loadDrawing()
+public boolean finishGame()
+
+------------------------------------------------------------------------------------------------------------------------
+
+Functionality:
+
+User Login - Allows a registered user to login to a new game.
+New User - Allows the creation of a new user to participate in a new game.
+Remember User - Provided on the login and new user screen. Allows for a user's credentials to be saved.
+Passive Timeout - If one user exits for any reason, the other user is notified and the game ends.
+Two player communication for drawing and guessing - A fully functional two player game where one player draws, the other guesses and vice versa.
+Scoring - Available based on how long the user takes to guess the correct answer.
+Choices in line width and color - Provided so even if you're not great at drawing, you can spice things up a bit.
+
+------------------------------------------------------------------------------------------------------------------------
