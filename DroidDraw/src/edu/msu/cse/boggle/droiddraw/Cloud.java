@@ -16,7 +16,6 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlSerializer;
 
-import android.os.Bundle;
 import android.util.Log;
 import android.util.Xml;
 
@@ -25,16 +24,16 @@ public class Cloud {
     private static final String MAGIC = "NechAtHa6RuzeR8x";
     
     // To add user - USER_ADD_URL + "?user=" + USER + "&magic=" + MAGIC + "&pw=" + PASSWORD  + $gcm + GCMID; 
-    private static final String USER_ADD_URL = "https://www.cse.msu.edu/~chesne14/teamcranium/user-add.php";
+    private static final String USER_ADD_URL = "https://www.cse.msu.edu/~chesne14/teamcranium2/user-add.php";
     // To login user - USER_LOGIN_URL + "?user=" + USER + "&magic=" + MAGIC + "&pw=" + PASSWORD + $gcm + GCMID;
-    private static final String USER_LOGIN_URL = "https://www.cse.msu.edu/~chesne14/teamcranium/user-login.php";
+    private static final String USER_LOGIN_URL = "https://www.cse.msu.edu/~chesne14/teamcranium2/user-login.php";
     
-    private static final String DRAWING_SAVE_URL = "https://www.cse.msu.edu/~chesne14/teamcranium/drawing-save.php";
+    private static final String DRAWING_SAVE_URL = "https://www.cse.msu.edu/~chesne14/teamcranium2/drawing-save.php";
     // To load drawing - DRAWING_LOAD_URL + "?user=" + USER + "&magic=" + MAGIC + "&pw=" + PASSWORD + $drawid + DRAWID;
-    private static final String DRAWING_LOAD_URL = "https://www.cse.msu.edu/~chesne14/teamcranium/drawing-load.php";
+    private static final String DRAWING_LOAD_URL = "https://www.cse.msu.edu/~chesne14/teamcranium2/drawing-load.php";
     
     // To notify of end game - END_GAME_URL + "?user=" + USER + "&magic=" + MAGIC + "&pw=" + PASSWORD;
-    private static final String END_GAME_URL = "https://www.cse.msu.edu/~chesne14/teamcranium/end-game.php";
+    private static final String END_GAME_URL = "https://www.cse.msu.edu/~chesne14/teamcranium2/end-game.php";
     private static final String UTF8 = "UTF-8";
 	
 	public Cloud() {
@@ -53,6 +52,8 @@ public class Cloud {
             xmlR.require(XmlPullParser.START_TAG, null, "droiddraw");
             
             String status = xmlR.getAttributeValue(null, "status");
+            //String message = xmlR.getAttributeValue(null, "msg");
+            
             if(status.equals("no")) {
                 return false;
             }
@@ -67,16 +68,12 @@ public class Cloud {
     }
     
     public boolean addUser (String username, String password){
-    	
-    	String query = USER_ADD_URL + "?user=" + username + "&magic=" + MAGIC + "&pw=" + password  + "&gcm=" + Game.getGcmId();
-    	
+    	String query = USER_ADD_URL + "?user=" + username + "&magic=" + MAGIC + "&pw=" + password  + "&gcm=" + Game.getGcmId(); 
     	return XMLParser(getInputStream(query));
     }
     
     public boolean loginUser (String username, String password){
-    	
     	String query = USER_LOGIN_URL + "?user=" + username + "&magic=" + MAGIC + "&pw=" + password + "&gcm=" + Game.getGcmId();
-    	
     	return XMLParser(getInputStream(query));
     }
     
@@ -98,6 +95,7 @@ public class Cloud {
             xml.attribute(null, "category", Game.getCategory());
             xml.attribute(null, "p1score", Integer.toString(Game.getScore(Game.PLAYERONE)));
             xml.attribute(null, "p2score", Integer.toString(Game.getScore(Game.PLAYERTWO)));
+            xml.attribute(null, "gameid", Game.getGameId());
             view.saveXml(xml);
             xml.endTag(null, "droiddraw");
             xml.endDocument();
@@ -168,8 +166,13 @@ public class Cloud {
     }
     
     public InputStream loadDrawing() {
-    	String query = DRAWING_LOAD_URL + "?user=" + Game.getName(Game.PLAYERSELF) + "&magic=" + MAGIC + "&pw=" + Game.getPassword() + "&drawid=" + Game.getDrawID();
+    	String query = DRAWING_LOAD_URL + "?user=" + Game.getName(Game.PLAYERSELF) + "&magic=" + MAGIC + "&pw=" + Game.getPassword() + "&gameid=" + Game.getGameId() + "&drawid=" + Game.getDrawID();
     	return getInputStream(query);
+    }
+    
+    public boolean finishGame() {
+    	String query = END_GAME_URL + "?user=" + Game.getName(Game.PLAYERSELF) + "&magic=" + MAGIC + "&pw=" + Game.getPassword() + "&gameid=" + Game.getGameId();
+    	return XMLParser(getInputStream(query));
     }
     
     public static void logStream(InputStream stream) {

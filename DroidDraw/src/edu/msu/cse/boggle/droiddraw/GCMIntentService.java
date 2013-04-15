@@ -2,14 +2,12 @@ package edu.msu.cse.boggle.droiddraw;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 
 import com.google.android.gcm.GCMBaseIntentService;
 
 public class GCMIntentService extends GCMBaseIntentService {
 	public static final String SENDER_ID = "600039815168";
 	public static final String START = "start";
-	public static final String DRAW = "draw";
 	public static final String GUESS = "guess";
 	public static final String END = "end";
 	
@@ -17,8 +15,7 @@ public class GCMIntentService extends GCMBaseIntentService {
 	public static final String PLAYERONESCORE = "p1Score";
 	public static final String PLAYERTWOSCORE = "p2Score";
 	public static final String DRAWID = "drawid";
-	
-	GuessActivity guessActivity = new GuessActivity();
+	public static final String DRAWER = "drawer";
 
 	public GCMIntentService() {
 		super(SENDER_ID);
@@ -33,7 +30,6 @@ public class GCMIntentService extends GCMBaseIntentService {
 	@Override
 	protected void onError(Context context, String message) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -44,20 +40,20 @@ public class GCMIntentService extends GCMBaseIntentService {
 		if (msg.equals(START)) {
 			String playerOne = message.getStringExtra("playerOne");
 			String playerTwo = message.getStringExtra("playerTwo");
+			String gameId = message.getStringExtra("gameid");
 			
 			Game.setName(Game.PLAYERONE, playerOne);
 			Game.setName(Game.PLAYERTWO, playerTwo);
+			Game.setGameId(gameId);
 			Game.setEditor(1);
 			
 			if (playerOne.equals(Game.getName(Game.PLAYERSELF))) {
-				Game.setSelfNumber(1);
 				Intent intent = new Intent(this, EditActivity.class);
 				// TODO
 				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				startActivity(intent);
 			}
 			if (playerTwo.equals(Game.getName(Game.PLAYERSELF))) {
-				Game.setSelfNumber(2);
 				Game.setWaitStatus(Game.WAITFORDRAW);
 				Intent intent = new Intent(this, WaitingActivity.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -67,20 +63,20 @@ public class GCMIntentService extends GCMBaseIntentService {
 		
 		// Game ready for someone to guess
 		} else if (msg.equals(GUESS)) {
-			Game.setDrawID(message.getStringExtra(DRAWID));
+			Game.setDrawID(message.getStringExtra(DRAWID));			
+			String drawer = message.getStringExtra(DRAWER);
 			
-			//Integer playerOneScore = Integer.getInteger(message.getStringExtra(PLAYERONESCORE));
-			//Integer playerTwoScore = Integer.getInteger(message.getStringExtra(PLAYERTWOSCORE));
-			//Game.setScore(Game.PLAYERONE, playerOneScore);
-			//Game.setScore(Game.PLAYERTWO, playerTwoScore);
-				
-			Intent intent = new Intent(this, GuessActivity.class);
-			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			startActivity(intent); 
+			if (!drawer.equals(Game.getName(Game.PLAYERSELF))) {
+				Intent intent = new Intent(this, GuessActivity.class);
+				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				startActivity(intent); 
+			}
 		
 		// Game ending
 		} else if (msg.equals(END)) {
-			// end the game
+			Intent intent = new Intent(this, ClosingActivity.class);
+			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			startActivity(intent);
 		}
 	}
 

@@ -11,9 +11,7 @@ import org.xmlpull.v1.XmlPullParserException;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Handler;
 import android.app.Activity;
-import android.content.ContextWrapper;
 import android.content.Intent;
 import android.util.Xml;
 import android.view.Menu;
@@ -39,18 +37,10 @@ public class GuessActivity extends Activity {
 	TextView answerText;
 	EditText edit;
 	Button guess;
-	Button exit;
 	Button draw;
-	private CountDownTimer cdTimer;
 	
-	/**
-	 * The player information 
-	 */
-	private long totaltime= 130000;
-	/* TODO private Game players = new Game();
-	private String category="" ;
-	private String hint="" ;
-	private String answer="" ;*/
+	private CountDownTimer cdTimer;
+	private long totaltime = 130000;
 	
 	@Override
 	protected void onCreate(Bundle bundle) {
@@ -88,10 +78,8 @@ public class GuessActivity extends Activity {
 		drawView.setEditable(false);
 		edit = (EditText) findViewById(R.id.editText1);
 		guess = (Button)findViewById(R.id.guess);
-		exit = (Button)findViewById(R.id.finish);
 		draw = (Button)findViewById(R.id.drawagain);
 		draw.setEnabled(false);
-		exit.setEnabled(false);
 		hintdisplay = (TextView) this.findViewById(R.id.clue);
 		timerText = (TextView) this.findViewById(R.id.time);  
      	
@@ -114,7 +102,6 @@ public class GuessActivity extends Activity {
 	    			  edit.setEnabled(false);
 	    			  guess.setEnabled(false);
 	    			  draw.setEnabled(true);
-	    			  exit.setEnabled(true);
 	    		  }
 	    	  }  
 	    }.start(); 
@@ -135,11 +122,14 @@ public class GuessActivity extends Activity {
     	}
 		Intent intent = new Intent(this, EditActivity.class);
 		startActivity(intent);
+		finish();
 	}
 	
-	public void onFinishGame(View view) {		
+	public void onFinishGame(View view) {
 		Intent intent = new Intent(this, ClosingActivity.class);
 		startActivity(intent);
+		finish();
+        cloud.finishGame();
 	}
 	
 	public void onGuessButton(View view) {
@@ -155,10 +145,9 @@ public class GuessActivity extends Activity {
         	guess.setEnabled(false);
         	 draw.setEnabled(true);
         	if (Game.getEditor()==2) {
-        		Game.setScore(Game.PLAYERONE, (int)totaltime/100);
-        		exit.setEnabled(true);
+        		Game.incScore(Game.PLAYERONE, (int)totaltime/100);
         	} else {
-        		Game.setScore(Game.PLAYERTWO, (int)totaltime/100);
+        		Game.incScore(Game.PLAYERTWO, (int)totaltime/100);
         	}
         	totaltime=0;
 		}
@@ -184,8 +173,6 @@ public class GuessActivity extends Activity {
 
             @Override
             public void run() {
-                // Create a cloud object and get the XML
-                Cloud cloud = new Cloud();
                 InputStream stream = cloud.loadDrawing();
                 
                 // Test for an error
@@ -202,10 +189,8 @@ public class GuessActivity extends Activity {
                         	Game.setHint(xml.getAttributeValue(null, "hint"));
                         	Game.setAnswer(xml.getAttributeValue(null, "answer"));
                         	Game.setCategory(xml.getAttributeValue(null, "category"));
-                        	String p1 = xml.getAttributeValue(null, "p1score");
-                        	String p2 = xml.getAttributeValue(null, "p2score");
-                        	//Game.setScore(Game.PLAYERONE, Integer.getInteger(xml.getAttributeValue(null, "p1score")));
-                        	//Game.setScore(Game.PLAYERTWO, Integer.getInteger(xml.getAttributeValue(null, "p2score")));
+                        	Game.setScore(Game.PLAYERONE, Integer.parseInt(xml.getAttributeValue(null, "p1score")));
+                        	Game.setScore(Game.PLAYERTWO, Integer.parseInt(xml.getAttributeValue(null, "p2score")));
                         	
                         	drawView.loadXml(xml);
                         	

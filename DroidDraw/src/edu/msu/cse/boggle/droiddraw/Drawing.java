@@ -636,58 +636,6 @@ public class Drawing {
     		
     		Cloud.skipToEndTag(xml);
     	}
-    	
-    	/*ArrayList<Integer> colorarray = new ArrayList<Integer>();
-    	ArrayList<Float> thicknessarray = new ArrayList<Float>();
-    	ArrayList<Float> lastxs = new ArrayList<Float>();
-    	ArrayList<Float> lastys = new ArrayList<Float>();
-    	ArrayList<Float> currxs = new ArrayList<Float>();
-    	ArrayList<Float> currys = new ArrayList<Float>();
-    	
-    	while(xml.nextTag() == XmlPullParser.START_TAG) {
-    		if (xml.getName().equals("segment")) {
-    			Integer color = Integer.parseInt(xml.getAttributeValue(null, "color"));
-    			Float thickness = Float.parseFloat(xml.getAttributeValue(null, "thickness"));
-    			Float lastx = Float.parseFloat(xml.getAttributeValue(null, "lastx"));
-    			Float lasty = Float.parseFloat(xml.getAttributeValue(null, "lasty"));
-    			Float currx = Float.parseFloat(xml.getAttributeValue(null, "currx"));
-    			Float curry = Float.parseFloat(xml.getAttributeValue(null, "curry"));
-    			
-    			colorarray.add(color);
-    			thicknessarray.add(thickness);
-    			lastxs.add(lastx);
-    			lastys.add(lasty);
-    			currxs.add(currx);
-    			currys.add(curry);
-    		}
-    		
-    		Cloud.skipToEndTag(xml);
-    	}
-    	
-    	// Save the drawing parameters
-    	Parameters parameters = new Parameters();
-    	bundle.putSerializable(PARAMETERS, parameters);
-    	bundle.putBoolean(EDITABLE, false);
-    			
-    	// Save the drawing segments
-    	int [] colors = new int[colorarray.size()];
-    	float [] thicknesses = new float[thicknessarray.size()];
-    	float [] startPoints = new float[lastxs.size()*2];
-    	float [] endPoints = new float[currxs.size()*2];
-    			
-    	for (int i=0; i < colorarray.size(); i++) {
-    		colors[i] = colorarray.get(i);
-    		thicknesses[i] = thicknessarray.get(i);
-    		startPoints[i*2] = lastxs.get(i);
-    		startPoints[i*2+1] = lastys.get(i);
-    		endPoints[i*2] = currxs.get(i);
-    		endPoints[i*2+1] = currys.get(i);
-    	}
-    			
-    	bundle.putIntArray(COLORS, colors);
-    	bundle.putFloatArray(THICKNESSES, thicknesses);
-    	bundle.putFloatArray(START_POINTS, startPoints);
-    	bundle.putFloatArray(END_POINTS, endPoints);*/
     }
 
 }

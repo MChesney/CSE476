@@ -5,7 +5,6 @@ import java.util.Random;
 import android.os.Bundle;
 import android.os.Handler;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.graphics.Color;
@@ -44,13 +43,13 @@ public class EditActivity extends Activity {
 		lineButton = (TextView) this.findViewById(R.id.linewidth);
 		lineButton.setText("Line Width: S");
 		
-		Bundle infoFromPrevActivity = getIntent().getExtras();
+		//Bundle infoFromPrevActivity = getIntent().getExtras();
 		if (bundle != null) {
 			drawView.loadView(bundle);
 			setThickness(drawView.getThickness());
-		} else if (infoFromPrevActivity != null) {
-//			popUp();
-		}
+		} /*else if (infoFromPrevActivity != null) {
+			popUp();
+		}*/
 		createCategory();
 		
 		TextView playerOne = (TextView) this.findViewById(R.id.playerOne);
@@ -67,26 +66,6 @@ public class EditActivity extends Activity {
 		categoryText.setText(Game.getCategory());
 		
 	}
-	
-	/**
-	 * Alert the players as to whose turn it is
-	 */
-	/*private void popUp(){
-		AlertDialog.Builder builder = new AlertDialog.Builder(drawView.getContext());
-	        
-	    // Parameterize the builder
-	    builder.setTitle("Player Turn");
-	    if (Game.getEditor() == 1){
-	    	builder.setMessage(Game.getName(Game.PLAYERONE) + " turn");
-	    } else {
-	    	builder.setMessage(Game.getName(Game.PLAYERTWO) + " turn");
-	    }
-	    builder.setPositiveButton(android.R.string.ok, null);
-	        
-	    // Create the dialog box and show it
-	    AlertDialog alertDialog = builder.create();
-	    alertDialog.show();
-	}*/
 	
 	/** 
 	 * Set the thickness of the paint brush
@@ -174,7 +153,6 @@ public class EditActivity extends Activity {
             public void run() {
 				
 				final boolean didFinishDrawing = cloud.addDrawing(drawView);
-				android.util.Log.d("debug",String.valueOf(didFinishDrawing));
 			
 				mainHandler.post(new Runnable() {
 
@@ -185,6 +163,7 @@ public class EditActivity extends Activity {
                         	Intent intent = new Intent(activity,  WaitingActivity.class);
                         	//intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     		startActivity(intent);
+                    		finish();
                         } else {
                             // Failure
                         	// TODO two users already logged in
@@ -218,8 +197,6 @@ public class EditActivity extends Activity {
 	@Override
 	protected void onSaveInstanceState(Bundle bundle) {
 		super.onSaveInstanceState(bundle);
-		
 		drawView.saveView(bundle);
-		
 	}
 }
