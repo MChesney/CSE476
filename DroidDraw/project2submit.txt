@@ -38,20 +38,23 @@ https://www.cse.msu.edu/~chesne14/teamcranium2/drawing-save.php
 https://www.cse.msu.edu/~chesne14/teamcranium2/drawing-load.php
     
 https://www.cse.msu.edu/~chesne14/teamcranium2/end-game.php
+https://www.cse.msu.edu/~chesne14/teamcranium2/end-session.php
 
 Where in the code the passive connection timeout is set (provide a script name and line number):
 
 Calls in the code to the server (provide a class name and function, or URL used for debugging):
 
 URLs for debugging:
-Pass - http://www.cse.msu.edu/~chesne14/teamcranium/user-login.php?magic=NechAtHa6RuzeR8x&user=chesne14&pw=drowssap&gcm=testssss
-Fail (gcm) - http://www.cse.msu.edu/~chesne14/teamcranium/user-login.php?magic=NechAtHa6RuzeR8x&user=chesne14&pw=drowssap&gcm=
-Fail (password) - http://www.cse.msu.edu/~chesne14/teamcranium/user-login.php?magic=NechAtHa6RuzeR8x&user=chesne14&pw=password&gcm=hello
+Pass - http://www.cse.msu.edu/~chesne14/teamcranium2/user-login.php?magic=NechAtHa6RuzeR8x&user=chesne14&pw=drowssap&gcm=testssss
+Fail (gcm) - http://www.cse.msu.edu/~chesne14/teamcranium2/user-login.php?magic=NechAtHa6RuzeR8x&user=chesne14&pw=drowssap&gcm=
+Fail (password) - http://www.cse.msu.edu/~chesne14/teamcranium2/user-login.php?magic=NechAtHa6RuzeR8x&user=chesne14&pw=password&gcm=hello
 
-Pass - http://www.cse.msu.edu/~chesne14/teamcranium/user-add.php?magic=NechAtHa6RuzeR8x&user=somethingdifferent&pw=something&gcm=whattup
-Fail (gcm) - http://www.cse.msu.edu/~chesne14/teamcranium/user-add.php?magic=NechAtHa6RuzeR8x&user=somethingelse&pw=hello&gcm=
-Fail (password) - http://www.cse.msu.edu/~chesne14/teamcranium/user-add.php?magic=NechAtHa6RuzeR8x&user=somethingelse2&gcm=heygirl
-Fail (duplicate) - http://www.cse.msu.edu/~chesne14/teamcranium/user-add.php?magic=NechAtHa6RuzeR8x&user=somethingdifferent&pw=supp&gcm=heygirl
+Pass - http://www.cse.msu.edu/~chesne14/teamcranium2/user-add.php?magic=NechAtHa6RuzeR8x&user=somethingdifferent&pw=something&gcm=whattup
+Fail (gcm) - http://www.cse.msu.edu/~chesne14/teamcranium2/user-add.php?magic=NechAtHa6RuzeR8x&user=somethingelse&pw=hello&gcm=
+Fail (password) - http://www.cse.msu.edu/~chesne14/teamcranium2/user-add.php?magic=NechAtHa6RuzeR8x&user=somethingelse2&gcm=heygirl
+Fail (duplicate) - http://www.cse.msu.edu/~chesne14/teamcranium2/user-add.php?magic=NechAtHa6RuzeR8x&user=somethingdifferent&pw=supp&gcm=heygirl
+
+Pass - http://www.cse.msu.edu/~chesne14/teamcranium2/drawing-load.php?magic=NechAtHa6RuzeR8x&user=me&pw=me&drawid=h516b14ff855b0&gameid=g516b43332085
 
 Functions in Cloud Class that make calls to the server:
 public boolean loginUser (String username, String password)

@@ -117,11 +117,6 @@ public class GuessActivity extends Activity {
 	}
 	
 	public void onDrawPicture(View view) {
-		if (Game.getEditor()==2) {
-			Game.setEditor(1);
-    	} else {
-    		Game.setEditor(2);
-    	}
 		Intent intent = new Intent(this, EditActivity.class);
 		startActivity(intent);
 		finish();
@@ -169,12 +164,8 @@ public class GuessActivity extends Activity {
         	answerText.setText("YOU WIN!");
         	edit.setEnabled(false);
         	guess.setEnabled(false);
-        	 draw.setEnabled(true);
-        	if (Game.getEditor()==2) {
-        		Game.incScore(Game.PLAYERONE, (int)totaltime/100);
-        	} else {
-        		Game.incScore(Game.PLAYERTWO, (int)totaltime/100);
-        	}
+        	draw.setEnabled(true);
+        	Game.incScore(Game.PLAYERSELF, (int)totaltime/100);
         	totaltime=0;
 		}
 		else
@@ -215,8 +206,6 @@ public class GuessActivity extends Activity {
                         	Game.setHint(xml.getAttributeValue(null, "hint"));
                         	Game.setAnswer(xml.getAttributeValue(null, "answer"));
                         	Game.setCategory(xml.getAttributeValue(null, "category"));
-                        	Game.setScore(Game.PLAYERONE, Integer.parseInt(xml.getAttributeValue(null, "p1score")));
-                        	Game.setScore(Game.PLAYERTWO, Integer.parseInt(xml.getAttributeValue(null, "p2score")));
                         	
                         	drawView.loadXml(xml);
                         	

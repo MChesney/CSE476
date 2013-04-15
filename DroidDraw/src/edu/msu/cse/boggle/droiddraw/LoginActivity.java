@@ -17,40 +17,60 @@ import android.widget.Toast;
 public class LoginActivity extends Activity {
 	
 	private Cloud cloud = new Cloud();
+	
 	static final String KEY_USERNAME = "username";
 	static final String KEY_PASSWORD = "password";
-	static final String REMEMBER = "remember_not_checked";
+	static final String KEY_REMEMBER = "remember";
+	
+	public String username;
+	public String getUsername() {
+		return username;
+	}
+
+	public String password;
+	public CheckBox cb;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
-	
-		if (REMEMBER.equals("remember_checked"))
+		
+		SharedPreferences prefs =PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+		
+		if (prefs.getBoolean(KEY_REMEMBER, true))
 		{
-			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-			String username = prefs.getString(KEY_USERNAME, "Default Value if not found");
-			String password = prefs.getString(KEY_PASSWORD, "Password Not Found");
+			username = prefs.getString(KEY_USERNAME, "Default Value if not found");
+			password = prefs.getString(KEY_PASSWORD, "Password Not Found");
 			
 			EditText one = (EditText) findViewById(R.id.playerOneEdit);
 			EditText two = (EditText) findViewById(R.id.PlayerPassword);
-			CheckBox cb = (CheckBox) this.findViewById(R.id.checkBox1);
+			cb = (CheckBox) this.findViewById(R.id.checkBox1);
 			
 			one.setText(username);
 			two.setText(password);
 			cb.setChecked(true);
 		}
 	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	
 	public void onStartGame(View view) {
-		
 		EditText one = (EditText) findViewById(R.id.playerOneEdit);
 		EditText two = (EditText) findViewById(R.id.PlayerPassword);
 		
 		
 		final String playerName = one.getText().toString().trim();
 		final String playerPassword = two.getText().toString();
-		
+		checkLogin(playerName, playerPassword);
 		
 		if (playerName.length() == 0) {
 			one.requestFocus();
@@ -103,20 +123,33 @@ public class LoginActivity extends Activity {
 	}
 		
 	public void onRememberChecked(View view){
-		
 		EditText one = (EditText) findViewById(R.id.playerOneEdit);
 		EditText two = (EditText) findViewById(R.id.PlayerPassword);
 		
 		
-		final String playerName = one.getText().toString();
+		final String playerName = one.getText().toString().trim();
 		final String playerPassword = two.getText().toString();
+		checkLogin(playerName, playerPassword);
+	}
+	
+	public void checkLogin(String playerName, String playerPassword){
+		
+		CheckBox rememberCB = (CheckBox) findViewById(R.id.checkBox1);
 		
 		
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-		Editor ed = prefs.edit();
-		ed.putString(KEY_USERNAME, playerName);
-		ed.putString(KEY_PASSWORD, playerPassword);
-		ed.putString(REMEMBER, "remember_checked");
-		ed.commit();
+	    Editor ed = prefs.edit();
+	    
+		if(rememberCB.isChecked()){
+		    ed.putString(KEY_USERNAME, playerName);
+		    ed.putString(KEY_PASSWORD, playerPassword);
+		    ed.putBoolean(KEY_REMEMBER, true);
+		    ed.commit();
+		    
+		    
+		}else{
+			ed.putBoolean(KEY_REMEMBER, false);
+			ed.commit();
+		}
 	}
 }

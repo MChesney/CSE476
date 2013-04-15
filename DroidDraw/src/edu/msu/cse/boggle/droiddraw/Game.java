@@ -15,8 +15,7 @@ public class Game {
 
 	private static int playerOneScore = 0;
 	private static int playerTwoScore = 0;
-	
-	private static int editor = 1;
+
 	private static String hint = "";
 	private static String answer = "";
 	private static String category = "";
@@ -67,6 +66,7 @@ public class Game {
 	public static void setPassword(String playerSelfPassword) {
 		Game.playerSelfPassword = playerSelfPassword;
 	}
+	
 	public static int getScore(String player) {
 		if (player.equals(PLAYERONE)) {
 			return playerOneScore;
@@ -74,15 +74,31 @@ public class Game {
 		if (player.equals(PLAYERTWO)) {
 			return playerTwoScore;
 		}
+		if (player.equals(PLAYERSELF)) {
+			if (playerSelfName.equals(playerOneName)) {
+				return playerOneScore;
+			}
+			if (playerSelfName.equals(playerTwoName)) {
+				return playerTwoScore;
+			}
+		}
 		return -1;
 	}
 
 	public static void setScore(String player, int score) {
 		if (player.equals(PLAYERONE)) {
-			playerOneScore += score;
+			playerOneScore = score;
 		}
 		if (player.equals(PLAYERTWO)) {
-			playerTwoScore += score;
+			playerTwoScore = score;
+		}
+		if (player.equals(PLAYERSELF)) {
+			if (playerSelfName.equals(playerOneName)) {
+				playerOneScore = score;
+			}
+			if (playerSelfName.equals(playerTwoName)) {
+				playerTwoScore = score;
+			}
 		}
 	}
 	
@@ -92,15 +108,6 @@ public class Game {
 	public static String getCategory(){
 		return category;
 	}
-	
-	public static void setEditor(Integer cat){
-		editor = cat;
-	}
-	public static Integer getEditor(){
-		return editor;
-	}
-	
-	
 	
 	public static String getHint() {
 		return hint;
@@ -124,6 +131,14 @@ public class Game {
 		}
 		if (player.equals(PLAYERTWO)) {
 			playerTwoScore += increment;
+		}
+		if (player.equals(PLAYERSELF)) {
+			if (playerSelfName.equals(playerOneName)) {
+				playerOneScore += increment;
+			}
+			if (playerSelfName.equals(playerTwoName)) {
+				playerTwoScore += increment;
+			}
 		}
 	}
 	

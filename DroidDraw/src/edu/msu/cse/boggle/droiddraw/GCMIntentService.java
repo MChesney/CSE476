@@ -12,8 +12,8 @@ public class GCMIntentService extends GCMBaseIntentService {
 	public static final String END = "end";
 	
 	public static final String PLAYER = "player";
-	public static final String PLAYERONESCORE = "p1Score";
-	public static final String PLAYERTWOSCORE = "p2Score";
+	public static final String PLAYERONESCORE = "p1score";
+	public static final String PLAYERTWOSCORE = "p2score";
 	public static final String DRAWID = "drawid";
 	public static final String DRAWER = "drawer";
 
@@ -45,7 +45,6 @@ public class GCMIntentService extends GCMBaseIntentService {
 			Game.setName(Game.PLAYERONE, playerOne);
 			Game.setName(Game.PLAYERTWO, playerTwo);
 			Game.setGameId(gameId);
-			Game.setEditor(1);
 			
 			if (playerOne.equals(Game.getName(Game.PLAYERSELF))) {
 				Intent intent = new Intent(this, EditActivity.class);
@@ -66,6 +65,11 @@ public class GCMIntentService extends GCMBaseIntentService {
 			Game.setDrawID(message.getStringExtra(DRAWID));			
 			String drawer = message.getStringExtra(DRAWER);
 			
+			Integer p1score = Integer.parseInt(message.getStringExtra(PLAYERONESCORE));
+			Integer p2score = Integer.parseInt(message.getStringExtra(PLAYERTWOSCORE));
+			Game.setScore(Game.PLAYERONE, p1score);
+			Game.setScore(Game.PLAYERTWO, p2score);
+			
 			if (!drawer.equals(Game.getName(Game.PLAYERSELF))) {
 				Intent intent = new Intent(this, GuessActivity.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -74,6 +78,9 @@ public class GCMIntentService extends GCMBaseIntentService {
 		
 		// Game ending
 		} else if (msg.equals(END)) {
+			Game.setScore(Game.PLAYERONE, Integer.parseInt(message.getStringExtra(PLAYERONESCORE)));
+			Game.setScore(Game.PLAYERTWO, Integer.parseInt(message.getStringExtra(PLAYERTWOSCORE)));
+			
 			Intent intent = new Intent(this, ClosingActivity.class);
 			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			startActivity(intent);
