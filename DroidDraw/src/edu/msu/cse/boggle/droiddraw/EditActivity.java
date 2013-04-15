@@ -49,7 +49,7 @@ public class EditActivity extends Activity {
 			drawView.loadView(bundle);
 			setThickness(drawView.getThickness());
 		} else if (infoFromPrevActivity != null) {
-			popUp();
+//			popUp();
 		}
 		createCategory();
 		
@@ -71,7 +71,7 @@ public class EditActivity extends Activity {
 	/**
 	 * Alert the players as to whose turn it is
 	 */
-	private void popUp(){
+	/*private void popUp(){
 		AlertDialog.Builder builder = new AlertDialog.Builder(drawView.getContext());
 	        
 	    // Parameterize the builder
@@ -86,7 +86,7 @@ public class EditActivity extends Activity {
 	    // Create the dialog box and show it
 	    AlertDialog alertDialog = builder.create();
 	    alertDialog.show();
-	}
+	}*/
 	
 	/** 
 	 * Set the thickness of the paint brush
@@ -174,7 +174,8 @@ public class EditActivity extends Activity {
             public void run() {
 				
 				final boolean didFinishDrawing = cloud.addDrawing(drawView);
-				
+				android.util.Log.d("debug",String.valueOf(didFinishDrawing));
+			
 				mainHandler.post(new Runnable() {
 
                     @Override
@@ -188,7 +189,7 @@ public class EditActivity extends Activity {
                         } else {
                             // Failure
                         	// TODO two users already logged in
-                        	Toast.makeText(activity, R.string.user_already_exists, Toast.LENGTH_SHORT).show();
+                        	Toast.makeText(activity, "Problem with OnDoneButton", Toast.LENGTH_SHORT).show();
                         }
                     }    
 				});

@@ -63,15 +63,8 @@ public class GCMIntentService extends GCMBaseIntentService {
 			}
 			
 		// Game ready for someone to draw
-		} else if (msg.equals(DRAW)) {
+		/*} else if (msg.equals(DRAW)) {
 			String player = message.getStringExtra(PLAYER);
-			int playerNum = -1;
-			if (player.equals("1")) {
-				playerNum = 1;
-			}
-			if (player.equals("2")) {
-				playerNum = 2;
-			}
 			
 			Integer playerOneScore = Integer.getInteger(message.getStringExtra(PLAYERONESCORE));
 			Integer playerTwoScore = Integer.getInteger(message.getStringExtra(PLAYERTWOSCORE));
@@ -79,7 +72,7 @@ public class GCMIntentService extends GCMBaseIntentService {
 			Game.setScore(Game.PLAYERTWO, playerTwoScore);
 			//Game.setEditor(player);
 			
-			if (playerNum == Game.getSelfNumber()) {
+			if (player.equals(Game.getName(Game.PLAYERSELF))) {
 				Intent intent = new Intent(this, EditActivity.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				startActivity(intent);
@@ -89,22 +82,20 @@ public class GCMIntentService extends GCMBaseIntentService {
 				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(intent);
-			}
+			}*/
 		
 		// Game ready for someone to guess
 		} else if (msg.equals(GUESS)) {
 			Game.setDrawID(message.getStringExtra(DRAWID));
 			
-			String player = message.getStringExtra(PLAYER);
-			int playerNum = -1;
-			if (player.equals("1")) {
-				playerNum = 1;
-			}
-			if (player.equals("2")) {
-				playerNum = 2;
-			}
+			//Integer playerOneScore = Integer.getInteger(message.getStringExtra(PLAYERONESCORE));
+			//Integer playerTwoScore = Integer.getInteger(message.getStringExtra(PLAYERTWOSCORE));
+			//Game.setScore(Game.PLAYERONE, playerOneScore);
+			//Game.setScore(Game.PLAYERTWO, playerTwoScore);
 			
-			if (playerNum == Game.getSelfNumber()) {
+			String player = message.getStringExtra(PLAYER);
+			
+			if (player.equals(Game.getName(Game.PLAYERSELF))) {
 				// fetch drawing
 				Intent intent = new Intent(this, GuessActivity.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
