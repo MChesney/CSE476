@@ -175,13 +175,6 @@ public class EditActivity extends Activity {
 		}).start();
 		
 	}
-	
-	/**
-	 * Do nothing when back is pressed
-	 * TODO
-	 */
-	@Override
-	public void onBackPressed() {}
 		
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -199,4 +192,33 @@ public class EditActivity extends Activity {
 		super.onSaveInstanceState(bundle);
 		drawView.saveView(bundle);
 	}
+	
+	/*@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		
+		final ContextWrapper activity = this;
+		final Handler mainHandler = new Handler(this.getMainLooper());
+		
+		new Thread(new Runnable() {
+			@Override
+            public void run() {
+				
+				final boolean didEndGame = cloud.finishGame();
+			
+				mainHandler.post(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        if(!didEndGame) {
+                        	Toast.makeText(activity, "Problem with Connection", Toast.LENGTH_SHORT).show();
+                        } else {
+                        	finish();
+                        }
+                    }    
+				});
+			}
+		}).start();
+	}*/
 }

@@ -14,13 +14,6 @@ public class ClosingActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_closing);
 		
-		/* TODO Players players = new Players();
-		
-		Bundle infoFromPrevActivity = getIntent().getExtras();
-		if (infoFromPrevActivity != null) {
-			players.loadPlayers(infoFromPrevActivity);
-		}*/
-		
 		TextView winnerName = (TextView) this.findViewById(R.id.winnerName);
 		TextView winnerScore = (TextView) this.findViewById(R.id.winnerScore);
 		TextView loserName = (TextView) this.findViewById(R.id.loserName);
@@ -50,7 +43,7 @@ public class ClosingActivity extends Activity {
 	}
 	
 	public void onNewGame(View view) {
-		Intent intent = new Intent(this, OpeningActivity.class);
+		Intent intent = new Intent(this, CloudOpeningActivity.class);
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(intent);
 		finish();

@@ -50,10 +50,6 @@
             android:name="edu.msu.cse.boggle.droiddraw.ClosingActivity"
             android:label="@string/title_activity_closing" >
         </activity>
-        <activity
-            android:name="edu.msu.cse.boggle.droiddraw.OpeningActivity"
-            android:label="@string/title_activity_opening" >
-        </activity>
         
         <activity
             android:name="edu.msu.cse.boggle.droiddraw.NewActivity"
