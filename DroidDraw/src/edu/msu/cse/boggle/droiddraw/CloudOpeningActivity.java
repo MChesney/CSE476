@@ -1,7 +1,5 @@
 package edu.msu.cse.boggle.droiddraw;
 
-import java.io.Serializable;
-
 import com.google.android.gcm.GCMRegistrar;
 
 import android.os.Bundle;

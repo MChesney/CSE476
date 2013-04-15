@@ -34,6 +34,7 @@ public class Cloud {
     
     // To notify of end game - END_GAME_URL + "?user=" + USER + "&magic=" + MAGIC + "&pw=" + PASSWORD;
     private static final String END_GAME_URL = "https://www.cse.msu.edu/~chesne14/teamcranium2/end-game.php";
+    private static final String END_SESSION_URL = "https://www.cse.msu.edu/~chesne14/teamcranium2/end-session.php";
     private static final String UTF8 = "UTF-8";
 	
 	public Cloud() {
@@ -172,6 +173,11 @@ public class Cloud {
     
     public boolean finishGame() {
     	String query = END_GAME_URL + "?user=" + Game.getName(Game.PLAYERSELF) + "&magic=" + MAGIC + "&pw=" + Game.getPassword() + "&gameid=" + Game.getGameId();
+    	return XMLParser(getInputStream(query));
+    }
+    
+    public boolean endSession() {
+    	String query = END_SESSION_URL + "?user=" + Game.getName(Game.PLAYERSELF) + "&magic=" + MAGIC + "&pw=" + Game.getPassword() + "&gameid=" + Game.getGameId();
     	return XMLParser(getInputStream(query));
     }
     

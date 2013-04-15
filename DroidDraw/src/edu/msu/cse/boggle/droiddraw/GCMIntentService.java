@@ -54,7 +54,7 @@ public class GCMIntentService extends GCMBaseIntentService {
 				startActivity(intent);
 			}
 			if (playerTwo.equals(Game.getName(Game.PLAYERSELF))) {
-				Game.setWaitStatus(Game.WAITFORDRAW);
+				Game.setWaitStatus(Game.WAITFORTURN);
 				Intent intent = new Intent(this, WaitingActivity.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				//intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

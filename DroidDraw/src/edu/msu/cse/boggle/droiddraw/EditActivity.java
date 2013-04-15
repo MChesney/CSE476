@@ -159,7 +159,7 @@ public class EditActivity extends Activity {
                     @Override
                     public void run() {
                         if(didFinishDrawing) {
-                        	Game.setWaitStatus(Game.WAITFORGUESS);
+                        	Game.setWaitStatus(Game.WAITFORTURN);
                         	Intent intent = new Intent(activity,  WaitingActivity.class);
                         	//intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     		startActivity(intent);

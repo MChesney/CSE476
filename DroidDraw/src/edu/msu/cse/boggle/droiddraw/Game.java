@@ -23,8 +23,7 @@ public class Game {
 	
 	// Waiting statuses
 	public static final String WAITFORPLAYER = "Waiting for second player";
-	public static final String WAITFORDRAW = "Waiting for player to draw";
-	public static final String WAITFORGUESS = "Waiting for player to guess";
+	public static final String WAITFORTURN = "Waiting for player to complete turn";
 	public static String waitStatus = "";
 	
 	private static String drawID = ""; 

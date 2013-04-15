@@ -11,7 +11,9 @@ import org.xmlpull.v1.XmlPullParserException;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.app.Activity;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.util.Xml;
 import android.view.Menu;
@@ -125,11 +127,35 @@ public class GuessActivity extends Activity {
 		finish();
 	}
 	
-	public void onFinishGame(View view) {
-		Intent intent = new Intent(this, ClosingActivity.class);
-		startActivity(intent);
-		finish();
-        cloud.finishGame();
+	public void onFinishGame(View view){
+
+		final ContextWrapper activity = this;
+		final Handler mainHandler = new Handler(this.getMainLooper());
+		
+		new Thread(new Runnable() {
+			@Override
+            public void run() {
+				
+				final boolean didEndGame = cloud.finishGame();
+			
+				mainHandler.post(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        if(didEndGame) {
+                        	Intent intent = new Intent(activity,  ClosingActivity.class);
+                    		startActivity(intent);
+                    		finish();
+                        } else {
+                            // Failure
+                        	// TODO two users already logged in
+                        	Toast.makeText(activity, "Problem with OnDoneButton", Toast.LENGTH_SHORT).show();
+                        }
+                    }    
+				});
+			}
+		}).start();
+		
 	}
 	
 	public void onGuessButton(View view) {
